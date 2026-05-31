@@ -2,31 +2,30 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>AC Holding – קרוסלה דובאי</title>
+  <title>Glidai Properties – קרוסלה דובאי</title>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #1c1c1c;
+      background: #181818;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 32px;
-      padding: 32px 16px;
+      gap: 28px;
+      padding: 28px 16px;
       font-family: 'Heebo', 'Arial Hebrew', Arial, sans-serif;
     }
 
     .slide-label {
-      color: #aaa;
-      font-size: 14px;
+      color: #888;
+      font-size: 13px;
       font-weight: 600;
-      align-self: center;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
     }
 
-    /* ─── SLIDE SHELL ──────────────────────────────────────── */
+    /* ─── SLIDE SHELL ─────────────────────────────────── */
     .slide {
       width: 1080px;
       height: 1350px;
@@ -34,73 +33,79 @@
       overflow: hidden;
       direction: rtl;
       font-family: 'Heebo', 'Arial Hebrew', Arial, sans-serif;
+      background-color: #0a0806;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
     }
 
-    /* ─── BACKGROUNDS ──────────────────────────────────────── */
-    .bg-intro {
-      background:
-        radial-gradient(ellipse at 65% 25%, rgba(180,130,40,.18) 0%, transparent 55%),
-        linear-gradient(175deg, #0b0907 0%, #120e06 45%, #0d0b08 75%, #080707 100%);
+    /* ─── OVERLAY ─────────────────────────────────────── */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
     }
-    .bg-paris {
-      background:
-        radial-gradient(ellipse at 40% 20%, rgba(160,120,60,.12) 0%, transparent 50%),
-        linear-gradient(165deg, #0b0a09 0%, #16120c 40%, #1a1510 65%, #0e0c09 100%);
+    /* Standard cities — heavy dark overlay so image is moody/subdued */
+    .ov-dark {
+      background: rgba(0, 0, 0, 0.72);
     }
-    .bg-ny {
-      background:
-        radial-gradient(ellipse at 30% 15%, rgba(80,90,110,.15) 0%, transparent 50%),
-        linear-gradient(160deg, #07080a 0%, #0d1014 40%, #111518 65%, #080a0b 100%);
+    /* Intro — medium overlay */
+    .ov-intro {
+      background: linear-gradient(
+        170deg,
+        rgba(0,0,0,0.68) 0%,
+        rgba(8,6,3,0.60) 50%,
+        rgba(0,0,0,0.75) 100%
+      );
     }
-    .bg-london {
-      background:
-        radial-gradient(ellipse at 50% 20%, rgba(120,100,70,.12) 0%, transparent 50%),
-        linear-gradient(160deg, #09090a 0%, #121009 35%, #19160e 65%, #0c0b09 100%);
+    /* Dubai comparison slide — lightest overlay, most image visible */
+    .ov-dubai {
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.22) 0%,
+        rgba(10,7,3,0.38) 45%,
+        rgba(0,0,0,0.62) 80%,
+        rgba(0,0,0,0.80) 100%
+      );
     }
-    .bg-berlin {
-      background:
-        radial-gradient(ellipse at 60% 25%, rgba(100,100,100,.1) 0%, transparent 50%),
-        linear-gradient(160deg, #090909 0%, #0e0e0e 40%, #141414 65%, #0a0a0a 100%);
-    }
-    .bg-dubai {
-      background:
-        radial-gradient(ellipse at 75% 20%, rgba(230,150,40,.40) 0%, rgba(180,110,25,.20) 35%, transparent 60%),
-        radial-gradient(ellipse at 25% 75%, rgba(160,100,20,.18) 0%, transparent 45%),
-        linear-gradient(175deg, #0b0806 0%, #180f05 30%, #1e1306 55%, #120a04 80%, #090706 100%);
-    }
-    .bg-cta {
-      background:
-        radial-gradient(ellipse at 70% 25%, rgba(210,140,40,.35) 0%, rgba(165,105,20,.15) 40%, transparent 65%),
-        radial-gradient(ellipse at 30% 80%, rgba(140,90,15,.15) 0%, transparent 45%),
-        linear-gradient(175deg, #0a0806 0%, #160f05 30%, #1c1207 55%, #110a04 80%, #090806 100%);
+    /* CTA — warm dark gradient */
+    .ov-cta {
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.50) 0%,
+        rgba(12,8,3,0.60) 50%,
+        rgba(0,0,0,0.80) 100%
+      );
     }
 
-    /* ─── CORNER ELEMENTS ──────────────────────────────────── */
+    /* ─── CORNER ELEMENTS ─────────────────────────────── */
     .asterisk {
       position: absolute;
-      top: 52px;
-      left: 55px;
+      top: 54px;
+      left: 56px;
       color: #C9A84C;
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 300;
       line-height: 1;
+      z-index: 10;
     }
     .page-counter {
       position: absolute;
-      top: 56px;
-      right: 55px;
+      top: 58px;
+      right: 56px;
       color: #C9A84C;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 400;
       letter-spacing: 2px;
+      z-index: 10;
     }
     .num-badge {
       position: absolute;
-      top: 48px;
-      left: 50px;
+      top: 50px;
+      left: 52px;
       width: 72px;
       height: 72px;
-      border: 2px solid rgba(201,168,76,.75);
+      border: 2px solid rgba(201,168,76,0.70);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -108,40 +113,42 @@
       font-size: 22px;
       font-weight: 700;
       letter-spacing: 1px;
+      z-index: 10;
     }
 
-    /* ─── LOGO ─────────────────────────────────────────────── */
+    /* ─── LOGO ────────────────────────────────────────── */
     .logo-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 11px;
+      z-index: 10;
     }
     .logo-wordmark {
       color: #C9A84C;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 700;
       letter-spacing: 5px;
       text-align: center;
     }
 
-    /* ─── DIVIDER ───────────────────────────────────────────── */
+    /* ─── DIVIDERS ────────────────────────────────────── */
     .divider {
       width: 100%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,.55), transparent);
-      margin: 36px 0;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.55), transparent);
+      margin: 34px 0;
     }
     .divider-short {
       width: 80px;
       height: 2px;
       background: #C9A84C;
-      margin: 36px auto;
+      margin: 38px auto;
     }
 
-    /* ══════════════════════════════════════════════════════════
-       SLIDE 1  –  INTRO HOOK
-    ══════════════════════════════════════════════════════════ */
+    /* ══════════════════════════════════════════════════
+       SLIDE 1  –  INTRO / HOOK
+    ══════════════════════════════════════════════════ */
     .s1-body {
       position: absolute;
       inset: 0;
@@ -149,44 +156,64 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 90px 80px;
+      padding: 100px 84px;
       text-align: center;
+      z-index: 5;
     }
-    .s1-star { font-size: 58px; color: #C9A84C; font-weight: 200; margin-bottom: 56px; line-height: 1; }
-    .s1-title { font-size: 104px; font-weight: 900; color: #fff; line-height: 1; margin-bottom: 14px; }
-    .s1-subtitle { font-size: 72px; font-weight: 900; color: #C9A84C; line-height: 1.1; margin-bottom: 0; }
-    .s1-text {
-      font-size: 30px; font-weight: 400; color: rgba(255,255,255,.82);
-      line-height: 1.75; max-width: 820px; margin-bottom: 40px;
+    .s1-star    { font-size: 56px; color: #C9A84C; font-weight: 200; margin-bottom: 50px; line-height: 1; }
+    .s1-title   { font-size: 106px; font-weight: 900; color: #fff; line-height: 0.95; margin-bottom: 14px; }
+    .s1-gold    { font-size: 74px; font-weight: 900; color: #C9A84C; line-height: 1.1; }
+    .s1-text    {
+      font-size: 30px; font-weight: 400;
+      color: rgba(255,255,255,0.83);
+      line-height: 1.78; max-width: 820px;
+      margin-bottom: 36px;
     }
-    .s1-arrow { font-size: 32px; font-weight: 700; color: rgba(255,255,255,.6); }
+    .s1-arrow   { font-size: 28px; font-weight: 600; color: rgba(255,255,255,0.50); }
 
-    /* ══════════════════════════════════════════════════════════
-       SLIDES 2–6  –  CITY CARDS
-    ══════════════════════════════════════════════════════════ */
+    /* ══════════════════════════════════════════════════
+       SLIDES 2–6  –  CITY CARDS  (centered layout)
+    ══════════════════════════════════════════════════ */
     .city-body {
       position: absolute;
       inset: 0;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 62px 78px;
+      justify-content: center;
+      align-items: center;
+      padding: 120px 62px 80px;
+      text-align: center;
+      z-index: 5;
     }
-    .city-name  { font-size: 114px; font-weight: 900; color: #fff;    line-height: .95; margin-bottom: 6px; }
-    .city-size  { font-size:  70px; font-weight: 900; color: #C9A84C; line-height: 1.1; margin-bottom: 44px; }
+    .city-name {
+      font-size: 116px; font-weight: 900; color: #fff;
+      line-height: 0.92; margin-bottom: 8px;
+      text-shadow: 0 4px 40px rgba(0,0,0,0.9);
+    }
+    .city-size {
+      font-size: 68px; font-weight: 900; color: #C9A84C;
+      line-height: 1.1; margin-bottom: 46px;
+    }
     .city-details {
-      font-size: 28px; font-weight: 400; color: rgba(255,255,255,.88);
+      font-size: 28px; font-weight: 400;
+      color: rgba(255,255,255,0.88);
       line-height: 1.72; margin-bottom: 10px;
     }
     .city-stats {
-      font-size: 27px; font-weight: 500; color: rgba(255,255,255,.82);
+      font-size: 27px; font-weight: 500;
+      color: rgba(255,255,255,0.82);
       line-height: 1.55; margin-bottom: 0;
     }
-    .tagline { font-size: 44px; font-weight: 800; color: #C9A84C; line-height: 1.3; margin-bottom: 50px; }
+    .tagline {
+      font-size: 44px; font-weight: 800;
+      color: #C9A84C; line-height: 1.3;
+      margin-bottom: 52px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.7);
+    }
 
-    /* ══════════════════════════════════════════════════════════
+    /* ══════════════════════════════════════════════════
        SLIDE 7  –  CTA
-    ══════════════════════════════════════════════════════════ */
+    ══════════════════════════════════════════════════ */
     .cta-body {
       position: absolute;
       inset: 0;
@@ -194,57 +221,61 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 80px;
+      padding: 90px 84px;
       text-align: center;
+      z-index: 5;
     }
-    .cta-title    { font-size: 100px; font-weight: 900; color: #fff;    line-height: 1;   margin-bottom: 12px; }
-    .cta-subtitle { font-size:  86px; font-weight: 900; color: #C9A84C; line-height: 1.1; margin-bottom: 52px; }
+    .cta-title    { font-size: 102px; font-weight: 900; color: #fff;    line-height: 1;   margin-bottom: 12px; }
+    .cta-subtitle { font-size:  88px; font-weight: 900; color: #C9A84C; line-height: 1.1; margin-bottom: 54px; }
     .cta-text {
-      font-size: 30px; font-weight: 400; color: rgba(255,255,255,.86);
-      line-height: 1.78; max-width: 840px; margin-bottom: 0;
+      font-size: 30px; font-weight: 400;
+      color: rgba(255,255,255,0.86);
+      line-height: 1.78; max-width: 840px;
+      margin-bottom: 0;
     }
-    .cta-tagline  { font-size: 44px; font-weight: 800; color: #C9A84C; margin-bottom: 58px; }
+    .cta-tagline  { font-size: 44px; font-weight: 800; color: #C9A84C; margin-bottom: 60px; line-height: 1.35; }
     .cta-send {
-      font-size: 21px; color: rgba(255,255,255,.55); margin-bottom: 46px;
+      font-size: 21px; color: rgba(255,255,255,0.52);
+      margin-bottom: 48px;
       display: flex; align-items: center; gap: 8px;
     }
-    .cta-send span { font-size: 18px; }
   </style>
 </head>
 <body>
 
+<!-- SVG logo snippet (reused) — defined once, referenced by class -->
 <!-- ═══════════════════════════════════════════════════════════
-     SLIDE 1 / 7  –  HOOK
+     SLIDE 1 / 7  —  HOOK
 ════════════════════════════════════════════════════════════ -->
 <p class="slide-label">שקופית 1 מתוך 7</p>
-<div class="slide bg-intro">
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1671818787626-2d70aa8d4292?w=1080&h=1350&fit=crop&q=85');">
 
+  <div class="overlay ov-intro"></div>
   <div class="asterisk">✦</div>
   <div class="page-counter">1/7</div>
 
   <div class="s1-body">
     <div class="s1-star">✦</div>
     <div class="s1-title">מיליון שקל.</div>
-    <div class="s1-subtitle">ארבעה עולמות.</div>
+    <div class="s1-gold">ארבעה עולמות.</div>
     <div class="divider-short"></div>
     <div class="s1-text">
       בדקנו מה אפשר לקנות בהם עם אותו הכסף —<br>
       בניו יורק, לונדון, ברלין ובדובאי.<br>
       הפערים בתשואה, בגודל ובמס יפתיעו אותך.
     </div>
-    <div class="divider" style="width:70%;margin:0 auto 36px;"></div>
+    <div class="divider" style="width:70%;margin:0 auto 34px;"></div>
     <div class="s1-arrow">← החליקו לראות ←</div>
-    <div style="margin-top: 60px;">
+    <div style="margin-top:58px;">
       <div class="logo-wrap">
-        <!-- AC Holding SVG Logo -->
-        <svg width="72" height="68" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="70" height="66" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
           <polygon points="6,64 12,18 18,64"  fill="#C9A84C"/>
           <polygon points="20,64 30,4  40,64" fill="#C9A84C"/>
           <polygon points="42,64 50,14 58,64" fill="#C9A84C"/>
           <polygon points="60,64 65,32 70,64" fill="#C9A84C"/>
           <rect x="4" y="63" width="64" height="2" fill="#C9A84C" rx="1"/>
         </svg>
-        <div class="logo-wordmark">AC HOLDING</div>
+        <div class="logo-wordmark">GLIDAI PROPERTIES</div>
       </div>
     </div>
   </div>
@@ -252,11 +283,12 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     SLIDE 2 / 7  –  CITY 01  –  פריז
+     SLIDE 2 / 7  —  CITY 01  —  פריז
 ════════════════════════════════════════════════════════════ -->
 <p class="slide-label">שקופית 2 מתוך 7</p>
-<div class="slide bg-paris">
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1563321753-6394c9e5b77b?w=1080&h=1350&fit=crop&q=85');">
 
+  <div class="overlay ov-dark"></div>
   <div class="num-badge">01</div>
   <div class="page-counter">2/7</div>
 
@@ -270,32 +302,33 @@
       רהיטים ישנים כלולים במחיר.
     </div>
     <div class="city-stats">
-      תשואה: כ־2.5%. &nbsp;מס: 30%.
+      תשואה: כ־2.5%.&nbsp;&nbsp;מס: 30%.
     </div>
 
     <div class="divider"></div>
     <div class="tagline">עיר האהבה. אבל לא של כספך.</div>
 
     <div class="logo-wrap">
-      <svg width="62" height="58" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="60" height="56" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="6,64 12,18 18,64"  fill="#C9A84C"/>
         <polygon points="20,64 30,4  40,64" fill="#C9A84C"/>
         <polygon points="42,64 50,14 58,64" fill="#C9A84C"/>
         <polygon points="60,64 65,32 70,64" fill="#C9A84C"/>
         <rect x="4" y="63" width="64" height="2" fill="#C9A84C" rx="1"/>
       </svg>
-      <div class="logo-wordmark">AC HOLDING</div>
+      <div class="logo-wordmark">GLIDAI PROPERTIES</div>
     </div>
   </div>
 
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     SLIDE 3 / 7  –  CITY 02  –  ניו יורק
+     SLIDE 3 / 7  —  CITY 02  —  ניו יורק
 ════════════════════════════════════════════════════════════ -->
 <p class="slide-label">שקופית 3 מתוך 7</p>
-<div class="slide bg-ny">
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1691862880069-e67b7b781b23?w=1080&h=1350&fit=crop&q=85');">
 
+  <div class="overlay ov-dark"></div>
   <div class="num-badge">02</div>
   <div class="page-counter">3/7</div>
 
@@ -308,32 +341,33 @@
       החלון פונה לבניין השכן.
     </div>
     <div class="city-stats">
-      תשואה: כ־3.5%. &nbsp;מס: 25%.
+      תשואה: כ־3.5%.&nbsp;&nbsp;מס: 25%.
     </div>
 
     <div class="divider"></div>
     <div class="tagline">אותו מיליון – חוויה דומה.</div>
 
     <div class="logo-wrap">
-      <svg width="62" height="58" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="60" height="56" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="6,64 12,18 18,64"  fill="#C9A84C"/>
         <polygon points="20,64 30,4  40,64" fill="#C9A84C"/>
         <polygon points="42,64 50,14 58,64" fill="#C9A84C"/>
         <polygon points="60,64 65,32 70,64" fill="#C9A84C"/>
         <rect x="4" y="63" width="64" height="2" fill="#C9A84C" rx="1"/>
       </svg>
-      <div class="logo-wordmark">AC HOLDING</div>
+      <div class="logo-wordmark">GLIDAI PROPERTIES</div>
     </div>
   </div>
 
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     SLIDE 4 / 7  –  CITY 03  –  לונדון
+     SLIDE 4 / 7  —  CITY 03  —  לונדון
 ════════════════════════════════════════════════════════════ -->
 <p class="slide-label">שקופית 4 מתוך 7</p>
-<div class="slide bg-london">
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1724987982894-4a84c2df3c3d?w=1080&h=1350&fit=crop&q=85');">
 
+  <div class="overlay ov-dark"></div>
   <div class="num-badge">03</div>
   <div class="page-counter">4/7</div>
 
@@ -346,32 +380,33 @@
       נסיעה של 45 דקות למרכז במטרו.
     </div>
     <div class="city-stats">
-      תשואה: כ־3%. &nbsp;מס: 28%.
+      תשואה: כ־3%.&nbsp;&nbsp;מס: 28%.
     </div>
 
     <div class="divider"></div>
     <div class="tagline">מיליון לחדר — לא לדירה.</div>
 
     <div class="logo-wrap">
-      <svg width="62" height="58" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="60" height="56" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="6,64 12,18 18,64"  fill="#C9A84C"/>
         <polygon points="20,64 30,4  40,64" fill="#C9A84C"/>
         <polygon points="42,64 50,14 58,64" fill="#C9A84C"/>
         <polygon points="60,64 65,32 70,64" fill="#C9A84C"/>
         <rect x="4" y="63" width="64" height="2" fill="#C9A84C" rx="1"/>
       </svg>
-      <div class="logo-wordmark">AC HOLDING</div>
+      <div class="logo-wordmark">GLIDAI PROPERTIES</div>
     </div>
   </div>
 
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     SLIDE 5 / 7  –  CITY 04  –  ברלין
+     SLIDE 5 / 7  —  CITY 04  —  ברלין
 ════════════════════════════════════════════════════════════ -->
 <p class="slide-label">שקופית 5 מתוך 7</p>
-<div class="slide bg-berlin">
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1492371491083-24c8d4bfe1f3?w=1080&h=1350&fit=crop&q=85');">
 
+  <div class="overlay ov-dark"></div>
   <div class="num-badge">04</div>
   <div class="page-counter">5/7</div>
 
@@ -384,32 +419,34 @@
       תחבורה ציבורית טובה. חוקי שכירות מגבילים.
     </div>
     <div class="city-stats">
-      תשואה: כ־4%. &nbsp;מס: 15–20%.
+      תשואה: כ־4%.&nbsp;&nbsp;מס: 15–20%.
     </div>
 
     <div class="divider"></div>
     <div class="tagline">טוב יותר. אבל לא מהפכני.</div>
 
     <div class="logo-wrap">
-      <svg width="62" height="58" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="60" height="56" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="6,64 12,18 18,64"  fill="#C9A84C"/>
         <polygon points="20,64 30,4  40,64" fill="#C9A84C"/>
         <polygon points="42,64 50,14 58,64" fill="#C9A84C"/>
         <polygon points="60,64 65,32 70,64" fill="#C9A84C"/>
         <rect x="4" y="63" width="64" height="2" fill="#C9A84C" rx="1"/>
       </svg>
-      <div class="logo-wordmark">AC HOLDING</div>
+      <div class="logo-wordmark">GLIDAI PROPERTIES</div>
     </div>
   </div>
 
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     SLIDE 6 / 7  –  CITY 05  –  דובאי  ★ THE WINNER ★
+     SLIDE 6 / 7  —  CITY 05  —  דובאי  ★  WINNER
+     Light overlay — most image visible, most elegant
 ════════════════════════════════════════════════════════════ -->
 <p class="slide-label">שקופית 6 מתוך 7</p>
-<div class="slide bg-dubai">
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1655309893829-407c54619f1f?w=1080&h=1350&fit=crop&q=90');">
 
+  <div class="overlay ov-dubai"></div>
   <div class="num-badge">05</div>
   <div class="page-counter">6/7</div>
 
@@ -422,32 +459,33 @@
       מרפסת, בריכה, חדר כושר, קונסיירז׳.
     </div>
     <div class="city-stats">
-      תשואה: 8–12%. &nbsp;מס: 0%.
+      תשואה: 8–12%.&nbsp;&nbsp;מס: 0%.
     </div>
 
     <div class="divider"></div>
     <div class="tagline">זה לא שדרוג. זה דילוג.</div>
 
     <div class="logo-wrap">
-      <svg width="62" height="58" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="60" height="56" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="6,64 12,18 18,64"  fill="#C9A84C"/>
         <polygon points="20,64 30,4  40,64" fill="#C9A84C"/>
         <polygon points="42,64 50,14 58,64" fill="#C9A84C"/>
         <polygon points="60,64 65,32 70,64" fill="#C9A84C"/>
         <rect x="4" y="63" width="64" height="2" fill="#C9A84C" rx="1"/>
       </svg>
-      <div class="logo-wordmark">AC HOLDING</div>
+      <div class="logo-wordmark">GLIDAI PROPERTIES</div>
     </div>
   </div>
 
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     SLIDE 7 / 7  –  CTA
+     SLIDE 7 / 7  —  CTA
 ════════════════════════════════════════════════════════════ -->
 <p class="slide-label">שקופית 7 מתוך 7</p>
-<div class="slide bg-cta">
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1655309893829-407c54619f1f?w=1080&h=1350&fit=crop&q=85&crop=top');">
 
+  <div class="overlay ov-cta"></div>
   <div class="asterisk">✦</div>
   <div class="page-counter">7/7</div>
 
@@ -461,25 +499,25 @@
       עם תשואה כפולה ובלי מס.
     </div>
 
-    <div class="divider" style="width:75%;margin:0 auto;"></div>
+    <div class="divider" style="width:72%;margin:0 auto;"></div>
 
     <div class="cta-tagline">
       השאלה היא לא ׳איפה אפשר׳ —<br>אלא ׳איפה כדאי׳.
     </div>
 
     <div class="cta-send">
-      <span>↙</span> שלחו הודעה
+      <span>↙</span>&nbsp;שלחו הודעה
     </div>
 
     <div class="logo-wrap">
-      <svg width="72" height="68" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="70" height="66" viewBox="0 0 72 68" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="6,64 12,18 18,64"  fill="#C9A84C"/>
         <polygon points="20,64 30,4  40,64" fill="#C9A84C"/>
         <polygon points="42,64 50,14 58,64" fill="#C9A84C"/>
         <polygon points="60,64 65,32 70,64" fill="#C9A84C"/>
         <rect x="4" y="63" width="64" height="2" fill="#C9A84C" rx="1"/>
       </svg>
-      <div class="logo-wordmark">AC HOLDING</div>
+      <div class="logo-wordmark">GLIDAI PROPERTIES</div>
     </div>
   </div>
 
