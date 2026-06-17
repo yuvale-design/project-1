@@ -44,10 +44,27 @@ These are already wired into the HTML — the `.glidai` block. Swap the crest le
 
 ---
 
+## Photo source notes
+
+The HTML already loads luxury Dubai photography from Unsplash hot-links as
+the live background for every slide, with a dark gold gradient overlay so
+the gold typography and Hebrew copy stay legible. Verify each photo loads
+in your browser — if any URL fails, the gold/charcoal/emerald gradient
+underneath still produces a polished slide.
+
+To swap to your own JVC project photography, edit the
+`LUXURY PHOTO BACKGROUNDS` block near the bottom of the CSS in
+`glidai-carousel.html`. Each slide has a single `background-image: url("…")`
+line — drop in your final photo URLs there.
+
+## Yield data
+
+The rental-yield stat on Slide 5 is set to **10%+**, in line with current
+JVC studio / 1-BR gross rental yields reported by Bayut and Property Finder.
+
 ## Export workflow
 
-1. Open `glidai-carousel.html` in Chrome at 100% zoom.
-2. Capture each `.slide` (1080 × 1350) — DevTools → Capture node screenshot or print-to-PDF.
-3. Replace the SVG silhouette backgrounds inside each `.photo` block with the AI-generated photographs above (as `background-image`); keep the `.vignette` overlay for legibility.
-4. Export each slide as JPG, sRGB, quality 90+.
-5. Upload in order 01 → 08.
+1. Open `glidai-carousel.html` in Chrome at 100% zoom (give it a moment for the photos to load).
+2. Capture each `.slide` (1080 × 1350) — DevTools → Capture node screenshot, or print-to-PDF.
+3. Export each slide as JPG, sRGB, quality 90+.
+4. Upload in order 01 → 08.
