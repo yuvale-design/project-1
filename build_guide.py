@@ -1,22 +1,35 @@
-"""Generate the Street Hebrew Survival Guide PDF — v4 weasyprint edition.
+"""Generate the Street Hebrew Survival Guide PDF — v5 image-Hebrew edition.
 
-Switched from reportlab (which forced visual-order Hebrew via python-bidi
-and broke for many viewers) to weasyprint, so Hebrew is stored and shaped
-in logical order with native bidi support. Output is selectable,
-searchable, and renders identically in every PDF viewer.
+Some PDF viewers (Microsoft Word's PDF preview, Office viewers, some
+mobile readers) try to re-apply their own bidi shaping to the text in
+the PDF, which double-reverses Hebrew and shows it scrambled. To make
+the guide bullet-proof across every viewer, each Hebrew phrase is
+rasterized to a PNG with PIL + Heebo + python-bidi, then embedded in
+the HTML. Hebrew is no longer text in the PDF — it's pixels — so no
+viewer can re-interpret it. Trade-off: Hebrew text isn't selectable,
+which is fine for a marketing lead magnet.
 """
 from __future__ import annotations
 
-import base64
+import hashlib
 from pathlib import Path
 
+from PIL import Image, ImageDraw, ImageFont
+from bidi import get_display
 from weasyprint import HTML, CSS
 
 ROOT = Path(__file__).parent
 FONT_DIR = ROOT / "fonts"
-OUT = ROOT / "Street_Hebrew_Survival_Guide_v4_Final.pdf"
+IMG_DIR = ROOT / "_heb_images"
+IMG_DIR.mkdir(exist_ok=True)
+OUT = ROOT / "Street_Hebrew_Survival_Guide_v5_Final.pdf"
 
 WHATSAPP_URL = "https://wa.me/972XXXXXXXXX"
+
+# PIL Hebrew rendering — high DPI for crisp print + zoom
+HEB_FONT = ImageFont.truetype(str(FONT_DIR / "Heebo-Bold.ttf"), 96)
+HEB_COLOR = (13, 31, 60, 255)  # navy
+RENDER_SCALE = 4  # 4x for retina sharpness
 
 # ---------------------------------------------------------------------------
 # Data — phrases in LOGICAL Hebrew order (no bidi preprocessing needed)
@@ -589,15 +602,19 @@ html, body {
 .phrases tr:nth-child(odd) td { background: var(--row-alt); }
 .phrases td.heb {
   width: 38%;
-  direction: rtl;
   text-align: right;
-  font-family: 'Heebo', sans-serif;
-  font-weight: 700;
-  font-size: 14pt;
-  line-height: 1.4;
-  color: var(--navy);
   border-right: 3px solid transparent;
   padding-right: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  vertical-align: middle;
+}
+.phrases td.heb img {
+  height: 26px;
+  width: auto;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: middle;
 }
 .cat-navy ~ .phrases td.heb,
 .phrases.navy   td.heb { border-right-color: var(--cat-navy); }
@@ -842,6 +859,28 @@ html, body {
 
 
 # ---------------------------------------------------------------------------
+# Hebrew → PNG rasterizer (one image per phrase, cached on disk)
+# ---------------------------------------------------------------------------
+def hebrew_image(text: str) -> str:
+    """Render a Hebrew phrase to a PNG file and return its file:// URI."""
+    key = hashlib.sha1(text.encode("utf-8")).hexdigest()[:16]
+    out = IMG_DIR / f"heb_{key}.png"
+    if not out.exists():
+        visual = get_display(text)
+        # Measure tight bbox for the visual-order string
+        bbox = HEB_FONT.getbbox(visual)
+        left, top, right, bottom = bbox
+        w = right - left
+        h = bottom - top
+        pad_x, pad_y = 12, 10
+        img = Image.new("RGBA", (w + pad_x * 2, h + pad_y * 2), (255, 255, 255, 0))
+        d = ImageDraw.Draw(img)
+        d.text((pad_x - left, pad_y - top), visual, font=HEB_FONT, fill=HEB_COLOR)
+        img.save(out, "PNG", optimize=True)
+    return out.resolve().as_uri()
+
+
+# ---------------------------------------------------------------------------
 # HTML helpers
 # ---------------------------------------------------------------------------
 def cover_html() -> str:
@@ -914,9 +953,10 @@ def cover_html() -> str:
 def category_html(cat: dict) -> str:
     rows = ""
     for hb, phon, meaning in cat["phrases"]:
+        img_uri = hebrew_image(hb)
         rows += (
             f"<tr>"
-            f"<td class='heb' lang='he'>{hb}</td>"
+            f"<td class='heb'><img src='{img_uri}' alt='{hb}'/></td>"
             f"<td class='phon'>{phon}</td>"
             f"<td class='mean'>{meaning}</td>"
             f"</tr>"
@@ -1074,3 +1114,4 @@ def build() -> None:
 
 if __name__ == "__main__":
     build()
+    print(f"Hebrew phrase images cached in {IMG_DIR}/")
