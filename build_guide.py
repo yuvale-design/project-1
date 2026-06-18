@@ -1,14 +1,14 @@
-"""Generate the Street Hebrew Survival Guide PDF lead magnet."""
+"""Generate the Street Hebrew Survival Guide PDF lead magnet — v3 elegant edition."""
 from __future__ import annotations
 
-from reportlab.lib.colors import Color, HexColor, white
+import math
+from pathlib import Path
+
+from reportlab.lib.colors import Color, HexColor, white, black
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle
-from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
-from reportlab.platypus import Paragraph
 
 from bidi import get_display
 
@@ -16,14 +16,20 @@ from bidi import get_display
 # Palette
 # ---------------------------------------------------------------------------
 NAVY = HexColor("#0D1F3C")
+NAVY_SOFT = HexColor("#1A2D52")
 ELECTRIC = HexColor("#1A73E8")
+ELECTRIC_DARK = HexColor("#0B5BC7")
 GOLD = HexColor("#F4A724")
+GOLD_DEEP = HexColor("#C98700")
 LIGHT_GRAY = HexColor("#F7F8FA")
-ROW_GRAY = HexColor("#F1F3F8")
-MUTED_BLUE = HexColor("#7A8CB0")
-CREAM = HexColor("#FFF7E0")
+ROW_ALT = HexColor("#FAFBFD")
+BORDER = HexColor("#E5E8F0")
+INK = HexColor("#1A2138")
+INK_SOFT = HexColor("#4B5572")
+MUTED = HexColor("#8693B1")
+CREAM = HexColor("#FFF6DE")
 LIGHT_BLUE = HexColor("#E8F0FE")
-WHITE = white
+RED_STRIKE = HexColor("#B71C1C")
 
 CAT_NAVY = NAVY
 CAT_BROWN = HexColor("#7B3F00")
@@ -32,20 +38,34 @@ CAT_PURPLE = HexColor("#6A1B9A")
 CAT_RED = HexColor("#B71C1C")
 
 # ---------------------------------------------------------------------------
-# Fonts
+# Fonts — Heebo for Hebrew, Inter for Latin, Symbola for icons
 # ---------------------------------------------------------------------------
-pdfmetrics.registerFont(TTFont("Heb", "/usr/share/fonts/truetype/culmus/HadasimCLM-Bold.ttf"))
-pdfmetrics.registerFont(TTFont("HebReg", "/usr/share/fonts/truetype/culmus/HadasimCLM-Regular.ttf"))
-pdfmetrics.registerFont(TTFont("Body", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"))
-pdfmetrics.registerFont(TTFont("BodyBold", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"))
-pdfmetrics.registerFont(TTFont("BodyIt", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf"))
-pdfmetrics.registerFont(TTFont("Symb", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf"))
+FONT_DIR = Path(__file__).parent / "fonts"
+SYMBOLA = "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf"
+
+_FONT_MAP = {
+    "HebReg":    FONT_DIR / "Heebo-Regular.ttf",
+    "HebMed":    FONT_DIR / "Heebo-Medium.ttf",
+    "HebBold":   FONT_DIR / "Heebo-Bold.ttf",
+    "HebXBold":  FONT_DIR / "Heebo-ExtraBold.ttf",
+    "HebBlack":  FONT_DIR / "Heebo-Black.ttf",
+    "Body":      FONT_DIR / "Inter-Regular.ttf",
+    "BodyMed":   FONT_DIR / "Inter-Medium.ttf",
+    "BodySemi":  FONT_DIR / "Inter-SemiBold.ttf",
+    "BodyBold":  FONT_DIR / "Inter-Bold.ttf",
+    "BodyXBold": FONT_DIR / "Inter-ExtraBold.ttf",
+    "BodyIt":    FONT_DIR / "Inter-Italic.ttf",
+    "BodyMedIt": FONT_DIR / "Inter-MediumItalic.ttf",
+    "Symb":      Path(SYMBOLA),
+}
+for name, path in _FONT_MAP.items():
+    pdfmetrics.registerFont(TTFont(name, str(path)))
 
 PAGE_W, PAGE_H = A4
 
 
 def heb(text: str) -> str:
-    """Apply bidi reordering so RTL Hebrew renders correctly in reportlab."""
+    """Reorder Hebrew logical→visual so reportlab's LTR engine renders it correctly."""
     return get_display(text)
 
 
@@ -54,6 +74,7 @@ def heb(text: str) -> str:
 # ---------------------------------------------------------------------------
 CATEGORIES = [
     {
+        "n": "01",
         "icon": "\U0001F3DB",
         "title": "Public Spaces & Bureaucracy",
         "subtitle": "Survive any clerk, landlord, or government counter.",
@@ -82,6 +103,7 @@ CATEGORIES = [
         ],
     },
     {
+        "n": "02",
         "icon": "☕",
         "title": "Cafes & Restaurants",
         "subtitle": "Order, sip, and pay like a Tel Aviv regular.",
@@ -110,6 +132,7 @@ CATEGORIES = [
         ],
     },
     {
+        "n": "03",
         "icon": "\U0001F6D2",
         "title": "Markets & Money",
         "subtitle": "Bargain at the shuk and walk out with the win.",
@@ -138,6 +161,7 @@ CATEGORIES = [
         ],
     },
     {
+        "n": "04",
         "icon": "\U0001F91D",
         "title": "Small Talk & Networking",
         "subtitle": "Slip into any conversation and sound like an insider.",
@@ -166,6 +190,7 @@ CATEGORIES = [
         ],
     },
     {
+        "n": "05",
         "icon": "\U0001F6A8",
         "title": "Emergency & Logistics",
         "subtitle": "The phrases that save the day — and the delivery.",
@@ -197,401 +222,560 @@ CATEGORIES = [
 
 
 # ---------------------------------------------------------------------------
-# Drawing helpers
+# Primitives
 # ---------------------------------------------------------------------------
-def draw_israeli_flag(c: canvas.Canvas, cx: float, cy: float, w: float = 70, h: float = 48) -> None:
-    """Draw a simple Israeli flag centered at (cx, cy)."""
+def rrect(c, x, y, w, h, r, fill=None, stroke=None, sw=1.0):
+    if fill is not None:
+        c.setFillColor(fill)
+    if stroke is not None:
+        c.setStrokeColor(stroke)
+        c.setLineWidth(sw)
+    c.roundRect(x, y, w, h, r,
+                fill=1 if fill is not None else 0,
+                stroke=1 if stroke is not None else 0)
+
+
+def draw_text_lines(c, lines, x, y, font, size, color, leading=None, align="left"):
+    """Draw consecutive text lines; returns y after the last line."""
+    leading = leading or size * 1.35
+    c.setFillColor(color)
+    c.setFont(font, size)
+    for ln in lines:
+        if align == "left":
+            c.drawString(x, y, ln)
+        elif align == "right":
+            c.drawRightString(x, y, ln)
+        else:
+            c.drawCentredString(x, y, ln)
+        y -= leading
+    return y + leading
+
+
+def wrap_text(c, text, font, size, max_w):
+    """Greedy word-wrap; returns list of lines."""
+    if not text:
+        return []
+    words = text.split()
+    lines, cur = [], ""
+    for w in words:
+        candidate = (cur + " " + w).strip()
+        if c.stringWidth(candidate, font, size) <= max_w:
+            cur = candidate
+        else:
+            if cur:
+                lines.append(cur)
+            cur = w
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+# ---------------------------------------------------------------------------
+# Page 1 — Cover
+# ---------------------------------------------------------------------------
+def draw_israeli_flag(c, cx, cy, w=92, h=62):
     x, y = cx - w / 2, cy - h / 2
     c.setFillColor(white)
-    c.setStrokeColor(HexColor("#DDDDDD"))
-    c.setLineWidth(0.7)
-    c.rect(x, y, w, h, fill=1, stroke=1)
+    c.setStrokeColor(HexColor("#E2E6F0"))
+    c.setLineWidth(0.6)
+    c.roundRect(x, y, w, h, 3, fill=1, stroke=1)
 
-    blue = HexColor("#0038B8")
-    c.setFillColor(blue)
-    c.setStrokeColor(blue)
-    stripe_h = h * 0.13
-    c.rect(x, y + h - stripe_h * 1.6, w, stripe_h, fill=1, stroke=0)
-    c.rect(x, y + stripe_h * 0.6, w, stripe_h, fill=1, stroke=0)
+    flag_blue = HexColor("#0038B8")
+    c.setFillColor(flag_blue)
+    c.setStrokeColor(flag_blue)
+    stripe_h = h * 0.12
+    c.rect(x, y + h - stripe_h * 1.7, w, stripe_h, fill=1, stroke=0)
+    c.rect(x, y + stripe_h * 0.7, w, stripe_h, fill=1, stroke=0)
 
     cx2, cy2 = x + w / 2, y + h / 2
     star_r = h * 0.22
-    c.setStrokeColor(blue)
-    c.setFillColor(blue)
-    c.setLineWidth(1.6)
-    import math
+    c.setStrokeColor(flag_blue)
+    c.setLineWidth(2.0)
     pts_up = [(cx2 + star_r * math.cos(math.radians(a)),
                cy2 + star_r * math.sin(math.radians(a)))
               for a in (90, 210, 330)]
     pts_dn = [(cx2 + star_r * math.cos(math.radians(a)),
                cy2 + star_r * math.sin(math.radians(a)))
               for a in (270, 30, 150)]
-    p = c.beginPath()
-    p.moveTo(*pts_up[0]); p.lineTo(*pts_up[1]); p.lineTo(*pts_up[2]); p.close()
-    c.drawPath(p, stroke=1, fill=0)
-    p = c.beginPath()
-    p.moveTo(*pts_dn[0]); p.lineTo(*pts_dn[1]); p.lineTo(*pts_dn[2]); p.close()
-    c.drawPath(p, stroke=1, fill=0)
+    for pts in (pts_up, pts_dn):
+        p = c.beginPath()
+        p.moveTo(*pts[0])
+        p.lineTo(*pts[1])
+        p.lineTo(*pts[2])
+        p.close()
+        c.drawPath(p, stroke=1, fill=0)
 
 
-def diagonal_texture(c: canvas.Canvas) -> None:
-    """Subtle diagonal lines on navy cover."""
+def cover_texture(c):
+    """Subtle diagonal grid + soft vignette glow at top."""
     c.saveState()
-    c.setStrokeColor(Color(1, 1, 1, alpha=0.04))
-    c.setLineWidth(0.6)
-    step = 14
+    c.setStrokeColor(Color(1, 1, 1, alpha=0.035))
+    c.setLineWidth(0.5)
+    step = 18
     for i in range(-int(PAGE_H), int(PAGE_W) + int(PAGE_H), step):
         c.line(i, 0, i + PAGE_H, PAGE_H)
     c.restoreState()
-
-
-def gold_bars(c: canvas.Canvas, color=GOLD, h: float = 8) -> None:
-    c.setFillColor(color)
-    c.rect(0, PAGE_H - h, PAGE_W, h, fill=1, stroke=0)
-    c.rect(0, 0, PAGE_W, h, fill=1, stroke=0)
-
-
-def draw_wrapped(c: canvas.Canvas, text: str, x: float, y: float, w: float,
-                 font: str, size: float, color, leading: float | None = None,
-                 align: str = "left") -> float:
-    """Draw text wrapping inside width w using a Paragraph; returns height used."""
-    style = ParagraphStyle(
-        "s", fontName=font, fontSize=size, leading=leading or size * 1.25,
-        textColor=color, alignment={"left": 0, "center": 1, "right": 2}[align],
-    )
-    p = Paragraph(text, style)
-    pw, ph = p.wrap(w, 1000)
-    p.drawOn(c, x, y - ph)
-    return ph
-
-
-def rounded_box(c: canvas.Canvas, x, y, w, h, r, fill=None, stroke=None,
-                stroke_w: float = 1) -> None:
-    if fill is not None:
-        c.setFillColor(fill)
-    if stroke is not None:
-        c.setStrokeColor(stroke)
-        c.setLineWidth(stroke_w)
-    c.roundRect(x, y, w, h, r,
-                fill=1 if fill is not None else 0,
-                stroke=1 if stroke is not None else 0)
-
-
-# ---------------------------------------------------------------------------
-# Page 1 — Cover
-# ---------------------------------------------------------------------------
-def draw_cover(c: canvas.Canvas) -> None:
-    c.setFillColor(NAVY)
-    c.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
-    diagonal_texture(c)
-    gold_bars(c, h=8)
-
-    draw_israeli_flag(c, PAGE_W / 2, PAGE_H - 150, w=86, h=58)
-
-    c.setFillColor(white)
-    c.setFont("BodyBold", 34)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 240, "THE STREET HEBREW")
-    c.setFillColor(GOLD)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 280, "SURVIVAL GUIDE")
-
-    c.setFillColor(white)
-    style_sub = ParagraphStyle(
-        "sub", fontName="Body", fontSize=12.5, leading=18,
-        textColor=Color(1, 1, 1, alpha=0.85), alignment=1,
-    )
-    sub = Paragraph(
-        "50 Essential Phrases to Navigate the Israeli Street with "
-        "<b>100% Confidence</b> &mdash; <i>Zero Grammar Inside.</i>",
-        style_sub,
-    )
-    sub_w = PAGE_W - 110
-    pw, ph = sub.wrap(sub_w, 200)
-    sub.drawOn(c, (PAGE_W - sub_w) / 2, PAGE_H - 320 - ph)
-
-    divider_y = PAGE_H - 360 - ph
-    c.setStrokeColor(GOLD)
-    c.setLineWidth(1.4)
-    c.line(PAGE_W / 2 - 60, divider_y, PAGE_W / 2 + 60, divider_y)
-
-    quote_w = PAGE_W - 110
-    quote_x = (PAGE_W - quote_w) / 2
-    quote_y_top = divider_y - 30
-    quote_text = (
-        '&ldquo;I spent weeks in Ulpan learning how to write essays, but froze when '
-        'the Wolt delivery guy called. I created this guide so you don&rsquo;t have to '
-        'experience that &lsquo;street paralysis&rsquo;. Here is the exact script you need '
-        'to sound like a local.&rdquo;'
-    )
-    style_q = ParagraphStyle(
-        "q", fontName="BodyIt", fontSize=11.5, leading=18,
-        textColor=Color(1, 1, 1, alpha=0.78), alignment=1,
-    )
-    p_q = Paragraph(quote_text, style_q)
-    qw, qh = p_q.wrap(quote_w - 50, 400)
-
-    box_x, box_y = quote_x, quote_y_top - qh - 30
-    box_w, box_h = quote_w, qh + 30
     c.saveState()
-    c.setFillColor(Color(1, 1, 1, alpha=0.07))
-    c.setStrokeColor(Color(1, 1, 1, alpha=0.18))
-    c.setLineWidth(0.6)
-    c.roundRect(box_x, box_y, box_w, box_h, 10, fill=1, stroke=1)
-    c.setFillColor(GOLD)
-    c.rect(box_x, box_y, 3, box_h, fill=1, stroke=0)
+    for i, a in enumerate((0.06, 0.04, 0.025, 0.015)):
+        c.setFillColor(Color(0.42, 0.58, 1.0, alpha=a))
+        c.circle(PAGE_W / 2, PAGE_H - 30, 200 + i * 80, stroke=0, fill=1)
     c.restoreState()
-    p_q.drawOn(c, box_x + 25, box_y + 15)
 
-    c.setFillColor(MUTED_BLUE)
-    c.setFont("Body", 9.5)
-    c.drawCentredString(PAGE_W / 2, 28, "Hebrew in 40 Days  ·  Free Preview Edition")
+
+def draw_cover(c):
+    c.setFillColor(NAVY)
+    c.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
+    cover_texture(c)
+
+    c.setFillColor(GOLD)
+    c.rect(0, PAGE_H - 8, PAGE_W, 8, fill=1, stroke=0)
+    c.rect(0, 0, PAGE_W, 8, fill=1, stroke=0)
+    c.setFillColor(Color(1, 1, 1, alpha=0.3))
+    c.rect(0, PAGE_H - 11, PAGE_W, 1, fill=1, stroke=0)
+    c.rect(0, 11, PAGE_W, 1, fill=1, stroke=0)
+
+    # Kicker label
+    c.setFillColor(GOLD)
+    c.setFont("BodyBold", 9)
+    label = "HEBREW IN 40 DAYS  ·  FREE GUIDE"
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 70, label)
+    # Underline
+    lw = c.stringWidth(label, "BodyBold", 9)
+    c.setStrokeColor(GOLD)
+    c.setLineWidth(0.6)
+    c.line(PAGE_W / 2 - lw / 2 - 14, PAGE_H - 76, PAGE_W / 2 - lw / 2 - 4, PAGE_H - 76)
+    c.line(PAGE_W / 2 + lw / 2 + 4, PAGE_H - 76, PAGE_W / 2 + lw / 2 + 14, PAGE_H - 76)
+
+    # Israeli flag
+    draw_israeli_flag(c, PAGE_W / 2, PAGE_H - 140, w=88, h=60)
+
+    # Main title
+    c.setFillColor(white)
+    c.setFont("BodyXBold", 40)
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 230, "THE STREET HEBREW")
+    c.setFillColor(GOLD)
+    c.setFont("BodyXBold", 40)
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 275, "SURVIVAL GUIDE")
+
+    # Tiny gold rule under title
+    c.setFillColor(GOLD)
+    c.rect(PAGE_W / 2 - 32, PAGE_H - 295, 64, 2.5, fill=1, stroke=0)
+
+    # Subtitle (two clean centred lines)
+    c.setFillColor(Color(1, 1, 1, alpha=0.92))
+    c.setFont("BodyMed", 13)
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 322,
+                        "50 essential phrases to navigate the Israeli street")
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 342,
+                        "with 100% confidence.")
+    c.setFillColor(GOLD)
+    c.setFont("BodyMedIt", 11)
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 365, "Zero grammar inside.")
+
+    # "What's inside" mini preview strip
+    pills = [
+        ("PUBLIC SPACES", CAT_NAVY),
+        ("CAFES", CAT_BROWN),
+        ("MARKETS", CAT_GREEN),
+        ("SMALL TALK", CAT_PURPLE),
+        ("EMERGENCY", CAT_RED),
+    ]
+    c.setFont("BodyXBold", 8)
+    pill_pad = 12
+    pill_h = 20
+    pill_widths = [c.stringWidth(p, "BodyXBold", 8) + pill_pad * 2 + 8 for p, _ in pills]
+    gap = 7
+    total = sum(pill_widths) + gap * (len(pills) - 1)
+    px = (PAGE_W - total) / 2
+    py = PAGE_H - 415
+    for (label, col), pw in zip(pills, pill_widths):
+        c.setFillColor(Color(1, 1, 1, alpha=0.08))
+        c.setStrokeColor(Color(1, 1, 1, alpha=0.3))
+        c.setLineWidth(0.6)
+        c.roundRect(px, py, pw, pill_h, pill_h / 2, fill=1, stroke=1)
+        # color dot on the left
+        c.setFillColor(col if col != CAT_NAVY else GOLD)
+        c.circle(px + 11, py + pill_h / 2, 2.6, stroke=0, fill=1)
+        # label
+        c.setFillColor(white)
+        c.setFont("BodyXBold", 8)
+        c.drawCentredString(px + pw / 2 + 4, py + 6.5, label)
+        px += pw + gap
+
+    # Quote card — elegant glass panel
+    card_w = PAGE_W - 120
+    card_x = (PAGE_W - card_w) / 2
+    card_h = 170
+    card_y = 200
+
+    c.saveState()
+    c.setFillColor(Color(1, 1, 1, alpha=0.06))
+    c.setStrokeColor(Color(1, 1, 1, alpha=0.18))
+    c.setLineWidth(0.8)
+    c.roundRect(card_x, card_y, card_w, card_h, 14, fill=1, stroke=1)
+    c.setFillColor(GOLD)
+    c.roundRect(card_x, card_y, 4, card_h, 2, fill=1, stroke=0)
+    c.restoreState()
+
+    # Tiny "TESTIMONIAL" label above the quote
+    c.setFillColor(GOLD)
+    c.setFont("BodyXBold", 8.5)
+    c.drawString(card_x + 28, card_y + card_h - 22, "FROM THE CREATOR")
+    c.setFillColor(GOLD)
+    c.rect(card_x + 28, card_y + card_h - 28, 24, 1.5, fill=1, stroke=0)
+
+    # Quote text — wrapped manually so we control line breaks
+    quote = ("I spent weeks in Ulpan learning how to write essays, but froze "
+             "when the Wolt delivery guy called. I created this guide so you "
+             "don't have to experience that 'street paralysis' — here is the "
+             "exact script you need to sound like a local.")
+    c.setFillColor(Color(1, 1, 1, alpha=0.94))
+    lines = wrap_text(c, quote, "BodyMedIt", 11.5, card_w - 60)
+    y = card_y + card_h - 50
+    for ln in lines:
+        c.setFont("BodyMedIt", 11.5)
+        c.drawString(card_x + 28, y, ln)
+        y -= 17
+
+    # Attribution
+    c.setFillColor(Color(1, 1, 1, alpha=0.65))
+    c.setFont("BodyMedIt", 9.5)
+    c.drawString(card_x + 28, card_y + 20, "— Built for new Israelis, by a frustrated Ulpan grad.")
+
+    # Footer
+    c.setFillColor(Color(1, 1, 1, alpha=0.55))
+    c.setFont("BodyMed", 9)
+    c.drawCentredString(PAGE_W / 2, 36, "hebrew-in-40-days.com  ·  Free Preview Edition")
 
 
 # ---------------------------------------------------------------------------
-# Content page header / footer
+# Content chrome
 # ---------------------------------------------------------------------------
-def content_chrome(c: canvas.Canvas, page_num: int) -> None:
+def content_chrome(c, page_num):
     c.setFillColor(white)
     c.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
 
+    # Top bar — slim, navy with gold accent
     c.setFillColor(NAVY)
-    c.rect(0, PAGE_H - 38, PAGE_W, 38, fill=1, stroke=0)
+    c.rect(0, PAGE_H - 36, PAGE_W, 36, fill=1, stroke=0)
     c.setFillColor(GOLD)
-    c.rect(0, PAGE_H - 41, PAGE_W, 3, fill=1, stroke=0)
-    c.setFillColor(white)
-    c.setFont("BodyBold", 10.5)
-    c.drawString(28, PAGE_H - 25, "STREET HEBREW SURVIVAL GUIDE")
-    c.setFillColor(GOLD)
-    c.setFont("BodyIt", 9.5)
-    c.drawRightString(PAGE_W - 28, PAGE_H - 25, "Hebrew in 40 Days")
+    c.rect(0, PAGE_H - 39, PAGE_W, 3, fill=1, stroke=0)
 
-    c.setFillColor(LIGHT_GRAY)
-    c.rect(0, 0, PAGE_W, 30, fill=1, stroke=0)
+    c.setFillColor(white)
+    c.setFont("BodyBold", 9.5)
+    c.drawString(36, PAGE_H - 24, "STREET HEBREW SURVIVAL GUIDE")
     c.setFillColor(GOLD)
-    c.rect(0, 30, PAGE_W, 1.5, fill=1, stroke=0)
-    c.setFillColor(NAVY)
-    c.setFont("Body", 9)
-    c.drawString(28, 12, "hebrew-in-40-days.com")
-    c.setFillColor(NAVY)
-    c.setFont("BodyBold", 9)
-    c.drawRightString(PAGE_W - 28, 12, f"Page {page_num} / 5")
+    c.setFont("BodyMedIt", 9)
+    c.drawRightString(PAGE_W - 36, PAGE_H - 24, "Hebrew in 40 Days")
+
+    # Bottom — minimal
+    c.setFillColor(BORDER)
+    c.rect(36, 36, PAGE_W - 72, 0.6, fill=1, stroke=0)
+    c.setFillColor(MUTED)
+    c.setFont("BodyMed", 8.5)
+    c.drawString(36, 22, "hebrew-in-40-days.com")
+    c.setFillColor(INK)
+    c.setFont("BodyBold", 8.5)
+    c.drawRightString(PAGE_W - 36, 22, f"PAGE {page_num} OF 5")
 
 
 # ---------------------------------------------------------------------------
 # Category section
 # ---------------------------------------------------------------------------
-def draw_category(c: canvas.Canvas, cat: dict, y_top: float) -> float:
-    margin = 28
+def draw_category(c, cat, y_top):
+    margin = 36
     width = PAGE_W - margin * 2
-    header_h = 54
+    header_h = 60
 
-    rounded_box(c, margin, y_top - header_h, width, header_h, 8, fill=cat["color"])
+    # Header card with rounded corners
+    rrect(c, margin, y_top - header_h, width, header_h, 10, fill=cat["color"])
+
+    # Subtle gold inner accent on header right edge
+    c.saveState()
     c.setFillColor(GOLD)
-    c.rect(margin, y_top - header_h, 4, header_h, fill=1, stroke=0)
+    c.roundRect(margin + width - 5, y_top - header_h + 8, 3, header_h - 16, 1.5,
+                fill=1, stroke=0)
+    c.restoreState()
 
+    # Number badge
+    badge_x = margin + 20
+    badge_cy = y_top - header_h / 2
+    c.setFillColor(Color(1, 1, 1, alpha=0.14))
+    c.circle(badge_x, badge_cy, 17, stroke=0, fill=1)
     c.setFillColor(white)
-    c.setFont("Symb", 22)
-    icon_x = margin + 22
-    icon_y = y_top - header_h / 2 - 4
-    c.drawString(icon_x, icon_y - 4, cat["icon"])
+    c.setFont("BodyXBold", 12)
+    c.drawCentredString(badge_x, badge_cy - 4, cat["n"])
 
+    # Icon
+    c.setFillColor(Color(1, 1, 1, alpha=0.95))
+    c.setFont("Symb", 18)
+    c.drawString(badge_x + 28, badge_cy - 7, cat["icon"])
+
+    # Title + subtitle
     c.setFillColor(white)
-    c.setFont("BodyBold", 14)
-    c.drawString(icon_x + 38, y_top - 22, cat["title"])
-    c.setFillColor(Color(1, 1, 1, alpha=0.85))
-    c.setFont("BodyIt", 9.5)
-    c.drawString(icon_x + 38, y_top - 38, cat["subtitle"])
+    c.setFont("BodyXBold", 14.5)
+    c.drawString(badge_x + 55, y_top - 26, cat["title"].upper())
+    c.setFillColor(Color(1, 1, 1, alpha=0.78))
+    c.setFont("BodyMedIt", 9.5)
+    c.drawString(badge_x + 55, y_top - 42, cat["subtitle"])
 
-    y = y_top - header_h - 4
+    # Table
+    y = y_top - header_h - 8
 
-    col_x = [margin, margin + 150, margin + 280]
-    col_w = [150, 130, width - 280]
-    row_h_min = 30
+    # Column geometry
+    heb_x_right = margin + 168     # right edge for Hebrew (RTL anchor)
+    phon_x = margin + 184
+    phon_w = 130
+    mean_x = phon_x + phon_w + 12
+    mean_w = (margin + width) - mean_x - 14
 
     for i, (hb, phon, meaning) in enumerate(cat["phrases"]):
-        heb_style = ParagraphStyle(
-            "h", fontName="Heb", fontSize=12.5, leading=15,
-            textColor=NAVY, alignment=2,
-        )
-        phon_style = ParagraphStyle(
-            "p", fontName="BodyIt", fontSize=8.8, leading=11.5,
-            textColor=HexColor("#1A73E8"), alignment=0,
-        )
-        meaning_style = ParagraphStyle(
-            "m", fontName="Body", fontSize=8.5, leading=11.5,
-            textColor=HexColor("#222B45"), alignment=0,
-        )
-        p_h = Paragraph(heb(hb), heb_style)
-        p_p = Paragraph(phon, phon_style)
-        p_m = Paragraph(meaning, meaning_style)
+        # Wrap phonetic and meaning
+        phon_lines = wrap_text(c, phon, "BodyMedIt", 9, phon_w)
+        mean_lines = wrap_text(c, meaning, "Body", 8.8, mean_w)
 
-        _, hh = p_h.wrap(col_w[0] - 14, 1000)
-        _, ph2 = p_p.wrap(col_w[1] - 10, 1000)
-        _, mh = p_m.wrap(col_w[2] - 14, 1000)
-        row_h = max(row_h_min, hh + 8, ph2 + 8, mh + 8)
+        # Hebrew is single-line; we draw it as one chunk
+        heb_lines = [heb(hb)]
 
-        bg = LIGHT_GRAY if i % 2 == 0 else white
-        c.setFillColor(bg)
-        c.rect(margin, y - row_h, width, row_h, fill=1, stroke=0)
+        n_lines = max(len(phon_lines), len(mean_lines), 1)
+        row_h = max(34, 11 + n_lines * 12 + 6)
+
+        # Row background
+        if i % 2 == 0:
+            c.setFillColor(ROW_ALT)
+            c.rect(margin, y - row_h, width, row_h, fill=1, stroke=0)
+
+        # Left accent bar
         c.setFillColor(cat["color"])
-        c.rect(margin, y - row_h, 3, row_h, fill=1, stroke=0)
+        c.rect(margin, y - row_h, 2.5, row_h, fill=1, stroke=0)
 
-        c.setStrokeColor(HexColor("#E3E6EE"))
+        # Hebrew — right-aligned, larger, bold
+        c.setFillColor(NAVY)
+        c.setFont("HebBold", 16)
+        text_y = y - row_h / 2 - 5
+        c.drawRightString(heb_x_right, text_y, heb_lines[0])
+
+        # Vertical micro-divider between Hebrew & phonetic
+        c.setStrokeColor(BORDER)
         c.setLineWidth(0.4)
-        c.line(col_x[1], y - row_h + 4, col_x[1], y - 4)
-        c.line(col_x[2], y - row_h + 4, col_x[2], y - 4)
+        div_x = margin + 176
+        c.line(div_x, y - row_h + 8, div_x, y - 8)
 
-        p_h.drawOn(c, col_x[0] + 8, y - 6 - hh)
-        p_p.drawOn(c, col_x[1] + 8, y - 6 - ph2)
-        p_m.drawOn(c, col_x[2] + 8, y - 6 - mh)
+        # Phonetic
+        c.setFillColor(ELECTRIC)
+        c.setFont("BodyMedIt", 9)
+        line_y = y - 14
+        for ln in phon_lines:
+            c.drawString(phon_x, line_y, ln)
+            line_y -= 12
+
+        # Meaning
+        c.setFillColor(INK_SOFT)
+        c.setFont("Body", 8.8)
+        line_y = y - 14
+        for ln in mean_lines:
+            c.drawString(mean_x, line_y, ln)
+            line_y -= 12
+
+        # Bottom row hairline
+        c.setStrokeColor(BORDER)
+        c.setLineWidth(0.3)
+        c.line(margin + 6, y - row_h, margin + width - 6, y - row_h)
 
         y -= row_h
 
-    c.setStrokeColor(HexColor("#D5DAE6"))
-    c.setLineWidth(0.5)
-    c.rect(margin, y, width, y_top - header_h - y, fill=0, stroke=1)
-
-    return y - 14
+    return y - 10
 
 
 # ---------------------------------------------------------------------------
 # Page 5 — Pitch
 # ---------------------------------------------------------------------------
-def draw_pitch(c: canvas.Canvas) -> None:
+def draw_pitch(c):
     c.setFillColor(LIGHT_GRAY)
     c.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
     content_chrome(c, 5)
 
-    margin = 36
+    margin = 44
     width = PAGE_W - margin * 2
 
+    # Top gold accent under header
     c.setFillColor(GOLD)
-    c.rect(0, PAGE_H - 50, PAGE_W, 5, fill=1, stroke=0)
-    c.rect(0, 33, PAGE_W, 5, fill=1, stroke=0)
+    c.rect(margin, PAGE_H - 60, 50, 3, fill=1, stroke=0)
 
-    y = PAGE_H - 90
+    y = PAGE_H - 80
 
-    hook_h = 84
-    rounded_box(c, margin, y - hook_h, width, hook_h, 10,
-                fill=CREAM, stroke=GOLD, stroke_w=2)
+    # Hook
+    c.setFillColor(MUTED)
+    c.setFont("BodyBold", 9)
+    c.drawString(margin, y, "STEP 02  ·  THE NEXT MOVE")
+    y -= 26
     c.setFillColor(NAVY)
-    c.setFont("BodyBold", 16)
-    c.drawCentredString(PAGE_W / 2, y - 32, "Now you have the words.")
-    c.setFillColor(HexColor("#B07B00"))
-    c.setFont("BodyBold", 16)
-    c.drawCentredString(PAGE_W / 2, y - 56, "But do you have the reflex?")
-    y -= hook_h + 22
+    c.setFont("BodyXBold", 26)
+    c.drawString(margin, y, "Now you have the words.")
+    y -= 32
+    c.setFillColor(GOLD_DEEP)
+    c.setFont("BodyXBold", 26)
+    c.drawString(margin, y, "But do you have the reflex?")
+    y -= 30
 
-    body_style = ParagraphStyle(
-        "body", fontName="Body", fontSize=11, leading=17,
-        textColor=NAVY, alignment=1,
-    )
-    body = Paragraph(
-        "Knowing 50 phrases on paper is great. But the Israeli street moves fast. "
-        "When someone speaks back to you at lightning speed, you need more than a "
-        "cheat sheet. <b>You need muscle memory.</b>",
-        body_style,
-    )
-    bw, bh = body.wrap(width - 30, 400)
-    body.drawOn(c, margin + 15, y - bh)
-    y -= bh + 24
+    # Body
+    body = ("Knowing 50 phrases on paper is great. But the Israeli street moves fast. "
+            "When someone speaks back to you at lightning speed, you need more than a "
+            "cheat sheet. You need muscle memory.")
+    c.setFillColor(INK_SOFT)
+    body_lines = wrap_text(c, body, "Body", 11, width)
+    for ln in body_lines:
+        c.setFont("Body", 11)
+        c.drawString(margin, y, ln)
+        y -= 16
+    y -= 14
 
-    c.setFillColor(NAVY)
-    c.setFont("BodyBold", 22)
-    c.drawCentredString(PAGE_W / 2, y - 24, "The 40-Day Hebrew Sprint")
+    # Program name card
+    prog_h = 70
+    rrect(c, margin, y - prog_h, width, prog_h, 12,
+          fill=NAVY)
+    # Gold accent
     c.setFillColor(GOLD)
-    c.rect(PAGE_W / 2 - 30, y - 34, 60, 2.5, fill=1, stroke=0)
-    y -= 56
+    c.rect(margin + 16, y - prog_h + 14, 3, prog_h - 28, fill=1, stroke=0)
+    c.setFillColor(GOLD)
+    c.setFont("BodyBold", 9)
+    c.drawString(margin + 30, y - 22, "INTRODUCING")
+    c.setFillColor(white)
+    c.setFont("BodyXBold", 22)
+    c.drawString(margin + 30, y - 48, "The 40-Day Hebrew Sprint")
+    y -= prog_h + 18
 
+    # Features grid — 3 cards side by side
     features = [
-        ("\U0001F3A7", "Daily 2-minute audio bites",
+        ("\U0001F3A7", "Daily 2-min audio bites",
          "Straight to your phone. Listen on the bus, in line, while you stir coffee."),
         ("✕", "Zero grammar. 100% action.",
          "Built for the street, not the classroom. Memorize, repeat, deploy."),
         ("\U0001F4AC", "Real-world challenges",
-         "Voice-message tasks that force you to speak and think in Hebrew."),
+         "Voice-message tasks that force you to think and speak in Hebrew."),
     ]
-    feat_h = 50
-    for icon, title, desc in features:
-        rounded_box(c, margin, y - feat_h, width, feat_h, 8,
-                    fill=white, stroke=HexColor("#E2E6F0"), stroke_w=0.8)
+    feat_h = 96
+    col_gap = 10
+    col_w = (width - col_gap * 2) / 3
+    for i, (icon, title, desc) in enumerate(features):
+        cx = margin + i * (col_w + col_gap)
+        rrect(c, cx, y - feat_h, col_w, feat_h, 10,
+              fill=white, stroke=BORDER, sw=0.8)
+        # Icon disc
+        c.setFillColor(LIGHT_BLUE)
+        c.circle(cx + 22, y - 22, 14, stroke=0, fill=1)
         c.setFillColor(ELECTRIC)
-        c.roundRect(margin + 10, y - feat_h + 8, 34, 34, 6, fill=1, stroke=0)
-        c.setFillColor(white)
-        c.setFont("Symb", 18)
-        c.drawCentredString(margin + 27, y - feat_h + 16, icon)
+        c.setFont("Symb", 14)
+        c.drawCentredString(cx + 22, y - 27, icon)
+        # Title
         c.setFillColor(NAVY)
-        c.setFont("BodyBold", 11.5)
-        c.drawString(margin + 56, y - 20, title)
-        c.setFillColor(HexColor("#46506E"))
-        c.setFont("Body", 9.5)
-        c.drawString(margin + 56, y - 34, desc)
-        y -= feat_h + 8
+        c.setFont("BodyBold", 10.5)
+        title_lines = wrap_text(c, title, "BodyBold", 10.5, col_w - 24)
+        ty = y - 46
+        for ln in title_lines:
+            c.drawString(cx + 12, ty, ln)
+            ty -= 13
+        # Desc
+        c.setFillColor(INK_SOFT)
+        c.setFont("Body", 8.5)
+        desc_lines = wrap_text(c, desc, "Body", 8.5, col_w - 24)
+        dy = ty - 4
+        for ln in desc_lines:
+            c.drawString(cx + 12, dy, ln)
+            dy -= 11
 
-    y -= 4
-    c.setFillColor(GOLD)
-    c.rect(PAGE_W / 2 - 80, y, 160, 1.5, fill=1, stroke=0)
-    y -= 16
+    y -= feat_h + 22
 
-    offer_h = 96
-    rounded_box(c, margin, y - offer_h, width, offer_h, 10,
-                fill=LIGHT_BLUE, stroke=ELECTRIC, stroke_w=1.5)
+    # Gold divider
+    c.setStrokeColor(GOLD)
+    c.setLineWidth(1.2)
+    c.line(PAGE_W / 2 - 36, y, PAGE_W / 2 + 36, y)
+    y -= 22
+
+    # Beta offer card
+    offer_h = 124
+    rrect(c, margin, y - offer_h, width, offer_h, 12,
+          fill=LIGHT_BLUE, stroke=ELECTRIC, sw=1.3)
+
+    # Ribbon "BETA"
+    rib_w = 90
+    rib_x = margin + width - rib_w - 16
+    rrect(c, rib_x, y - 22, rib_w, 18, 9, fill=ELECTRIC)
+    c.setFillColor(white)
+    c.setFont("BodyXBold", 9)
+    c.drawCentredString(rib_x + rib_w / 2, y - 18, "BETA  ·  10 SPOTS")
+
+    # Offer copy
     c.setFillColor(NAVY)
-    c.setFont("Body", 10.5)
-    c.drawCentredString(PAGE_W / 2, y - 18,
-                        "Since you downloaded this guide, you can join our upcoming")
-    c.drawCentredString(PAGE_W / 2, y - 32,
-                        "closed Beta cohort for just")
+    c.setFont("BodyMed", 11)
+    c.drawString(margin + 22, y - 30,
+                 "Since you downloaded this guide, you can join our")
+    c.drawString(margin + 22, y - 46,
+                 "upcoming closed Beta cohort for just")
 
-    price_y = y - 62
+    # Price row
     big = "$39"
     small = "$149"
-    big_w = c.stringWidth(big, "BodyBold", 26)
-    small_w = c.stringWidth(small, "BodyBold", 13)
-    gap = 12
-    total_w = big_w + gap + small_w
-    start_x = PAGE_W / 2 - total_w / 2
-
     c.setFillColor(ELECTRIC)
-    c.setFont("BodyBold", 26)
-    c.drawString(start_x, price_y, big)
+    c.setFont("BodyXBold", 38)
+    c.drawString(margin + 22, y - 92, big)
+    big_w = c.stringWidth(big, "BodyXBold", 38)
 
-    small_x = start_x + big_w + gap
-    c.setFillColor(HexColor("#9099AD"))
-    c.setFont("BodyBold", 13)
-    c.drawString(small_x, price_y + 4, small)
-    c.setStrokeColor(HexColor("#B71C1C"))
-    c.setLineWidth(1.4)
-    c.line(small_x - 1, price_y + 8, small_x + small_w + 1, price_y + 8)
+    sx = margin + 22 + big_w + 14
+    c.setFillColor(MUTED)
+    c.setFont("BodyBold", 16)
+    c.drawString(sx, y - 80, small)
+    sw_ = c.stringWidth(small, "BodyBold", 16)
+    c.setStrokeColor(RED_STRIKE)
+    c.setLineWidth(1.6)
+    c.line(sx - 1, y - 74, sx + sw_ + 1, y - 74)
 
-    c.setFillColor(HexColor("#B71C1C"))
-    c.setFont("BodyBold", 10)
-    c.drawCentredString(PAGE_W / 2, y - 82, "Only 10 spots available.")
-    y -= offer_h + 18
+    # Savings pill
+    pill_x = sx + sw_ + 14
+    pill_w = 84
+    rrect(c, pill_x, y - 86, pill_w, 18, 9, fill=GOLD)
+    c.setFillColor(NAVY)
+    c.setFont("BodyXBold", 9)
+    c.drawCentredString(pill_x + pill_w / 2, y - 82, "SAVE $110")
 
-    btn_h = 48
+    # Sub note
+    c.setFillColor(RED_STRIKE)
+    c.setFont("BodyMedIt", 9.5)
+    c.drawString(margin + 22, y - 110, "Only 10 spots available — first come, first served.")
+
+    y -= offer_h + 20
+
+    # CTA button
+    btn_h = 52
     btn_x = margin
     btn_w = width
     btn_y = y - btn_h
     whatsapp_url = "https://wa.me/972XXXXXXXXX"
+
+    # Soft shadow
     c.saveState()
-    c.setFillColor(ELECTRIC)
-    c.roundRect(btn_x, btn_y, btn_w, btn_h, 10, fill=1, stroke=0)
-    c.setFillColor(HexColor("#0B5BC7"))
-    c.roundRect(btn_x, btn_y - 2, btn_w, 4, 2, fill=1, stroke=0)
-    c.setFillColor(ELECTRIC)
-    c.roundRect(btn_x, btn_y, btn_w, btn_h, 10, fill=1, stroke=0)
-    c.setFillColor(white)
-    c.setFont("BodyBold", 14)
-    c.drawCentredString(PAGE_W / 2, btn_y + btn_h / 2 - 5,
-                        "Secure My Beta Spot & Start Speaking Now →")
+    c.setFillColor(Color(0.1, 0.45, 0.91, alpha=0.18))
+    c.roundRect(btn_x + 2, btn_y - 4, btn_w, btn_h, 12, fill=1, stroke=0)
     c.restoreState()
+
+    # Button gradient effect via two stacked rects
+    rrect(c, btn_x, btn_y, btn_w, btn_h, 12, fill=ELECTRIC_DARK)
+    rrect(c, btn_x, btn_y + 3, btn_w, btn_h - 3, 11, fill=ELECTRIC)
+
+    c.setFillColor(white)
+    c.setFont("BodyXBold", 15)
+    c.drawCentredString(PAGE_W / 2, btn_y + btn_h / 2 - 5,
+                        "Secure My Beta Spot & Start Speaking Now  →")
+
     c.linkURL(whatsapp_url,
               (btn_x, btn_y, btn_x + btn_w, btn_y + btn_h),
               relative=0, thickness=0)
-    y = btn_y - 16
 
-    c.setFillColor(HexColor("#5B6685"))
-    c.setFont("BodyIt", 9.5)
+    y = btn_y - 22
+
+    # Footer note
+    c.setFillColor(MUTED)
+    c.setFont("BodyMedIt", 9)
     c.drawCentredString(PAGE_W / 2, y,
                         "Questions? Reply directly — we respond within 24 hours.")
 
@@ -605,15 +789,13 @@ def build(filename: str) -> None:
     c.setAuthor("Hebrew in 40 Days")
     c.setSubject("50 essential street Hebrew phrases")
 
-    # Page 1 — Cover
     draw_cover(c)
     c.showPage()
 
-    # Pages 2-4 — Categories (5 categories across 3 pages)
     layout = [
-        [CATEGORIES[0], CATEGORIES[1]],   # Page 2
-        [CATEGORIES[2], CATEGORIES[3]],   # Page 3
-        [CATEGORIES[4]],                   # Page 4
+        [CATEGORIES[0], CATEGORIES[1]],
+        [CATEGORIES[2], CATEGORIES[3]],
+        [CATEGORIES[4]],
     ]
     for page_idx, cats in enumerate(layout, start=2):
         content_chrome(c, page_idx)
@@ -622,7 +804,6 @@ def build(filename: str) -> None:
             y = draw_category(c, cat, y)
         c.showPage()
 
-    # Page 5 — Pitch
     draw_pitch(c)
     c.showPage()
 
@@ -630,5 +811,5 @@ def build(filename: str) -> None:
 
 
 if __name__ == "__main__":
-    build("Street_Hebrew_Survival_Guide_v2.pdf")
-    print("Wrote Street_Hebrew_Survival_Guide_v2.pdf")
+    build("Street_Hebrew_Survival_Guide_v3_Elegant.pdf")
+    print("Wrote Street_Hebrew_Survival_Guide_v3_Elegant.pdf")
