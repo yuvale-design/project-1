@@ -24,7 +24,7 @@ IMG_DIR = ROOT / "_heb_images"
 IMG_DIR.mkdir(exist_ok=True)
 OUT = ROOT / "Street_Hebrew_Survival_Guide_v5_Final.pdf"
 
-WHATSAPP_URL = "https://wa.me/972XXXXXXXXX"
+WHATSAPP_URL = "https://hebrew-in-40-days.com/#pricing"
 
 # PIL Hebrew rendering — high DPI for crisp print + zoom
 HEB_FONT = ImageFont.truetype(str(FONT_DIR / "Heebo-Bold.ttf"), 96)
