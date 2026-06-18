@@ -1,0 +1,55 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - claude/youthful-feynman-h753bh
+    paths:
+      - 'index.html'
+      - 'Street_Hebrew_Survival_Guide_*.pdf'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Stage publishable files
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          # Copy the most recent built PDF (in case the version suffix changes)
+          cp $(ls -1t Street_Hebrew_Survival_Guide_*.pdf | head -1) _site/
+          # Friendly alias so the PDF has a stable URL regardless of version
+          cp _site/Street_Hebrew_Survival_Guide_*.pdf _site/guide.pdf
+          ls -la _site/
+
+      - name: Configure Pages (auto-enables if needed)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
