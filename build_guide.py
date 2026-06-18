@@ -862,20 +862,23 @@ html, body {
 # Hebrew → PNG rasterizer (one image per phrase, cached on disk)
 # ---------------------------------------------------------------------------
 def hebrew_image(text: str) -> str:
-    """Render a Hebrew phrase to a PNG file and return its file:// URI."""
+    """Render a Hebrew phrase to a PNG file and return its file:// URI.
+
+    PIL/Pillow with a TrueType font calls HarfBuzz under the hood, which
+    handles Hebrew bidi shaping natively. Pass the logical Unicode text
+    directly — DO NOT pre-bidi with python-bidi, that double-reverses.
+    """
     key = hashlib.sha1(text.encode("utf-8")).hexdigest()[:16]
     out = IMG_DIR / f"heb_{key}.png"
     if not out.exists():
-        visual = get_display(text)
-        # Measure tight bbox for the visual-order string
-        bbox = HEB_FONT.getbbox(visual)
+        bbox = HEB_FONT.getbbox(text)
         left, top, right, bottom = bbox
         w = right - left
         h = bottom - top
-        pad_x, pad_y = 12, 10
+        pad_x, pad_y = 14, 12
         img = Image.new("RGBA", (w + pad_x * 2, h + pad_y * 2), (255, 255, 255, 0))
         d = ImageDraw.Draw(img)
-        d.text((pad_x - left, pad_y - top), visual, font=HEB_FONT, fill=HEB_COLOR)
+        d.text((pad_x - left, pad_y - top), text, font=HEB_FONT, fill=HEB_COLOR)
         img.save(out, "PNG", optimize=True)
     return out.resolve().as_uri()
 
