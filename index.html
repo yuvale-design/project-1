@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hebrew Sprint — Speak Hebrew in 40 Days</title>
+    <meta name="description" content="Master conversational Hebrew in 40 days with 15-minute daily micro-learning capsules. No textbooks. No Zoom classrooms. Just results.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://www.paypal.com/sdk/js?client-id=AQ3zR3-oQW63JDyTinfOT4HXoswULWCHM2BPQI2eU0machwnKl5ZWdtFaRvnw3swCA5qRhlgiS4pNFOg&currency=USD&disable-funding=credit&intent=capture&locale=en_US"></script>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* ── Carrd-style palette ── */
+            --bg: #2d2d3d;
+            --bg-2: #28283a;
+            --bg-3: #353548;
+            --accent-pink: #e29acc;
+            --accent-lavender: #b8b5e8;
+            --accent-purple: #9b8fdc;
+            --accent-soft: rgba(184, 181, 232, 0.12);
+            --text-hero: #f5f3ff;
+            --text-primary: #d8d6e8;
+            --text-secondary: #9b9aab;
+            --text-muted: #74738a;
+            --text-dark: #2d2d3d;
+            --text-dark-secondary: #5a5a72;
+            --border-glass: rgba(255, 255, 255, 0.06);
+            --border-glass-hover: rgba(255, 255, 255, 0.14);
+            --gradient-button: linear-gradient(135deg, #b8b5e8 0%, #e29acc 100%);
+            --gradient-text: linear-gradient(135deg, #ffffff 0%, #d8d4f5 40%, #b8b5e8 100%);
+            --gradient-accent: linear-gradient(135deg, #b8b5e8, #e29acc);
+            --radius: 14px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 400;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ─── Decorative particle background ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 12% 18%, rgba(226, 154, 204, 0.4) 1px, transparent 2px),
+                radial-gradient(circle at 87% 25%, rgba(184, 181, 232, 0.35) 1px, transparent 2px),
+                radial-gradient(circle at 25% 75%, rgba(226, 154, 204, 0.3) 1.5px, transparent 2.5px),
+                radial-gradient(circle at 78% 82%, rgba(184, 181, 232, 0.4) 1px, transparent 2px),
+                radial-gradient(circle at 55% 50%, rgba(226, 154, 204, 0.25) 1px, transparent 2px),
+                radial-gradient(circle at 92% 60%, rgba(184, 181, 232, 0.3) 1.5px, transparent 2.5px),
+                radial-gradient(circle at 8% 55%, rgba(226, 154, 204, 0.3) 1px, transparent 2px);
+            background-size: 100% 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(115deg, transparent 49.7%, rgba(255, 255, 255, 0.025) 49.85%, rgba(255, 255, 255, 0.025) 50.15%, transparent 50.3%),
+                linear-gradient(65deg, transparent 49.7%, rgba(255, 255, 255, 0.025) 49.85%, rgba(255, 255, 255, 0.025) 50.15%, transparent 50.3%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ═══════════════════════════════
+           HERO — Carrd signature look
+           ═══════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 32px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #e29acc, #b8b5e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 56px;
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.2s forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 11vw, 8rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.045em;
+            text-transform: lowercase;
+            margin-bottom: 48px;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeUp 1.2s ease-out 0.4s forwards;
+            max-width: 1000px;
+            text-wrap: balance;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 56px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeUp 1.2s ease-out 0.6s forwards;
+        }
+
+        /* ─── Circular gradient scroll button (the Carrd signature) ─── */
+        .scroll-orb {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: var(--gradient-button);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(226, 154, 204, 0.3), 0 16px 48px rgba(184, 181, 232, 0.2);
+            transition: var(--transition);
+            text-decoration: none;
+            opacity: 0;
+            animation: fadeUp 1.2s ease-out 0.8s forwards, floaty 4s ease-in-out 2s infinite;
+            position: relative;
+            border: none;
+            outline: none;
+        }
+
+        .scroll-orb::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: var(--gradient-button);
+            opacity: 0.3;
+            filter: blur(20px);
+            z-index: -1;
+        }
+
+        .scroll-orb:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(226, 154, 204, 0.45), 0 20px 60px rgba(184, 181, 232, 0.3);
+        }
+
+        .scroll-orb svg {
+            width: 28px;
+            height: 28px;
+            color: #fff;
+            stroke-width: 2.5;
+        }
+
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ═══════════════════════════════
+           SHARED SECTION STYLES
+           ═══════════════════════════════ */
+        section {
+            padding: 7rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #e29acc, #b8b5e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 28px;
+            text-align: center;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            text-transform: lowercase;
+            margin-bottom: 32px;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            text-wrap: balance;
+        }
+
+        .section-intro {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 64px;
+        }
+
+        /* ═══════════════════════════════
+           PROBLEM / SOLUTION
+           ═══════════════════════════════ */
+        .ps-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 64px;
+        }
+
+        .ps-card {
+            padding: 48px 40px;
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+
+        .ps-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glass-hover);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .ps-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gradient-button);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 20px rgba(226, 154, 204, 0.3);
+        }
+
+        .ps-card.problem .ps-icon {
+            background: linear-gradient(135deg, #e29acc, #b65f9c);
+        }
+
+        .ps-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            color: var(--text-hero);
+            text-wrap: balance;
+        }
+
+        .ps-card p {
+            color: var(--text-secondary);
+            font-size: 0.97rem;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        /* ═══════════════════════════════
+           METHOD
+           ═══════════════════════════════ */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .method-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 40px 36px;
+            text-align: left;
+            transition: var(--transition);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-button);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .method-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glass-hover);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .method-card:hover::before {
+            opacity: 1;
+        }
+
+        .method-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient-button);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(226, 154, 204, 0.25);
+        }
+
+        .method-card h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-hero);
+            margin-bottom: 12px;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        .method-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.75;
+        }
+
+        /* ═══════════════════════════════
+           PRICING
+           ═══════════════════════════════ */
+        .pricing-wrapper {
+            max-width: 540px;
+            margin: 64px auto 0;
+            text-align: center;
+        }
+
+        .pricing-box {
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border-radius: 24px;
+            padding: 56px 44px;
+            border: 1px solid var(--border-glass-hover);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow:
+                0 8px 32px rgba(0,0,0,0.2),
+                0 24px 64px rgba(0,0,0,0.25),
+                inset 0 1px 0 rgba(255,255,255,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            height: 3px;
+            background: var(--gradient-button);
+            opacity: 0.6;
+        }
+
+        .pricing-box h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-hero);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .pricing-sub {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom: 32px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Urgency tracker — purple Carrd-style */
+        .urgency-tracker {
+            background: rgba(184, 181, 232, 0.08);
+            border: 1px solid rgba(184, 181, 232, 0.18);
+            padding: 18px 20px;
+            border-radius: var(--radius);
+            margin-bottom: 32px;
+        }
+
+        .urgency-text {
+            font-size: 0.78rem;
+            color: var(--accent-lavender);
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .progress-bar-bg {
+            background: rgba(184, 181, 232, 0.12);
+            height: 6px;
+            border-radius: 100px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background: var(--gradient-button);
+            height: 100%;
+            width: 0%;
+            border-radius: 100px;
+            transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 12px rgba(226, 154, 204, 0.5);
+        }
+
+        .price-display {
+            margin-bottom: 28px;
+        }
+
+        .price-old {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-weight: 500;
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+
+        .price-new {
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.05em;
+            line-height: 1;
+        }
+
+        .price-label {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        .guarantee-box {
+            background: rgba(184, 181, 232, 0.06);
+            border: 1px solid rgba(184, 181, 232, 0.18);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin: 28px 0;
+            text-align: left;
+        }
+
+        .guarantee-box h5 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e29acc, #b8b5e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: 0.02em;
+        }
+
+        .guarantee-box p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            font-weight: 400;
+        }
+
+        /* PayPal container — match dark theme */
+        .paypal-wrap {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .paypal-label {
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        #paypal-button-container {
+            min-height: 150px;
+            position: relative;
+            z-index: 10;
+            max-width: 100%;
+            overflow: visible;
+        }
+
+        /* ═══════════════════════════════
+           FAQ
+           ═══════════════════════════════ */
+        .faq {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 7rem 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            margin-bottom: 14px;
+            overflow: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(12px);
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-glass-hover);
+        }
+
+        .faq-item.open {
+            border-color: rgba(184, 181, 232, 0.3);
+            background: rgba(184, 181, 232, 0.04);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: left;
+            padding: 24px 26px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover {
+            color: var(--text-hero);
+        }
+
+        .faq-chevron {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gradient-button);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 4px 12px rgba(226, 154, 204, 0.2);
+        }
+
+        .faq-item.open .faq-chevron {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 280px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.8;
+            padding: 0 26px 24px;
+        }
+
+        /* ═══════════════════════════════
+           FOOTER
+           ═══════════════════════════════ */
+        footer {
+            text-align: center;
+            padding: 56px 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(60%, 400px);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-glass-hover), transparent);
+        }
+
+        footer p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 0.04em;
+        }
+
+        /* ═══════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════ */
+        @media (max-width: 768px) {
+            .container { padding: 0 24px; }
+            .hero { padding: 80px 24px 60px; }
+            .hero h1 { font-size: clamp(2.5rem, 12vw, 4.5rem); }
+            .badge { font-size: 0.78rem; letter-spacing: 0.3em; margin-bottom: 40px; }
+            .scroll-orb { width: 72px; height: 72px; }
+            .scroll-orb svg { width: 24px; height: 24px; }
+            section { padding: 5rem 0; }
+            .ps-grid { grid-template-columns: 1fr; gap: 16px; }
+            .ps-card { padding: 36px 28px; }
+            .method-grid { grid-template-columns: 1fr; gap: 14px; }
+            .method-card { padding: 32px 28px; }
+            .pricing-box { padding: 44px 28px; }
+            .price-new { font-size: 3.2rem; }
+            .faq { padding: 5rem 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.4rem; }
+            .pricing-box { padding: 36px 20px; }
+            .faq-question { font-size: 0.94rem; padding: 20px 22px; }
+            .faq-answer p { padding: 0 22px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ════════ HERO ════════ -->
+    <section class="hero">
+        <div class="badge">the hebrew sprint</div>
+        <h1>speak hebrew in 40 days</h1>
+        <p class="hero-sub">Stop getting buried under complex grammar and endless textbook drills. Master the core vocabulary used in 80% of daily Hebrew conversations with a high-intensity, micro-learning system delivered straight to your phone.</p>
+        <a href="#method" class="scroll-orb" aria-label="Scroll to learn more">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
+    </section>
+
+    <!-- ════════ PROBLEM / SOLUTION ════════ -->
+    <section class="problem-solution">
+        <div class="container">
+            <span class="section-label">the truth</span>
+            <h2 class="section-title">a smarter approach</h2>
+            <div class="ps-grid">
+                <div class="ps-card problem">
+                    <div class="ps-icon">&#10005;</div>
+                    <h3>Why traditional Hebrew courses fail you</h3>
+                    <p>Most programs treat language learning like an academic lecture. They force you to memorize complicated grammar rules, root patterns (Binyanim), and &ldquo;training wheels&rdquo; vowel signs (Nikkud) that Israelis don&rsquo;t even use in real life. You get overwhelmed, lose momentum, and quit by week three.</p>
+                </div>
+                <div class="ps-card solution">
+                    <div class="ps-icon">&#9889;</div>
+                    <h3>The Hebrew Sprint is built like a fitness program</h3>
+                    <p>We stripped away the fluff and packed the essentials into a daily All-in-One Audio &amp; Visual Capsule. No textbooks. No Zoom classrooms. Just rapid, daily conditioning designed to build conversational muscle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ METHOD ════════ -->
+    <section class="method" id="method">
+        <div class="container">
+            <span class="section-label">the method</span>
+            <h2 class="section-title">how it works</h2>
+            <p class="section-intro">Four principles. Forty days. One conversation-ready you.</p>
+            <div class="method-grid">
+                <div class="method-card">
+                    <div class="method-num">1</div>
+                    <h4>No Nikkud Training Wheels</h4>
+                    <p>Learn to read real Hebrew from Day 1, the exact way native speakers read signs, menus, and text messages.</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-num">2</div>
+                    <h4>The 450-Word Core</h4>
+                    <p>Master the highly specific 450 words and 50 sentence templates that unlock 80% of everyday spoken Hebrew.</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-num">3</div>
+                    <h4>15-Minute Daily Capsules</h4>
+                    <p>Every morning, get a short, high-impact audio drill and an interactive digital flashcard pack pushed directly to your phone.</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-num">4</div>
+                    <h4>Active Speaking Accountability</h4>
+                    <p>Speak from Day 1. Respond to daily micro-prompts via voice notes and get immediate feedback.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ PRICING ════════ -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <span class="section-label">get started</span>
+            <h2 class="section-title">join the founding cohort</h2>
+            <p class="section-intro">Limited to 25 spots. Founding members lock in lifetime access at one-third of the regular price.</p>
+            <div class="pricing-wrapper">
+                <div class="pricing-box">
+                    <h3>The Hebrew Sprint</h3>
+                    <p class="pricing-sub">In exchange for your active daily participation and a video testimonial at the end of the 40 days, you get lifetime access at a fraction of the cost.</p>
+
+                    <div class="urgency-tracker">
+                        <div class="urgency-text">
+                            <span>Founding Spots Claimed</span>
+                            <span>19 / 25</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+
+                    <div class="price-display">
+                        <span class="price-old">$119</span>
+                        <span class="price-new">$39</span>
+                        <span class="price-label">One-time payment &middot; Lifetime access</span>
+                    </div>
+
+                    <div class="guarantee-box">
+                        <h5>&#10003; Our 100% Action-Backed Guarantee</h5>
+                        <p>Commit to your growth. Complete all 40 daily micro-learning capsules and submit your daily 10-second audio prompts to our WhatsApp business line. If you complete 100% of the program tasks and still cannot hold a functional 3-minute conversation in Hebrew by Day 40, we will return every single penny. No questions asked. We protect our community, and we reward action.</p>
+                    </div>
+
+                    <div class="paypal-wrap">
+                        <p class="paypal-label">&#9889; Select Secure Payment Method</p>
+                        <div id="paypal-button-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ FAQ ════════ -->
+    <div class="faq">
+        <span class="section-label">questions</span>
+        <h2 class="section-title">faq</h2>
+        <div style="margin-top: 56px;">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Do I need any prior Hebrew knowledge?</span>
+                    <span class="faq-chevron">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Not at all. The Hebrew Sprint is designed for absolute beginners. We start from zero and build your reading, listening, and speaking skills from the ground up &mdash; without academic fluff.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What exactly do I receive each day?</span>
+                    <span class="faq-chevron">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Every morning you receive a single All-in-One Capsule: a short audio drill, an interactive flashcard set, and a speaking micro-prompt. Everything is delivered to your phone and takes about 15 minutes to complete.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What does &ldquo;founding member&rdquo; mean?</span>
+                    <span class="faq-chevron">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>You&rsquo;re joining the first-ever cohort. In exchange for committing to all 40 days and sharing a short video testimonial at the end, you lock in a one-time price of $39 instead of the standard $119. Only 25 spots are available.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What if the program doesn&rsquo;t work for me?</span>
+                    <span class="faq-chevron">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Complete all 40 capsules and submit every daily audio prompt to our WhatsApp line. If you do 100% of the work and still can&rsquo;t hold a 3-minute Hebrew conversation by Day 40, you get a full refund. We reward action &mdash; no free rides, no risk for committed learners.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════ FOOTER ════════ -->
+    <footer>
+        <p>&copy; 2026 The Hebrew Sprint. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+
+            // ── FAQ accordion ──
+            document.querySelectorAll('.faq-question').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var item = this.parentElement;
+                    var isOpen = item.classList.contains('open');
+                    document.querySelectorAll('.faq-item.open').forEach(function (el) {
+                        el.classList.remove('open');
+                    });
+                    if (!isOpen) item.classList.add('open');
+                });
+            });
+
+            // ── Progress bar — animate on scroll ──
+            var fill = document.getElementById('progressFill');
+            if (fill) {
+                var animated = false;
+                var observer = new IntersectionObserver(function (entries) {
+                    if (entries[0].isIntersecting && !animated) {
+                        animated = true;
+                        fill.style.width = '76%';
+                    }
+                }, { threshold: 0.6 });
+                observer.observe(fill);
+            }
+
+            // ── PayPal Smart Buttons ──
+            if (typeof paypal !== 'undefined') {
+                paypal.Buttons({
+                    style: {
+                        layout: 'vertical',
+                        color:  'gold',
+                        shape:  'pill',
+                        label:  'checkout',
+                        height: 48
+                    },
+                    createOrder: function (data, actions) {
+                        return actions.order.create({
+                            application_context: {
+                                shipping_preference: 'NO_SHIPPING',
+                                user_action: 'PAY_NOW'
+                            },
+                            purchase_units: [{
+                                description: 'The Hebrew Sprint — Founding Cohort Membership',
+                                amount: {
+                                    value: '39.00',
+                                    currency_code: 'USD'
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function (data, actions) {
+                        return actions.order.capture().then(function (details) {
+                            var pricingBox = document.querySelector('.pricing-box');
+                            pricingBox.innerHTML =
+                                '<div style="text-align:center;padding:48px 16px;font-family:inherit;">' +
+                                    '<div style="width:80px;height:80px;background:linear-gradient(135deg,#b8b5e8,#e29acc);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;margin:0 auto 28px;box-shadow:0 8px 32px rgba(226,154,204,0.4);">&#10003;</div>' +
+                                    '<h3 style="background:linear-gradient(135deg,#ffffff,#d8d4f5,#b8b5e8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:2rem;font-weight:900;margin-bottom:14px;letter-spacing:-0.03em;text-transform:lowercase;">you\'re in, ' + details.payer.name.given_name.toLowerCase() + '!</h3>' +
+                                    '<p style="color:#9b9aab;font-size:1rem;line-height:1.75;max-width:400px;margin:0 auto;">Your payment of $39 was captured successfully. A confirmation email with your Day 1 onboarding instructions has been sent to your inbox.</p>' +
+                                '</div>';
+                        });
+                    },
+                    onError: function (err) {
+                        console.error('PayPal Core Error:', err);
+                        alert('Payment initialization failed. Please refresh or try a different card.');
+                    }
+                }).render('#paypal-button-container');
+            } else {
+                console.error('PayPal SDK failed to load. Check your Client ID setup.');
+                document.getElementById('paypal-button-container').innerHTML =
+                    '<p style="color:#e29acc;font-size:0.88rem;padding:20px 0;">Payment buttons could not load. Please refresh the page or contact support.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
