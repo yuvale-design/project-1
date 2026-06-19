@@ -34,6 +34,8 @@ jobs:
           cp $(ls -1t Street_Hebrew_Survival_Guide_*.pdf | head -1) _site/
           # Friendly alias so the PDF has a stable URL regardless of version
           cp _site/Street_Hebrew_Survival_Guide_*.pdf _site/guide.pdf
+          # Custom domain — GitHub Pages reads CNAME from the deployed site
+          cp CNAME _site/
           ls -la _site/
 
       - name: Configure Pages (auto-enables if needed)
