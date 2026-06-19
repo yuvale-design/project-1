@@ -5,10 +5,6 @@ on:
     branches:
       - main
       - claude/youthful-feynman-h753bh
-    paths:
-      - 'index.html'
-      - 'Street_Hebrew_Survival_Guide_*.pdf'
-      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
