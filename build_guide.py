@@ -24,7 +24,7 @@ IMG_DIR = ROOT / "_heb_images"
 IMG_DIR.mkdir(exist_ok=True)
 OUT = ROOT / "Street_Hebrew_Survival_Guide_v5_Final.pdf"
 
-WHATSAPP_URL = "https://hebrew-in-40-days.com/#pricing"
+WHATSAPP_URL = "https://thehebrewsprint.com/#pricing"
 
 # PIL Hebrew rendering — high DPI for crisp print + zoom
 HEB_FONT = ImageFont.truetype(str(FONT_DIR / "Heebo-Bold.ttf"), 96)
@@ -947,7 +947,7 @@ def cover_html() -> str:
           <div class="quote-attr">&mdash; Built for new Israelis, by a frustrated Ulpan grad.</div>
         </div>
 
-        <div class="cover-footer">hebrew-in-40-days.com &middot; Free Preview Edition</div>
+        <div class="cover-footer">thehebrewsprint.com &middot; Free Preview Edition</div>
       </div>
     </div>
     """
@@ -987,7 +987,7 @@ def content_page_html(page_num: int, cats: list[dict]) -> str:
       </div>
       <div class="content-body">{body}</div>
       <div class="content-footer">
-        <div class="site">hebrew-in-40-days.com</div>
+        <div class="site">thehebrewsprint.com</div>
         <div class="pgnum">PAGE {page_num} OF 5</div>
       </div>
     </div>
@@ -1079,7 +1079,7 @@ def pitch_html() -> str:
         </div>
       </div>
       <div class="content-footer">
-        <div class="site">hebrew-in-40-days.com</div>
+        <div class="site">thehebrewsprint.com</div>
         <div class="pgnum">PAGE 5 OF 5</div>
       </div>
     </div>

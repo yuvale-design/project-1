@@ -9,7 +9,7 @@ Usage:
     pip install pikepdf
     python3 add_pdf_link.py \\
         --pdf Street_Hebrew_Survival_Guide_v5_Final.pdf \\
-        --url https://hebrew-in-40-days.com/#pricing
+        --url https://thehebrewsprint.com/#pricing
 """
 from __future__ import annotations
 
