@@ -1,0 +1,401 @@
+#,Hebrew,English,Phonetic
+1,שלום,Hello / Peace / Goodbye,Sha-lom
+2,להתראות,Goodbye,Le-hit-ra-ot
+3,בוקר טוב,Good morning,Bo-ker Tov
+4,ערב טוב,Good evening,E-rev Tov
+5,תודה,Thank you,To-da
+6,בבקשה,Please / You're welcome,Be-va-ka-sha
+7,סליחה,Excuse me / Sorry,Sli-cha
+8,כן,Yes,Ken
+9,לא,No,Lo
+10,בסדר,Okay / Alright,Be-se-der
+11,אני,I / I am,A-ni
+12,אתה,"You (singular, masculine)",A-ta
+13,את,"You (singular, feminine)",At
+14,מי,Who,Mi
+15,שם,Name,Shem
+16,קוראים לי,My name is (lit. They call me),Ko-rim Li
+17,נעים מאוד,Nice to meet you,Na-im Me-od
+18,מאיפה,From where,Me-e-fo
+19,מאמריקה,From America,Me-a-me-ri-ka
+20,מישראל,From Israel,Mi-yis-ra-el
+21,איפה,Where,E-fo
+22,פה,Here,Po
+23,שם,There,Sham
+24,ישר,Straight,Ya-shar
+25,ימינה,Right (direction),Ya-mi-na
+26,שמאלה,Left (direction),Smo-la
+27,שירותים,Restrooms,Shi-ru-tim
+28,רחוב,Street,Re-chov
+29,מלון,Hotel,Ma-lon
+30,חנות,Shop / Store,Cha-nut
+31,רוצה (ז),Want (masculine),Ro-tze
+32,רוצה (נ),Want (feminine),Ro-tza
+33,מים,Water,Ma-yim
+34,קפה,Coffee,Ka-fe
+35,חשבון,Bill / Check,Chesh-bon
+36,תפריט,Menu,Taf-rit
+37,לאכול,To eat,Le-e-chol
+38,לשתות,To drink,Lish-tot
+39,זה,This,Ze
+40,יותר,More,Yo-ter
+41,כמה,How much / How many,Ka-ma
+42,עולה,Costs,O-le
+43,שקל,Shekel,She-kel
+44,כסף,Money,Ke-sef
+45,אחד,One,E-chad
+46,שתיים,Two,Shtay-im
+47,חמש,Five,Cha-mesh
+48,עשר,Ten,E-ser
+49,מאה,One hundred,Me-a
+50,יקר,Expensive,Ya-kar
+51,חלב,Milk,Cha-lav
+52,סוכר,Sugar,Su-kar
+53,בלי,Without,Bli
+54,עם,With,Im
+55,קר,Cold,Kar
+56,חם,Hot,Cham
+57,גדול,Large / Big,Ga-dol
+58,קטן,Small,Ka-tan
+59,לקחת,To take / To-go,La-ka-chat
+60,לשבת,To sit / Dine-in,La-she-vet
+61,לחם,Bread,Le-chem
+62,סלט,Salad,Sa-lat
+63,בשר,Meat,Ba-sar
+64,עוף,Chicken,Of
+65,טעים,Tasty / Delicious,Ta-im
+66,חריף,Spicy,Cha-rif
+67,יש,There is / We have,Yesh
+68,אין,There is no / We don't have,En
+69,בשבילי,For me,Bish-vi-li
+70,בשבילך,For you (m) / For you (f),Bish-vil-cha / Bish-vi-lech
+71,אבל,But,A-val
+72,כי,Because,Ki
+73,בגלל זה,Because of this / Therefore,Bi-glal ze
+74,אז,So / Then,Az
+75,או,Or,O
+76,וגם,And also / As well,V'gam
+77,עכשיו,Now,Ach-shav
+78,אחר כך,Later,A-char kach
+79,מהר,Fast / Quickly,Ma-her
+80,לאט,Slowly,Le-at
+81,צריך (ז),Need / Should (masculine),Tza-rich
+82,צריכה (נ),Need / Should (feminine),Tzri-cha
+83,חייב (ז),Must / Owe (masculine),Chai-yav
+84,חייבת (נ),Must / Owe (feminine),Chai-ye-vet
+85,זמן,Time,Zman
+86,מונית,Taxi,Mo-nit
+87,שירות,Service,Shi-rut
+88,מפתח,Key,Maf-te-ach
+89,ללכת,To go / To walk,La-le-chet
+90,הביתה,Home / Homeward,Ha-bay-ta
+91,סבבה,Cool / Alright / Great,Sa-ba-ba
+92,יאללה,Let's go / Hurry up,Yal-la
+93,באסה,Bummer / That sucks,Ba-sa
+94,תכלס,Bottom line / Actually / Totally,Tach-les
+95,נכון,Correct / True,Na-chon
+96,לא נכון,Not true / No way,Lo Na-chon
+97,מעולה,Excellent / Perfect,Me-u-le
+98,חיים,Life,Cha-yim
+99,חברים,Friends,Cha-ve-rim
+100,הכל,Everything / All,Ha-kol
+101,חבר,Friend (male),Cha-ver
+102,חברה,Friend (female),Cha-ve-ra
+103,נשוי,Married (male),Na-sui
+104,נשואה,Married (female),Ne-su-a
+105,רווק,Single (male),Ra-vak
+106,עבודה,Work / Job,A-vo-da
+107,משפחה,Family,Mish-pa-cha
+108,בן,Son,Ben
+109,בת,Daughter,Bat
+110,ילדים,Children,Ye-la-dim
+111,מתי,When,Ma-tai
+112,מחר,Tomorrow,Ma-char
+113,אתמול,Yesterday,Et-mol
+114,בוקר,Morning,Bo-ker
+115,צהריים,Noon / Afternoon,Tzo-ha-ra-im
+116,ערב,Evening,E-rev
+117,לילה,Night,Lai-la
+118,שעה,Hour,Sha-a
+119,פגישה,Meeting,Pgi-sha
+120,רגע,Moment / Second,Re-ga
+121,יפה,Beautiful,Ya-fe
+122,גדול,Big,Ga-dol
+123,קטן,Small,Ka-tan
+124,קרוב,Near,Ka-rov
+125,רחוק,Far,Ra-chok
+126,שמח,Happy,Sa-me-ach
+127,עייף,Tired,A-yef
+128,רעב,Hungry,Ra-ev
+129,מוזר,Weird,Mu-zar
+130,מעניין,Interesting,Me-an-yen
+131,אוטובוס,Bus,O-to-bus
+132,רכבת,Train,Ra-ke-vet
+133,תחנה,Station,Ta-cha-na
+134,כרטיס,Ticket,Kar-tis
+135,לנסוע,To travel / To drive,Lin-so-a
+136,הגעה,Arrival,Ha-ga-a
+137,לחכות,To wait,Le-cha-kot
+138,מהיר,Fast,Ma-hir
+139,רחוק,Far,Ra-chok
+140,שדה תעופה,Airport,Sde Te-u-fa
+141,עוד פעם,Once more,Od pa-am
+142,להבין,To understand,Le-ha-vin
+143,לא הבנתי,I didn't understand,Lo he-van-ti
+144,לכתוב,To write,Lich-tov
+145,לקרוא,To read,Lik-ro
+146,לדבר,To speak,Le-da-ber
+147,קצת,A little,Ktzat
+148,עברית,Hebrew,Iv-rit
+149,אנגלית,English,Ang-lit
+150,מילה,Word,Mi-la
+151,בנק,Bank,Bank
+152,חשבון,Account,Chesh-bon
+153,כסף,Money,Ke-sef
+154,כרטיס אשראי,Credit card,Kar-tis Ash-ra-i
+155,קוד,Code,Kod
+156,פקיד,Clerk,Pa-kid
+157,למשוך,To withdraw,Lim-shoch
+158,להפקיד,To deposit,Le-haf-kid
+159,מזומן,Cash,Me-zu-man
+160,עובר ושב,Checking account,O-ver Ve-shav
+161,דואר,Post / Mail,Do-ar
+162,חבילה,Package,Cha-bi-la
+163,מכתב,Letter,Mich-tav
+164,לשלוח,To send,Lish-lo-ach
+165,לקבל,To receive,Le-ka-bel
+166,תור,Queue / Line,Tor
+167,פתוח,Open,Pa-tu-ach
+168,סגור,Closed,Sa-gur
+169,סניף,Branch,S-nif
+170,כתובת,Address,K-to-vet
+171,סופרמרקט,Supermarket,Su-per-mar-ket
+172,שקית,Bag,Sa-kit
+173,קופה,Cashier / Checkout,Ku-pa
+174,מחיר,Price,Me-chir
+175,מבצע,Sale / Promotion,Miv-tza
+176,קילוגרם,Kilogram,Ki-lo-gram
+177,מוצר,Product,Mo-tzar
+178,יקר,Expensive,Ya-kar
+179,זול,Cheap,Zol
+180,לשלם,To pay,Le-shal-em
+181,בית מרקחת,Pharmacy,Beit Mir-ka-chat
+182,תרופה,Medicine,T-ru-fa
+183,כואב לי,It hurts me,Ko-ev li
+184,ראש,Head,Rosh
+185,בטן,Stomach,Be-ten
+186,רופא,Doctor,Ro-fe
+187,עזרה,Help,Ez-ra
+188,דחוף,Urgent,Da-chuf
+189,מתי,When,Ma-tai
+190,מרשם,Prescription,Mir-sham
+191,טופס,Form,To-fes
+192,לחתום,To sign,Lach-tom
+193,חתימה,Signature,Cha-ti-ma
+194,בעיה,Problem,Be-a-ya
+195,תיקון,Fix / Repair,Ti-kun
+196,שירות לקוחות,Customer service,Shi-rut Le-ko-chot
+197,מנהל,Manager,Me-na-hel
+198,בירור,Inquiry,Bi-rur
+199,לבדוק,To check,Liv-dok
+200,תשובה,Answer,T-shu-va
+201,דירה,Apartment,Di-ra
+202,חוזה,Contract,Cho-ze
+203,שכירות,Rent,S-chi-rut
+204,בית,House,Ba-yit
+205,חדר,Room,Cha-dar
+206,שותפים,Roommates,Shut-a-fim
+207,מתווך,Real estate agent,Me-ta-vech
+208,לראות,To see,Lir-ot
+209,קומה,Floor,Ko-ma
+210,מעלית,Elevator,Ma-a-lit
+211,חשמל,Electricity,Chash-mal
+212,מים,Water,Ma-yim
+213,ארנונה,Municipal tax,Ar-no-na
+214,ועד בית,Building committee/fee,Va-ad Ba-yit
+215,תיקון,Repair,Ti-kun
+216,מזגן,Air conditioner,Maz-gan
+217,דוד,Boiler (water heater),Dud
+218,בעל בית,Landlord,Ba-al Ba-yit
+219,לשלם,To pay,Le-shal-em
+220,חשבונית,Invoice,Chesh-bo-nit
+221,רהיטים,Furniture,Re-hi-tim
+222,מיטה,Bed,Mi-ta
+223,מקרר,Refrigerator,Me-ka-rer
+224,תנור,Oven,Ta-nur
+225,להוביל,To move/transport,Le-ho-vil
+226,מובילים,Movers,Mo-bi-lim
+227,ארגזים,Boxes,Ar-ga-zim
+228,חדש,New,Cha-dash
+229,ישן,Old,Ya-shan
+230,מקום,Place/Space,Ma-kom
+231,חתימה,Signature,Cha-ti-ma
+232,עורך דין,Lawyer,O-rech Din
+233,תנאי,Condition / Term,T-nai
+234,תוקף,Validity,To-kef
+235,חודש,Month,Cho-desh
+236,שנה,Year,Sha-na
+237,הודעה מראש,Notice period,Ho-da-a Me-rosh
+238,פיקדון,Deposit,Pi-ka-don
+239,ביטוח,Insurance,Bi-tu-ach
+240,לחתום,To sign,Lach-tom
+241,אינסטלטור,Plumber,In-sta-la-tor
+242,חשמלאי,Electrician,Chash-ma-lai
+243,סתימה,Clog,Sti-ma
+244,דחוף,Urgent,Da-chuf
+245,נזילה,Leak,Ne-zi-la
+246,מפתח,Key,Maf-te-ach
+247,נעול,Locked,Na-ul
+248,פריצה,Break-in/Opening,Pri-tza
+249,להזמין,To order/invite,Le-haz-min
+250,תודה,Thank you,To-da
+251,מסיבה,Party,Me-si-ba
+252,בילוי,Hangout / Leisure,Bi-luy
+253,להיפגש,To meet (up),Le-hip-ga-esh
+254,להזמין,To invite,Le-haz-min
+255,חברים,Friends,Cha-ve-rim
+256,יחד,Together,Ya-chad
+257,לצאת,To go out,La-tzet
+258,מועדון,Club,Mo-a-don
+259,פאב,Pub,Pub
+260,בכיף,With pleasure / For fun,Be-kef
+261,תחביב,Hobby,Tach-viv
+262,מוזיקה,Music,Mu-zi-ka
+263,סרט,Movie,Se-ret
+264,ים,Sea,Yam
+265,חוף,Beach,Chof
+266,טיול,Trip / Hike,Ti-yul
+267,ספורט,Sport,Sport
+268,לקרוא,To read,Lik-ro
+269,לשמוע,To hear/listen,Lish-mo-a
+270,לראות,To see/watch,Lir-ot
+271,מזג אוויר,Weather,Me-zeg A-vir
+272,חם,Hot,Cham
+273,קר,Cold,Kar
+274,גשם,Rain,Ge-shem
+275,שמש,Sun,She-mesh
+276,רוח,Wind,Ru-ach
+277,יפה,Beautiful/Nice,Ya-fe
+278,אביב,Spring,A-viv
+279,קיץ,Summer,Ka-yitz
+280,חורף,Winter,Cho-ref
+281,מסעדה,Restaurant,Mis-a-da
+282,תפריט,Menu,Taf-rit
+283,מלצר,Waiter,Mel-tzar
+284,להזמין,To order,Le-haz-min
+285,טעים,Tasty,Ta-im
+286,לשתות,To drink,Lish-tot
+287,לחלוק,To share,La-cha-lok
+288,טיפ,Tip,Tip
+289,חשבון,Bill,Chesh-bon
+290,ביחד,Together,Be-ya-chad
+291,להכיר,To know/meet,Le-ha-kir
+292,נחמד,Nice,Nech-mad
+293,מצחיק,Funny,Matz-chik
+294,מעניין,Interesting,Me-an-yen
+295,שיחה,Conversation,Si-cha
+296,לדבר,To speak,Le-da-ber
+297,לספר,To tell (a story),Le-sa-per
+298,צחוק,Laughter,Tz-chok
+299,חוויה,Experience,Cha-va-ya
+300,שפה,Language,Sa-fa
+301,עבודה,Work / Job,A-vo-da
+302,משרה,Position / Role,Mis-ra
+303,ניסיון,Experience,Ni-sa-yon
+304,קורות חיים,CV / Resume,Ko-rot Cha-yim
+305,ראיון,Interview,Re-a-yon
+306,להתקבל,To be accepted,Le-hit-ka-bel
+307,מיומנות,Skill,Me-yu-ma-nut
+308,משרד,Office,Mis-rad
+309,משכורת,Salary,Mas-ko-ret
+310,בוס,Boss,Bos
+311,פגישה,Meeting,Pgi-sha
+312,דואר אלקטרוני,Email,Do-ar E-lek-tro-ni
+313,טלפון,Phone,Te-le-fon
+314,להחליט,To decide,Le-hach-lit
+315,הסכם,Agreement,Hes-kem
+316,פרויקט,Project,Pro-yekt
+317,צוות,Team,Tze-vet
+318,משימה,Task,Me-si-ma
+319,דחוף,Urgent,Da-chuf
+320,חשוב,Important,Cha-shuv
+321,נסיעה,Trip / Journey,Ne-si-a
+322,טיסה,Flight,Ti-sa
+323,מלון,Hotel,Ma-lon
+324,נסיעת עסקים,Business trip,Ne-si-at As-a-kim
+325,כרטיס טיסה,Plane ticket,Kar-tis Ti-sa
+326,מונית,Taxi,Mo-nit
+327,תיק,Bag / Briefcase,Tik
+328,מחשב,Computer,Mach-shev
+329,להזמין,To book/order,Le-haz-min
+330,אישור,Confirmation,I-shur
+331,קידום,Promotion,Ki-dum
+332,קשרים,Connections / Networking,K-sha-rim
+333,ללמוד,To learn,Lish-mod
+334,מטרה,Goal,Ma-ta-ra
+335,הצלחה,Success,Hatz-la-cha
+336,יוזמה,Initiative,Yo-z-ma
+337,דיון,Discussion,Di-yun
+338,לבקש,To ask/request,Le-va-kesh
+339,לעזור,To help,La-a-zor
+340,עתיד,Future,A-tid
+341,תרבות,Culture,Tar-but
+342,כבוד,Respect,Ka-vod
+343,קולגה,Colleague,Ko-le-ga
+344,להסביר,To explain,Le-has-bir
+345,הבנה,Understanding,Ha-va-na
+346,פשרה,Compromise,Psha-ra
+347,משא ומתן,Negotiation,Ma-sa U-ma-tan
+348,חוזה,Contract,Cho-ze
+349,חוק,Law / Rule,Chok
+350,ביצועים,Performance,Bi-tzu-im
+351,בעיה,Problem,Be-a-ya
+352,פתרון,Solution,Pit-ron
+353,טעות,Mistake,Ta-ut
+354,סליחה,Sorry,Sli-cha
+355,להסביר,To explain,Le-has-bir
+356,להבין,To understand,Le-ha-vin
+357,בבקשה,Please/You're welcome,Be-va-ka-sha
+358,אולי,Maybe,U-lay
+359,נכון,Correct/Right,Na-chon
+360,לא נכון,Incorrect,Lo Na-chon
+361,עתיד,Future,A-tid
+362,תוכנית,Plan,Toch-nit
+363,להחליט,To decide,Le-hach-lit
+364,לנסות,To try,Le-na-sot
+365,לעשות,To do/make,La-a-sot
+366,לקנות,To buy,Lik-not
+367,למכור,To sell,Lim-kor
+368,לבקר,To visit,Le-va-ker
+369,חופשה,Vacation,Chuf-sha
+370,סוף שבוע,Weekend,Sof Sha-vu-a
+371,לדעתי,In my opinion,Le-da-ati
+372,נראה לי,It seems to me,Nir-eh li
+373,בטוח,Sure/Certain,Ba-tu-ach
+374,מופתע,Surprised,Muf-ta-a
+375,מאושר,Happy/Thrilled,Me-ush-ar
+376,עצוב,Sad,A-tzuv
+377,חשוב,Important,Cha-shuv
+378,מעניין,Interesting,Me-an-yen
+379,מצוין,Excellent,Me-tzu-yan
+380,רע,Bad,Ra
+381,חוק,Rule,Chok
+382,דוגמה,Example,Dug-ma
+383,מילים,Words,Mi-lim
+384,משפט,Sentence,Mish-pat
+385,דיבור,Speaking,Di-bur
+386,שמיעה,Listening,Sh-mi-a
+387,קריאה,Reading,K-ri-a
+388,כתיבה,Writing,K-ti-va
+389,הצלחה,Success,Hatz-la-cha
+390,קדימה,Forward/Let's go,Ka-di-ma
+391,סיום,End/Finish,Si-yum
+392,התחלה,Beginning,Hat-cha-la
+393,דרך,Way/Path,De-rech
+394,מטרה,Goal,Ma-ta-ra
+395,ביטחון,Confidence,Bi-ta-chon
+396,קשר,Connection,Ke-sher
+397,חברים,Friends,Cha-ve-rim
+398,ישראל,Israel,Yis-ra-el
+399,עברית,Hebrew,Iv-rit
+400,תודה,Thank you,To-da

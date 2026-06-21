@@ -30,10 +30,13 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html _site/
-          # Copy the most recent built PDF (in case the version suffix changes)
+          # Lead-magnet PDF (free, 50 phrases)
           cp $(ls -1t Street_Hebrew_Survival_Guide_*.pdf | head -1) _site/
-          # Friendly alias so the PDF has a stable URL regardless of version
           cp _site/Street_Hebrew_Survival_Guide_*.pdf _site/guide.pdf
+          # Full course PDF (paid; obscure filename so the URL doesn't leak)
+          if ls course-*.pdf 1>/dev/null 2>&1; then
+            cp course-*.pdf _site/
+          fi
           # Custom domain — GitHub Pages reads CNAME from the deployed site
           cp CNAME _site/
           ls -la _site/

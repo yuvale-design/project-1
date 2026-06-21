@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Hebrew Sprint — Speak Hebrew in 40 Days</title>
-    <meta name="description" content="Master conversational Hebrew in 40 days with 15-minute daily micro-learning capsules. No textbooks. No Zoom classrooms. Just results.">
+    <meta name="description" content="Master conversational Hebrew in 40 days with single-page micro-lessons. 400 essential words, 50 ready-to-use sentences, real-world speaking challenges. Lifetime access.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -754,18 +754,18 @@
                 </div>
                 <div class="method-card">
                     <div class="method-num">2</div>
-                    <h4>The 450-Word Core</h4>
-                    <p>Master the highly specific 450 words and 50 sentence templates that unlock 80% of everyday spoken Hebrew.</p>
+                    <h4>The 400-Word Core</h4>
+                    <p>Master the 400 essential words and 50 sentence templates that unlock 80% of everyday spoken Hebrew.</p>
                 </div>
                 <div class="method-card">
                     <div class="method-num">3</div>
-                    <h4>15-Minute Daily Capsules</h4>
-                    <p>Every morning, get a short, high-impact audio drill and an interactive digital flashcard pack pushed directly to your phone.</p>
+                    <h4>40 Daily Micro-Lessons</h4>
+                    <p>One single-page lesson per day, ~15 minutes each. 10 fresh words + one real-world speaking challenge. No fluff, no skipping.</p>
                 </div>
                 <div class="method-card">
                     <div class="method-num">4</div>
-                    <h4>Active Speaking Accountability</h4>
-                    <p>Speak from Day 1. Respond to daily micro-prompts via voice notes and get immediate feedback.</p>
+                    <h4>Active Speaking From Day 1</h4>
+                    <p>Every page ends with a tiny street challenge that forces you to use today's Hebrew with a real Israeli. That's where confidence is built.</p>
                 </div>
             </div>
         </div>
@@ -917,12 +917,44 @@
                     onApprove: function (data, actions) {
                         return actions.order.capture().then(function (details) {
                             var pricingBox = document.querySelector('.pricing-box');
+                            var name = (details.payer && details.payer.name && details.payer.name.given_name)
+                                ? details.payer.name.given_name.toLowerCase() : 'friend';
+                            var email = (details.payer && details.payer.email_address) || '';
+                            var courseUrl = 'https://thehebrewsprint.com/course-hsvr2024-x9k2m7.pdf';
+                            var orderId = details.id || data.orderID || '';
+
+                            // Persist the download link locally so the customer can come back to this page
+                            try {
+                                localStorage.setItem('ths_course_url', courseUrl);
+                                localStorage.setItem('ths_order_id', orderId);
+                            } catch (e) {}
+
                             pricingBox.innerHTML =
-                                '<div style="text-align:center;padding:48px 16px;font-family:inherit;">' +
-                                    '<div style="width:80px;height:80px;background:linear-gradient(135deg,#b8b5e8,#e29acc);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;margin:0 auto 28px;box-shadow:0 8px 32px rgba(226,154,204,0.4);">&#10003;</div>' +
-                                    '<h3 style="background:linear-gradient(135deg,#ffffff,#d8d4f5,#b8b5e8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:2rem;font-weight:900;margin-bottom:14px;letter-spacing:-0.03em;text-transform:lowercase;">you\'re in, ' + details.payer.name.given_name.toLowerCase() + '!</h3>' +
-                                    '<p style="color:#9b9aab;font-size:1rem;line-height:1.75;max-width:400px;margin:0 auto;">Your payment of $39 was captured successfully. A confirmation email with your Day 1 onboarding instructions has been sent to your inbox.</p>' +
+                                '<div style="text-align:center;padding:32px 8px 16px;font-family:inherit;">' +
+                                    '<div style="width:80px;height:80px;background:linear-gradient(135deg,#b8b5e8,#e29acc);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;margin:0 auto 24px;box-shadow:0 8px 32px rgba(226,154,204,0.4);">&#10003;</div>' +
+
+                                    '<h3 style="background:linear-gradient(135deg,#ffffff,#d8d4f5,#b8b5e8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:2rem;font-weight:900;margin-bottom:12px;letter-spacing:-0.03em;text-transform:lowercase;">you\'re in, ' + name + '! 🇮🇱</h3>' +
+
+                                    '<p style="color:#9b9aab;font-size:0.98rem;line-height:1.75;max-width:440px;margin:0 auto 28px;">Payment of $39 confirmed. Your lifetime access to <strong style="color:#d8d6e8;">The 40-Day Hebrew Sprint</strong> is ready right now &mdash; download it below and bookmark this page.</p>' +
+
+                                    '<a href="' + courseUrl + '" target="_blank" rel="noopener" download style="display:inline-block;background:linear-gradient(135deg,#b8b5e8 0%,#e29acc 100%);color:#fff;text-decoration:none;font-weight:800;font-size:1.05rem;padding:18px 36px;border-radius:14px;letter-spacing:0.02em;box-shadow:0 8px 32px rgba(226,154,204,0.45);">📥&nbsp; Download Your Course Now</a>' +
+
+                                    '<div style="margin-top:22px;padding:18px;background:rgba(184,181,232,0.08);border:1px solid rgba(184,181,232,0.22);border-radius:14px;font-size:0.85rem;color:#9b9aab;line-height:1.7;text-align:left;max-width:440px;margin-left:auto;margin-right:auto;">' +
+                                        '<div style="color:#b8b5e8;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">📌 Save these for your records</div>' +
+                                        '<div style="margin-bottom:6px;"><strong style="color:#d8d6e8;">Direct course link:</strong></div>' +
+                                        '<div style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:0.78rem;word-break:break-all;color:#b8b5e8;margin-bottom:14px;"><a href="' + courseUrl + '" style="color:#b8b5e8;text-decoration:none;">' + courseUrl + '</a></div>' +
+                                        (email ? '<div style="margin-bottom:6px;"><strong style="color:#d8d6e8;">PayPal email:</strong> ' + email + '</div>' : '') +
+                                        (orderId ? '<div><strong style="color:#d8d6e8;">Order ID:</strong> ' + orderId + '</div>' : '') +
+                                    '</div>' +
+
+                                    '<p style="color:#74738a;font-size:0.82rem;margin-top:22px;line-height:1.6;">Bookmark this page or save the link above. You can come back any time. ' +
+                                    'Questions or didn\'t receive the link? Email <a href="mailto:hello@thehebrewsprint.com?subject=Course%20access%20-%20order%20' + orderId + '" style="color:#b8b5e8;">hello@thehebrewsprint.com</a> with your Order ID and we\'ll get you in within a few hours.</p>' +
                                 '</div>';
+
+                            // Smooth scroll up so the user sees the new success state
+                            setTimeout(function () {
+                                pricingBox.scrollIntoView({behavior: 'smooth', block: 'center'});
+                            }, 100);
                         });
                     },
                     onError: function (err) {
