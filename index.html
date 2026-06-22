@@ -954,7 +954,9 @@
                             // The success screen renders regardless of whether the email succeeds.
                             if (typeof emailjs !== 'undefined' && email) {
                                 emailjs.send('service_mltiq6p', 'template_w612t55', {
+                                    email: email,
                                     to_email: email,
+                                    name: firstName,
                                     customer_name: firstName,
                                     customer_email: email,
                                     course_url: courseUrl,
