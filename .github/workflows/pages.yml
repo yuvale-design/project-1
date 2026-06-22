@@ -37,6 +37,10 @@ jobs:
           if ls course-*.pdf 1>/dev/null 2>&1; then
             cp course-*.pdf _site/
           fi
+          # Landing-page image assets (mockups, etc.)
+          if [ -d assets ]; then
+            cp -r assets _site/
+          fi
           # Custom domain — GitHub Pages reads CNAME from the deployed site
           cp CNAME _site/
           ls -la _site/

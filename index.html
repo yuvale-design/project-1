@@ -699,6 +699,290 @@
         }
 
         /* ═══════════════════════════════
+           TRUST BAR (below hero)
+           ═══════════════════════════════ */
+        .trust-bar {
+            padding: 3.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.012);
+            position: relative;
+            z-index: 1;
+        }
+        .trust-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem 3rem;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        .trust-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+        .trust-icon {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: var(--accent-pink);
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════
+           FOUNDER + SOCIAL PROOF SECTION
+           ═══════════════════════════════ */
+        .founder-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 24px;
+            margin-top: 64px;
+            align-items: stretch;
+        }
+        .founder-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 44px 40px;
+            position: relative;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+        }
+        .founder-card .qmark {
+            position: absolute;
+            top: 12px;
+            right: 28px;
+            font-size: 5rem;
+            line-height: 1;
+            color: var(--accent-pink);
+            opacity: 0.18;
+            font-family: 'Times New Roman', serif;
+            font-weight: 700;
+            pointer-events: none;
+        }
+        .founder-card h3 {
+            font-size: 1.18rem;
+            font-weight: 800;
+            color: var(--text-hero);
+            margin-bottom: 18px;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            text-wrap: balance;
+        }
+        .founder-card p {
+            color: var(--text-secondary);
+            font-size: 0.94rem;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+        .founder-card p:last-of-type { margin-bottom: 0; }
+        .founder-card .attribution {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: auto;
+            padding-top: 26px;
+            border-top: 1px solid var(--border-glass);
+        }
+        .founder-card .avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-lavender), var(--accent-pink));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(226,154,204,0.3);
+        }
+        .founder-card .attribution-text strong {
+            display: block;
+            color: var(--text-hero);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+        .founder-card .attribution-text span {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+        }
+
+        .reviews-coming {
+            background: linear-gradient(180deg, rgba(184,181,232,0.07) 0%, rgba(226,154,204,0.04) 100%);
+            border: 1px dashed rgba(184,181,232,0.32);
+            border-radius: var(--radius-lg);
+            padding: 44px 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .reviews-coming .badge-coming {
+            display: inline-block;
+            margin: 0 auto 22px;
+            background: rgba(184,181,232,0.14);
+            color: var(--accent-lavender);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+        .reviews-coming h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-hero);
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            text-wrap: balance;
+        }
+        .reviews-coming p {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.75;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+        .reviews-coming .live-pill {
+            margin-top: 26px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 18px;
+            background: rgba(0,0,0,0.22);
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+        .live-pill .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #58cc6b;
+            box-shadow: 0 0 12px rgba(88,204,107,0.7);
+            animation: livepulse 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        @keyframes livepulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.55; transform: scale(0.85); }
+        }
+
+        /* ═══════════════════════════════
+           MOCKUPS (phone + PDF preview)
+           ═══════════════════════════════ */
+        .mockups {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px 40px;
+            align-items: end;
+            max-width: 880px;
+            margin: 90px auto 0;
+        }
+        .mockup-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .mockup-phone-frame {
+            width: 260px;
+            background: linear-gradient(160deg, #1a1a2e, #14142a);
+            border-radius: 38px;
+            padding: 10px 8px;
+            border: 1.5px solid rgba(255,255,255,0.08);
+            box-shadow:
+                0 30px 60px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(255,255,255,0.04),
+                inset 0 0 0 6px #0a0a1a;
+            position: relative;
+        }
+        .mockup-phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 18px;
+            background: #000;
+            border-radius: 12px;
+            z-index: 2;
+        }
+        .mockup-phone-frame img {
+            width: 100%;
+            display: block;
+            border-radius: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .mockup-pdf-frame {
+            width: 230px;
+            background: #fff;
+            padding: 0;
+            border-radius: 6px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            box-shadow:
+                0 30px 60px rgba(0,0,0,0.45),
+                0 0 0 1px rgba(0,0,0,0.4),
+                0 6px 0 -2px #2a2a3a,
+                0 8px 0 -2px rgba(0,0,0,0.6),
+                0 12px 0 -4px #353548,
+                0 14px 0 -4px rgba(0,0,0,0.5);
+            transform: rotate(-2deg);
+            position: relative;
+        }
+        .mockup-pdf-frame img {
+            width: 100%;
+            display: block;
+            border-radius: 6px;
+        }
+        .mockup-label {
+            margin-top: 32px;
+        }
+        .mockup-label .mockup-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent-pink);
+            margin-bottom: 8px;
+        }
+        .mockup-label h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-hero);
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+        .mockup-label p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        /* ═══════════════════════════════
            RESPONSIVE
            ═══════════════════════════════ */
         @media (max-width: 768px) {
@@ -716,6 +1000,12 @@
             .pricing-box { padding: 44px 28px; }
             .price-new { font-size: 3.2rem; }
             .faq { padding: 5rem 24px; }
+            .trust-bar { padding: 2.5rem 0; }
+            .trust-strip { gap: 1.2rem 2rem; }
+            .trust-item { font-size: 0.72rem; }
+            .founder-grid { grid-template-columns: 1fr; gap: 18px; }
+            .founder-card, .reviews-coming { padding: 36px 28px; }
+            .mockups { grid-template-columns: 1fr; gap: 70px; max-width: 320px; margin-top: 60px; }
         }
 
         @media (max-width: 480px) {
@@ -732,12 +1022,38 @@
     <section class="hero">
         <div class="badge">the hebrew sprint</div>
         <h1>speak hebrew in 40 days</h1>
-        <p class="hero-sub">Stop getting buried under complex grammar and endless textbook drills. Master the core vocabulary used in 80% of daily Hebrew conversations with a high-intensity, micro-learning system delivered straight to your phone.</p>
+        <p class="hero-sub">Stop drowning in grammar tables and endless textbook drills. Master the 400 words and 50 sentences Israelis actually use on the street &mdash; one 15-minute page per day, for 40 days. By the end, you'll hold real conversations.</p>
         <a href="#method" class="scroll-orb" aria-label="Scroll to learn more">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
         </a>
+    </section>
+
+    <!-- ════════ TRUST BAR ════════ -->
+    <section class="trust-bar">
+        <div class="trust-strip">
+            <div class="trust-item">
+                <svg class="trust-icon" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+                <span>BUILT BY OLIM, FOR OLIM</span>
+            </div>
+            <div class="trust-item">
+                <svg class="trust-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>40 DAYS &middot; 15 MIN/DAY</span>
+            </div>
+            <div class="trust-item">
+                <svg class="trust-icon" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7.9 6.4 2.5"/><polyline points="21 4 21 12 13 12"/></svg>
+                <span>LIFETIME ACCESS</span>
+            </div>
+            <div class="trust-item">
+                <svg class="trust-icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                <span>100% MONEY-BACK GUARANTEE</span>
+            </div>
+            <div class="trust-item">
+                <svg class="trust-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+                <span>ZERO GRAMMAR &middot; 100% STREET</span>
+            </div>
+        </div>
     </section>
 
     <!-- ════════ PROBLEM / SOLUTION ════════ -->
@@ -786,6 +1102,65 @@
                     <div class="method-num">4</div>
                     <h4>Active Speaking From Day 1</h4>
                     <p>Every page ends with a tiny street challenge that forces you to use today's Hebrew with a real Israeli. That's where confidence is built.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ FOUNDER + SOCIAL PROOF ════════ -->
+    <section class="founder">
+        <div class="container">
+            <span class="section-label">why it exists</span>
+            <h2 class="section-title">the story behind the sprint</h2>
+            <p class="section-intro">No fake reviews here. Just the honest reason this program exists &mdash; and what's coming.</p>
+
+            <div class="founder-grid">
+                <div class="founder-card">
+                    <div class="qmark">&ldquo;</div>
+                    <h3>From "yes, no, todah" to renting an apartment in Hebrew &mdash; in 40 days.</h3>
+                    <p>I made aliyah from abroad. Spent six months in Ulpan, learned every Binyan, memorized hundreds of vocabulary lists &mdash; and still froze every time the Wolt driver called. The textbooks weren't built for the real streets of Tel Aviv.</p>
+                    <p>So I built what I wish I'd had on Day 1: the 400 words and 50 sentences Israelis really use, organized into 40 daily 15-minute lessons. 100% speaking, zero grammar fluff. The Sprint you're looking at right now.</p>
+                    <div class="attribution">
+                        <div class="avatar">Y</div>
+                        <div class="attribution-text">
+                            <strong>Yuval</strong>
+                            <span>Creator &middot; The Hebrew Sprint</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reviews-coming">
+                    <div class="badge-coming">&starf; Reviews Coming Soon</div>
+                    <h3>Real testimonials from the founding cohort &mdash; coming as they hit Day 40.</h3>
+                    <p>We don't fake reviews. The first founding members are working through the program right now. As they cross Day 40, their honest experiences will appear here.</p>
+                    <div class="live-pill">
+                        <div class="dot"></div>
+                        <span>Founding seats still open</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real mockups (extracted from the actual product files) -->
+            <div class="mockups">
+                <div class="mockup-cell">
+                    <div class="mockup-phone-frame">
+                        <img src="assets/mockup-course-day.jpg" alt="Preview: Day 4 of The 40-Day Hebrew Sprint course, showing the vocabulary table, sentence of the day, and today's challenge.">
+                    </div>
+                    <div class="mockup-label">
+                        <div class="mockup-tag">A typical day</div>
+                        <h4>One page. 15 minutes.</h4>
+                        <p>This is what Day 4 looks like.</p>
+                    </div>
+                </div>
+                <div class="mockup-cell">
+                    <div class="mockup-pdf-frame">
+                        <img src="assets/mockup-guide-cover.jpg" alt="Preview: The Street Hebrew Survival Guide cover &mdash; the free 50-phrase PDF lead magnet.">
+                    </div>
+                    <div class="mockup-label">
+                        <div class="mockup-tag">Free preview &mdash; before you buy</div>
+                        <h4>The 50-Phrase Survival Guide</h4>
+                        <p>Open it on any device. No signup needed.</p>
+                    </div>
                 </div>
             </div>
         </div>
