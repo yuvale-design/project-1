@@ -1019,13 +1019,14 @@ def pitch_html() -> str:
           <div class="feature">
             <div class="ico">
               <svg viewBox="0 0 24 24" fill="none" stroke="#1A73E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 14v-2a9 9 0 0 1 18 0v2"/>
-                <path d="M21 14v4a2 2 0 0 1-2 2h-1v-7h3z"/>
-                <path d="M3 14v4a2 2 0 0 0 2 2h1v-7H3z"/>
+                <rect x="5" y="3" width="14" height="18" rx="2"/>
+                <line x1="9" y1="8" x2="15" y2="8"/>
+                <line x1="9" y1="12" x2="15" y2="12"/>
+                <line x1="9" y1="16" x2="13" y2="16"/>
               </svg>
             </div>
-            <h3>Daily 2-min audio bites</h3>
-            <p>Straight to your phone. Listen on the bus, in line, while you stir coffee.</p>
+            <h3>40 daily single-page lessons</h3>
+            <p>One page per day, ~15 minutes. Built to fit your phone, your commute, your coffee break.</p>
           </div>
           <div class="feature">
             <div class="ico">
@@ -1046,8 +1047,8 @@ def pitch_html() -> str:
                 <circle cx="16" cy="12" r="0.8" fill="#1A73E8"/>
               </svg>
             </div>
-            <h3>Real-world challenges</h3>
-            <p>Voice-message tasks that force you to think and speak in Hebrew.</p>
+            <h3>Real-world speaking challenges</h3>
+            <p>Every page ends with one tiny street task to do that same day. That's how it sticks.</p>
           </div>
         </div>
 
@@ -1061,8 +1062,8 @@ def pitch_html() -> str:
           </div>
           <div class="price-row">
             <div class="price-now">$39</div>
-            <div class="price-was">$149</div>
-            <div class="save">SAVE $110</div>
+            <div class="price-was">$119</div>
+            <div class="save">SAVE $80</div>
           </div>
           <div class="scarcity">Only 10 spots available &mdash; first come, first served.</div>
         </div>
