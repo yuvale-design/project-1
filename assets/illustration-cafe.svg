@@ -1,0 +1,99 @@
+<!-- Illustration: Cafe Hafuch (Israeli latte) on a saucer with cardamom seeds and a magazine -->
+<svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of an Israeli cafe scene: a cup of cafe hafuch with latte art on a wooden table">
+  <defs>
+    <radialGradient id="cupShine" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tableGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5a3a2a"/>
+      <stop offset="100%" stop-color="#3a2418"/>
+    </linearGradient>
+    <radialGradient id="foamGrad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#fdf3e0"/>
+      <stop offset="100%" stop-color="#d9b88a"/>
+    </radialGradient>
+    <linearGradient id="glow2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e29acc" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#b8b5e8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background warm glow -->
+  <rect x="0" y="0" width="360" height="260" fill="url(#glow2)"/>
+
+  <!-- Table top (top half visible) -->
+  <path d="M0 165 L360 165 L360 260 L0 260 Z" fill="url(#tableGrad)"/>
+  <!-- Table grain hints -->
+  <path d="M0 175 L360 175 M0 200 L360 200 M0 225 L360 225 M0 245 L360 245" stroke="#704430" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Shadow under saucer -->
+  <ellipse cx="180" cy="220" rx="100" ry="14" fill="rgba(0,0,0,0.35)"/>
+
+  <!-- Saucer -->
+  <ellipse cx="180" cy="200" rx="98" ry="22" fill="#f5f3ff"/>
+  <ellipse cx="180" cy="198" rx="98" ry="22" fill="#e0dceb"/>
+  <ellipse cx="180" cy="195" rx="92" ry="20" fill="#fff"/>
+  <ellipse cx="180" cy="193" rx="80" ry="16" fill="#d9d3e8"/>
+  <ellipse cx="180" cy="193" rx="76" ry="14" fill="#f5f3ff"/>
+
+  <!-- Cup body (rounded) -->
+  <path d="M120 165 Q120 200 138 210 Q156 220 180 220 Q204 220 222 210 Q240 200 240 165 Z" fill="#fff"/>
+  <!-- Cup inner depth -->
+  <ellipse cx="180" cy="165" rx="60" ry="18" fill="#3a2418"/>
+  <!-- Foam surface -->
+  <ellipse cx="180" cy="163" rx="55" ry="15" fill="url(#foamGrad)"/>
+
+  <!-- Latte art (rosetta / heart) -->
+  <g transform="translate(180,163)" opacity="0.9">
+    <path d="M0 -8 Q-8 -10 -10 -4 Q-12 0 -6 4 L0 8 L6 4 Q12 0 10 -4 Q8 -10 0 -8 Z" fill="#fdf3e0"/>
+    <!-- Side leaves -->
+    <ellipse cx="-22" cy="-2" rx="9" ry="3" fill="#fdf3e0" opacity="0.85" transform="rotate(-20 -22 -2)"/>
+    <ellipse cx="22" cy="-2" rx="9" ry="3" fill="#fdf3e0" opacity="0.85" transform="rotate(20 22 -2)"/>
+    <ellipse cx="-15" cy="6" rx="11" ry="3" fill="#fdf3e0" opacity="0.7"/>
+    <ellipse cx="15" cy="6" rx="11" ry="3" fill="#fdf3e0" opacity="0.7"/>
+  </g>
+
+  <!-- Cup handle -->
+  <path d="M240 178 Q260 178 260 195 Q260 210 240 210" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+  <path d="M240 182 Q254 182 254 195 Q254 206 240 206" fill="none" stroke="#e0dceb" stroke-width="4"/>
+
+  <!-- Subtle shine on cup -->
+  <ellipse cx="155" cy="180" rx="14" ry="22" fill="url(#cupShine)"/>
+
+  <!-- Steam wisps -->
+  <g stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.65">
+    <path d="M160 145 Q165 130 158 118 Q151 106 160 90">
+      <animate attributeName="opacity" values="0.4;0.85;0.4" dur="3.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M180 142 Q185 128 178 115 Q172 102 182 85">
+      <animate attributeName="opacity" values="0.85;0.4;0.85" dur="3.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M200 145 Q205 130 198 118 Q190 106 200 92">
+      <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3.5s" begin="0.7s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Small spoon next to saucer -->
+  <g transform="translate(290,210) rotate(20)">
+    <ellipse cx="0" cy="0" rx="8" ry="5" fill="#d9d3e8"/>
+    <rect x="6" y="-1.5" width="40" height="3" rx="1.5" fill="#d9d3e8"/>
+  </g>
+
+  <!-- Cardamom seeds beside cup -->
+  <g transform="translate(75,215)" opacity="0.85">
+    <ellipse cx="0" cy="0" rx="5" ry="3" fill="#a08454" transform="rotate(15)"/>
+    <ellipse cx="11" cy="3" rx="5" ry="3" fill="#a08454" transform="rotate(-10)"/>
+    <ellipse cx="22" cy="0" rx="5" ry="3" fill="#a08454" transform="rotate(25)"/>
+  </g>
+
+  <!-- "Sababa" floating word -->
+  <g transform="translate(60,90)" opacity="0.5">
+    <text font-family="Heebo,Arial,sans-serif" font-size="14" font-weight="800" fill="#b8b5e8">סבבה</text>
+  </g>
+
+  <!-- Decorative dots -->
+  <circle cx="310" cy="50" r="3" fill="#e29acc" opacity="0.6"/>
+  <circle cx="290" cy="90" r="2" fill="#b8b5e8" opacity="0.5"/>
+  <circle cx="330" cy="110" r="2.5" fill="#e29acc" opacity="0.5"/>
+</svg>

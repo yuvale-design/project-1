@@ -1,0 +1,117 @@
+<!-- Illustration: Hand holding phone with Hebrew WhatsApp bubble -->
+<svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a hand holding a phone showing a Hebrew chat message">
+  <defs>
+    <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d2d3d"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="bubbleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b8b5e8"/>
+      <stop offset="100%" stop-color="#e29acc"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e29acc" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#e29acc" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Soft glow behind -->
+  <ellipse cx="200" cy="170" rx="180" ry="120" fill="url(#glow)"/>
+
+  <!-- Coffee cup bottom-left -->
+  <g transform="translate(40,210)" opacity="0.85">
+    <ellipse cx="32" cy="62" rx="32" ry="6" fill="rgba(0,0,0,0.25)"/>
+    <path d="M5 18 Q5 12 11 12 L53 12 Q59 12 59 18 L55 55 Q55 62 48 62 L16 62 Q9 62 9 55 Z" fill="#f5f3ff"/>
+    <path d="M59 22 Q72 22 72 33 Q72 44 59 44" fill="none" stroke="#f5f3ff" stroke-width="3"/>
+    <ellipse cx="32" cy="18" rx="22" ry="5" fill="#7a5a3a"/>
+    <!-- Steam -->
+    <path d="M20 6 Q22 0 18 -4 Q14 -8 18 -14" stroke="#b8b5e8" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M32 4 Q34 -2 30 -6 Q26 -10 30 -16" stroke="#b8b5e8" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M44 6 Q46 0 42 -4 Q38 -8 42 -14" stroke="#b8b5e8" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- Phone -->
+  <g transform="translate(170,40)">
+    <!-- Drop shadow -->
+    <rect x="6" y="10" width="120" height="230" rx="22" fill="rgba(0,0,0,0.4)" filter="blur(8)"/>
+    <!-- Phone body -->
+    <rect x="0" y="0" width="120" height="230" rx="22" fill="url(#phoneGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
+    <!-- Inner screen -->
+    <rect x="6" y="6" width="108" height="218" rx="18" fill="#0b0b1a"/>
+    <!-- Notch / island -->
+    <rect x="46" y="12" width="28" height="7" rx="3.5" fill="#000"/>
+    <!-- Status bar -->
+    <text x="15" y="32" font-family="-apple-system,Inter,sans-serif" font-size="7" font-weight="600" fill="#f5f3ff">9:41</text>
+    <circle cx="100" cy="29" r="2.5" fill="#58cc6b"/>
+
+    <!-- App header bar -->
+    <rect x="6" y="40" width="108" height="22" fill="#1f3a5a"/>
+    <circle cx="20" cy="51" r="6" fill="#b8b5e8"/>
+    <text x="30" y="49" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#fff">דוד הקבלן</text>
+    <text x="30" y="56" font-family="Inter,sans-serif" font-size="4.2" fill="#a0c8e0">online</text>
+
+    <!-- Incoming message (Hebrew, RTL handled by direction attr) -->
+    <g transform="translate(0,70)">
+      <rect x="14" y="0" width="76" height="22" rx="11" fill="#2a3f5c"/>
+      <text x="86" y="13" direction="rtl" font-family="Heebo,Arial,sans-serif" font-size="7" font-weight="700" fill="#fff" text-anchor="end">שלום, מתי להגיע?</text>
+    </g>
+
+    <!-- Outgoing message (user reply in Hebrew, light bubble) -->
+    <g transform="translate(0,100)">
+      <rect x="30" y="0" width="80" height="22" rx="11" fill="url(#bubbleGrad)"/>
+      <text x="106" y="13" direction="rtl" font-family="Heebo,Arial,sans-serif" font-size="7" font-weight="700" fill="#2d2d3d" text-anchor="end">סבבה, אני בכניסה</text>
+    </g>
+
+    <!-- "Sent" double check + time -->
+    <text x="100" y="128" font-family="Inter,sans-serif" font-size="3.4" fill="#9b9aab" text-anchor="end">14:32 ✓✓</text>
+
+    <!-- Incoming reply -->
+    <g transform="translate(0,138)">
+      <rect x="14" y="0" width="62" height="22" rx="11" fill="#2a3f5c"/>
+      <text x="72" y="13" direction="rtl" font-family="Heebo,Arial,sans-serif" font-size="7" font-weight="700" fill="#fff" text-anchor="end">מעולה, באים!</text>
+    </g>
+
+    <!-- Typing indicator -->
+    <g transform="translate(20,180)" opacity="0.7">
+      <circle cx="0" cy="0" r="2" fill="#b8b5e8">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="8" cy="0" r="2" fill="#b8b5e8">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="16" cy="0" r="2" fill="#b8b5e8">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.4s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- Input bar -->
+    <rect x="14" y="200" width="92" height="14" rx="7" fill="#1a2738"/>
+  </g>
+
+  <!-- Hand holding phone (stylized) -->
+  <g transform="translate(140,240)">
+    <!-- Wrist -->
+    <path d="M30 80 L30 130 Q30 145 60 145 L120 145 Q150 145 150 130 L150 80 Z" fill="#d9b89c" opacity="0.95"/>
+    <path d="M30 80 L30 130 Q30 145 60 145 L120 145 Q150 145 150 130 L150 80 Z" fill="none" stroke="#2d2d3d" stroke-width="0.8" opacity="0.3"/>
+
+    <!-- Thumb -->
+    <path d="M148 36 Q172 36 175 60 Q175 75 165 82 L150 86 L150 38 Z" fill="#d9b89c"/>
+    <path d="M148 36 Q172 36 175 60 Q175 75 165 82 L150 86" fill="none" stroke="#2d2d3d" stroke-width="0.8" opacity="0.3"/>
+
+    <!-- Knuckles ridge (subtle) -->
+    <path d="M40 78 L40 96 M60 78 L60 96 M80 78 L80 96 M100 78 L100 96" stroke="#c19a7f" stroke-width="1" opacity="0.5"/>
+
+    <!-- Shirt cuff -->
+    <rect x="20" y="138" width="140" height="14" rx="4" fill="#3a3a5a" opacity="0.85"/>
+    <rect x="20" y="148" width="140" height="2" fill="#2a2a4a"/>
+  </g>
+
+  <!-- Floating heart (warmth) -->
+  <g transform="translate(310,80)" opacity="0.85">
+    <path d="M0 8 Q-12 -4 -12 -16 Q-12 -24 0 -24 Q12 -24 12 -16 Q12 -4 0 8 Z" fill="#e29acc"/>
+  </g>
+
+  <!-- Decorative dots -->
+  <circle cx="320" cy="200" r="3" fill="#b8b5e8" opacity="0.6"/>
+  <circle cx="345" cy="230" r="2" fill="#e29acc" opacity="0.6"/>
+  <circle cx="300" cy="265" r="2.5" fill="#b8b5e8" opacity="0.5"/>
+</svg>

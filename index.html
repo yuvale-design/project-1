@@ -983,6 +983,44 @@
         }
 
         /* ═══════════════════════════════
+           ILLUSTRATIONS (custom SVG art)
+           ═══════════════════════════════ */
+        .ps-card { position: relative; overflow: visible; }
+        .ps-illustration {
+            display: block;
+            width: 100%;
+            max-width: 360px;
+            height: auto;
+            margin: 22px auto -8px;
+            filter: drop-shadow(0 20px 40px rgba(184,181,232,0.18));
+        }
+        .method-illustration-wrap {
+            display: flex;
+            justify-content: center;
+            margin: 48px auto 0;
+            max-width: 380px;
+        }
+        .method-illustration {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(226,154,204,0.2));
+        }
+        .skyline-divider {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 100%);
+        }
+        .skyline-divider svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 220px;
+        }
+
+        /* ═══════════════════════════════
            RESPONSIVE
            ═══════════════════════════════ */
         @media (max-width: 768px) {
@@ -1070,7 +1108,8 @@
                 <div class="ps-card solution">
                     <div class="ps-icon">&#9889;</div>
                     <h3>The Hebrew Sprint is built like a fitness program</h3>
-                    <p>We stripped away the fluff and packaged the essentials into 40 daily single-page lessons. No textbooks. No Zoom classrooms. Just rapid, daily conditioning designed to build conversational muscle.</p>
+                    <p>We stripped away the fluff and packaged the essentials into 40 daily single-page lessons. No textbooks. No Zoom classrooms. Just rapid, daily conditioning designed to build conversational muscle. By Day 40, you'll reply in Hebrew before you even think about it.</p>
+                    <img src="assets/illustration-chat.svg" alt="Illustration of a hand holding a phone with a Hebrew WhatsApp conversation" class="ps-illustration" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1103,6 +1142,9 @@
                     <h4>Active Speaking From Day 1</h4>
                     <p>Every page ends with a tiny street challenge that forces you to use today's Hebrew with a real Israeli. That's where confidence is built.</p>
                 </div>
+            </div>
+            <div class="method-illustration-wrap">
+                <img src="assets/illustration-cafe.svg" alt="Illustration of a cafe hafuch (Israeli latte) with heart-shaped latte art on a wooden table" class="method-illustration" loading="lazy">
             </div>
         </div>
     </section>
@@ -1165,6 +1207,11 @@
             </div>
         </div>
     </section>
+
+    <!-- ════════ TEL AVIV SKYLINE DIVIDER ════════ -->
+    <div class="skyline-divider" aria-hidden="true">
+        <img src="assets/illustration-skyline.svg" alt="" loading="lazy">
+    </div>
 
     <!-- ════════ PRICING ════════ -->
     <section class="pricing" id="pricing">
