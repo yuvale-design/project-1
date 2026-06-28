@@ -30,6 +30,10 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html _site/
+          # Apartment floor-plan demo (standalone HTML)
+          if [ -f apartment.html ]; then
+            cp apartment.html _site/
+          fi
           # Lead-magnet PDF (free, 50 phrases)
           cp $(ls -1t Street_Hebrew_Survival_Guide_*.pdf | head -1) _site/
           cp _site/Street_Hebrew_Survival_Guide_*.pdf _site/guide.pdf
