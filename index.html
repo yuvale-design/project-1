@@ -147,6 +147,11 @@
             animation: fadeUp 1s ease-out 0.2s forwards;
         }
 
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1306,6 +1311,116 @@
     </footer>
 
     <script>
+        // ══════════════════════════════════════════
+        // CALENDAR GENERATOR — 40 Day Hebrew Sprint
+        // ══════════════════════════════════════════
+        function downloadHebrewSprintCalendar(firstName) {
+            var themes = [
+                { t: 'Welcome — your first 10 words',                     d: 'Day 1. The 10 words that unlock everything else. Open today\'s page (15 min).' },
+                { t: 'Greetings — shalom, boker tov, lehitra\'ot',         d: 'Day 2. Master 5 greetings Israelis use every hour of every day.' },
+                { t: 'Yes, no, please, thank you',                          d: 'Day 3. The 4 magic words. Plus the secret behind toda raba vs toda.' },
+                { t: 'Numbers 1 to 10',                                     d: 'Day 4. Counting like a local. Bonus: how to say your phone number.' },
+                { t: 'Asking questions — eifo, ma, kama',                   d: 'Day 5. The 3 question words that solve 80% of daily life.' },
+                { t: 'First sentence templates',                            d: 'Day 6. Mix and match: build 20 sentences from 5 templates.' },
+                { t: 'Asking for directions',                               d: 'Day 7. Navigate the streets of Tel Aviv without Google Maps.' },
+                { t: 'Days of the week',                                    d: 'Day 8. Yom rishon to Shabbat — and why Sunday is day "one".' },
+                { t: 'Time of day vocabulary',                              d: 'Day 9. Morning, noon, night — and how to make plans.' },
+                { t: 'Week 1 review — first conversation drill',            d: 'Day 10. Quick win: 1-minute self-introduction in Hebrew.' },
+                { t: 'Present tense verbs — overview',                      d: 'Day 11. The simplest tense. Stop drowning in conjugations.' },
+                { t: '"Ani rotzeh" — I want',                               d: 'Day 12. The most useful verb in the language. Use it 100 times today.' },
+                { t: '"Yesh / Ein" — there is / there isn\'t',             d: 'Day 13. The shortcut to half of all sentences.' },
+                { t: 'Cafe vocabulary',                                     d: 'Day 14. Order coffee, ask for the bill, sound like a regular.' },
+                { t: 'Ordering food at a restaurant',                       d: 'Day 15. From menu to check. Real Israeli restaurant flow.' },
+                { t: 'Negation — "lo" and how to refuse politely',          d: 'Day 16. Say no without being rude. Crucial for shuks and salespeople.' },
+                { t: 'Past tense — the basics',                             d: 'Day 17. "I ate, I went, I saw" — past tense without the headache.' },
+                { t: 'Family vocabulary',                                   d: 'Day 18. Mishpacha — talk about your family in Hebrew.' },
+                { t: 'Describing things — adjectives',                      d: 'Day 19. Big, small, hot, cold, beautiful. The basics.' },
+                { t: 'Week 2 review — restaurant simulation',               d: 'Day 20. Halfway there! Full cafe-to-bill conversation drill.' },
+                { t: 'At the shuk — market vocabulary',                     d: 'Day 21. Carmel, Mahane Yehuda, Levinsky. Buy without the tourist tax.' },
+                { t: 'Bargaining — get the local price',                    d: 'Day 22. "Dai nu, be\'emet!" and other bargaining magic.' },
+                { t: 'Public transportation',                               d: 'Day 23. Buses, trains, monit. Navigate Israel like a pro.' },
+                { t: 'Money and currency',                                  d: 'Day 24. Shekels, agorot, "kama ze" — pay confidently.' },
+                { t: 'Doctor and medical Hebrew',                           d: 'Day 25. Just in case — pharmacy, pain, prescriptions.' },
+                { t: 'Phone calls in Hebrew',                               d: 'Day 26. The hardest scenario — no body language. We crack it today.' },
+                { t: 'Slang and casual speech',                             d: 'Day 27. Sababa, tachles, walla — sound 100% Israeli.' },
+                { t: 'WhatsApp Hebrew — texting like a local',              d: 'Day 28. Abbreviations, emojis, and texting style most Israelis use.' },
+                { t: 'Workplace Hebrew basics',                             d: 'Day 29. Meetings, emails, small talk at the office.' },
+                { t: 'Three-quarter review — real-world scenarios',         d: 'Day 30. You\'re 75% done. Today: full mock day in Hebrew.' },
+                { t: 'Idioms — the secret level',                           d: 'Day 31. "Hayinu" vs "haya li" — phrases that mark you as fluent.' },
+                { t: 'Telling stories in past tense',                       d: 'Day 32. "Yesterday I went to the beach and..." — narrative skill.' },
+                { t: 'Future tense — making plans',                         d: 'Day 33. "I will, we\'ll, tomorrow we\'re going" — finally future tense.' },
+                { t: 'Opinions and arguments',                              d: 'Day 34. Disagree like an Israeli (politely, loudly, with passion).' },
+                { t: 'Compliments and small flirting',                      d: 'Day 35. Compliment without being awkward. Critical social skill.' },
+                { t: 'Hebrew humor and sarcasm',                            d: 'Day 36. Get the joke. Make the joke. Belong.' },
+                { t: 'News headlines and current events',                   d: 'Day 37. Read a Ynet headline without panicking.' },
+                { t: 'Conversation simulator — 5-minute test',              d: 'Day 38. Practice with a partner or out loud. You\'re ready.' },
+                { t: 'Final review + grad day prep',                        d: 'Day 39. Tomorrow is your 3-minute conversation milestone.' },
+                { t: '🎉 GRADUATION — your 3-minute conversation',         d: 'Day 40. Today you hold a real 3-minute Hebrew conversation.' }
+            ];
+
+            function pad(n) { return n < 10 ? '0' + n : '' + n; }
+            function fmtLocal(d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00'; }
+            function fmtUTC(d) { return d.getUTCFullYear() + pad(d.getUTCMonth() + 1) + pad(d.getUTCDate()) + 'T' + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + 'Z'; }
+            function escapeICS(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n'); }
+
+            var startDate = new Date();
+            startDate.setDate(startDate.getDate() + 1);
+            startDate.setHours(7, 0, 0, 0);
+
+            var nowStamp = fmtUTC(new Date());
+            var lines = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//The Hebrew Sprint//40 Day Program//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'X-WR-CALNAME:The Hebrew Sprint — 40 Day Program',
+                'X-WR-CALDESC:Your daily 15-minute Hebrew capsules. One per day for 40 days.',
+                'X-WR-TIMEZONE:Asia/Jerusalem'
+            ];
+
+            for (var i = 0; i < 40; i++) {
+                var eventStart = new Date(startDate.getTime());
+                eventStart.setDate(eventStart.getDate() + i);
+                var eventEnd = new Date(eventStart.getTime());
+                eventEnd.setMinutes(eventEnd.getMinutes() + 15);
+
+                var theme = themes[i];
+                var summary = '🇮🇱 Hebrew Sprint — Day ' + (i + 1) + ': ' + theme.t;
+                var description = (firstName ? 'Hey ' + firstName + '! ' : '') + theme.d + '\\n\\nOpen the course PDF and go to page ' + (i + 1) + '.';
+
+                lines.push('BEGIN:VEVENT');
+                lines.push('UID:hebrew-sprint-day-' + (i + 1) + '-' + Date.now() + '-' + i + '@thehebrewsprint.com');
+                lines.push('DTSTAMP:' + nowStamp);
+                lines.push('DTSTART:' + fmtLocal(eventStart));
+                lines.push('DTEND:' + fmtLocal(eventEnd));
+                lines.push('SUMMARY:' + escapeICS(summary));
+                lines.push('DESCRIPTION:' + escapeICS(description));
+                lines.push('LOCATION:Your phone');
+                lines.push('STATUS:CONFIRMED');
+                lines.push('SEQUENCE:0');
+                lines.push('BEGIN:VALARM');
+                lines.push('ACTION:DISPLAY');
+                lines.push('TRIGGER:-PT5M');
+                lines.push('DESCRIPTION:' + escapeICS('Hebrew Sprint Day ' + (i + 1) + ' starts in 5 minutes'));
+                lines.push('END:VALARM');
+                lines.push('END:VEVENT');
+            }
+
+            lines.push('END:VCALENDAR');
+
+            var icsContent = lines.join('\r\n');
+            var blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'hebrew-sprint-40-days.ics';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        }
+
         window.addEventListener('DOMContentLoaded', function () {
 
             // ── FAQ accordion ──
@@ -1410,6 +1525,21 @@
                                         (orderId ? '<div><strong style="color:#d8d6e8;">Order ID:</strong> ' + orderId + '</div>' : '') +
                                     '</div>' +
 
+                                    '<div id="calendarReminderBlock" style="margin-top:18px;padding:22px 18px;background:linear-gradient(180deg,rgba(184,181,232,0.10),rgba(226,154,204,0.06));border:1px solid rgba(184,181,232,0.30);border-radius:14px;max-width:440px;margin-left:auto;margin-right:auto;text-align:center;">' +
+                                        '<div style="font-size:11px;font-weight:700;color:#e29acc;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:10px;">📅 Auto-installing your daily reminders…</div>' +
+                                        '<div id="calendarStatus" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;background:rgba(0,0,0,0.18);border-radius:10px;margin-bottom:14px;">' +
+                                            '<div style="width:22px;height:22px;border:3px solid rgba(184,181,232,0.25);border-top-color:#e29acc;border-radius:50%;animation:spin 0.9s linear infinite;"></div>' +
+                                            '<div style="font-size:0.9rem;color:#d8d6e8;font-weight:600;">Generating your 40-day calendar…</div>' +
+                                        '</div>' +
+                                        '<div style="font-size:0.82rem;color:#9b9aab;line-height:1.65;text-align:left;">' +
+                                            '<strong style="color:#fff;">Next step (30 seconds):</strong><br>' +
+                                            '<strong style="color:#e29acc;">1.</strong> A file <code style="background:rgba(184,181,232,0.15);padding:1px 5px;border-radius:3px;color:#c8c4f0;font-size:0.85em;">hebrew-sprint-40-days.ics</code> is downloading<br>' +
+                                            '<strong style="color:#e29acc;">2.</strong> Tap it from your downloads<br>' +
+                                            '<strong style="color:#e29acc;">3.</strong> Your phone will ask to install 40 events — tap Add' +
+                                        '</div>' +
+                                        '<button id="dlCalendarAgainBtn" style="margin-top:14px;background:transparent;color:#a5b4fc;font-size:0.82rem;font-weight:700;padding:8px 16px;border-radius:8px;border:1px solid rgba(184,181,232,0.3);cursor:pointer;">📅 Download Again</button>' +
+                                    '</div>' +
+
                                     '<p style="color:#74738a;font-size:0.82rem;margin-top:22px;line-height:1.6;">Bookmark this page or save the link above. You can come back any time. ' +
                                     'Questions or didn\'t receive the link? Email <a href="mailto:hello@thehebrewsprint.com?subject=Course%20access%20-%20order%20' + orderId + '" style="color:#b8b5e8;">hello@thehebrewsprint.com</a> with your Order ID and we\'ll get you in within a few hours.</p>' +
                                 '</div>';
@@ -1418,6 +1548,38 @@
                             setTimeout(function () {
                                 pricingBox.scrollIntoView({behavior: 'smooth', block: 'center'});
                             }, 100);
+
+                            // Auto-trigger the calendar download after 1.5s (gives the success state time to render + scroll)
+                            setTimeout(function () {
+                                try {
+                                    downloadHebrewSprintCalendar(firstName);
+                                    var status = document.getElementById('calendarStatus');
+                                    if (status) {
+                                        status.innerHTML =
+                                            '<div style="width:28px;height:28px;background:linear-gradient(135deg,#86efac,#34d399);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:#064e3b;font-weight:900;">&#10003;</div>' +
+                                            '<div style="font-size:0.9rem;color:#86efac;font-weight:700;">Calendar downloaded — check your files</div>';
+                                    }
+                                } catch (e) {
+                                    console.error('Calendar auto-download failed:', e);
+                                    var status = document.getElementById('calendarStatus');
+                                    if (status) {
+                                        status.innerHTML = '<div style="font-size:0.9rem;color:#f4cfdb;">Browser blocked auto-download. Tap the button below.</div>';
+                                    }
+                                }
+                            }, 1500);
+
+                            // Manual re-download button
+                            setTimeout(function () {
+                                var againBtn = document.getElementById('dlCalendarAgainBtn');
+                                if (againBtn) {
+                                    againBtn.addEventListener('click', function () {
+                                        downloadHebrewSprintCalendar(firstName);
+                                        againBtn.innerHTML = '&#10003; Downloaded again';
+                                        againBtn.style.color = '#86efac';
+                                        againBtn.style.borderColor = 'rgba(134,239,172,0.4)';
+                                    });
+                                }
+                            }, 200);
                         });
                     },
                     onError: function (err) {
