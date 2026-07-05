@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Glidai Properties — Dubai Market Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@200;300;400;500;700;900&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #07070A;
+    --charcoal: #14141A;
+    --charcoal-2: #1B1B22;
+    --emerald: #0E2B26;
+    --emerald-deep: #061714;
+    --gold: #D4AF37;
+    --gold-soft: #E9CF7B;
+    --gold-deep: #A8862B;
+    --beige: #C8B891;
+    --beige-soft: #E7DCC4;
+    --white: #F6F2E8;
+    --line: rgba(212,175,55,.35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #101013;
+    font-family: 'Heebo', sans-serif;
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 44px;
+    padding: 40px 0 80px;
+  }
+  .slide {
+    width: 1080px; height: 1350px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 40px 90px rgba(0,0,0,.7);
+  }
+  .label {
+    color: #888; font-size: 13px; letter-spacing: .25em;
+    text-transform: uppercase; margin-top: 6px;
+  }
+
+  /* photo bg + fallback */
+  .photo { position: absolute; inset: 0; z-index: 1; }
+  .photo .photo-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; z-index: 1;
+  }
+  .vignette {
+    position: absolute; inset: 0; z-index: 2;
+    background:
+      linear-gradient(180deg, rgba(7,7,10,.72) 0%, rgba(7,7,10,.55) 30%, rgba(7,7,10,.55) 70%, rgba(7,7,10,.92) 100%),
+      radial-gradient(120% 80% at 50% 30%, transparent 0%, rgba(7,7,10,.35) 60%, rgba(7,7,10,.85) 100%);
+  }
+
+  /* per-slide photo backdrops (gradient fallback + Unsplash photo) */
+  .s1 .photo { background: linear-gradient(180deg, #0a0810 0%, #1d1610 30%, #3c2914 60%, #6b3e1a 80%, #2a1409 100%); }
+  .s2 .photo { background: linear-gradient(180deg, #14100a 0%, #2c1f12 25%, #4a3220 45%, #1a120a 70%, #07070A 100%); }
+  .s3 .photo { background: linear-gradient(180deg, #07070A 0%, #0E2B26 50%, #061714 100%); }
+  .s4 .photo { background: linear-gradient(180deg, #1a1410 0%, #3a2c1c 30%, #14100a 70%, #07070A 100%); }
+  .s5 .photo { background: linear-gradient(180deg, #050407 0%, #14120e 25%, #3a2412 55%, #5a2e10 75%, #1a0c06 100%); }
+
+  /* luxury frame */
+  .frame {
+    position: absolute; inset: 40px;
+    border: 1px solid rgba(212,175,55,.28);
+    pointer-events: none; z-index: 6;
+  }
+  .frame::before, .frame::after {
+    content: ""; position: absolute; width: 34px; height: 34px;
+  }
+  .frame::before { top: -2px; right: -2px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  .frame::after { bottom: -2px; left: -2px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+
+  /* top chrome */
+  .page {
+    position: absolute; top: 78px; left: 90px; z-index: 10;
+    display: flex; align-items: center; gap: 12px;
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .page .num { font-size: 22px; letter-spacing: .25em; }
+  .page .bar { width: 50px; height: 1px; background: var(--gold); opacity: .55; }
+  .page .total { font-size: 14px; letter-spacing: .25em; opacity: .65; }
+  .top-eyebrow {
+    position: absolute; top: 78px; right: 90px; z-index: 10;
+    color: var(--gold); letter-spacing: .45em;
+    font-size: 12px; text-transform: uppercase; font-weight: 400;
+  }
+  .disclaimer {
+    position: absolute; bottom: 210px; right: 90px; left: 90px; z-index: 10;
+    color: rgba(246,242,232,.4); font-size: 10px; letter-spacing: .15em;
+    text-align: center;
+  }
+
+  /* Glidai footer — every slide */
+  .glidai {
+    position: absolute; left: 0; right: 0; bottom: 90px;
+    display: flex; flex-direction: column; align-items: center;
+    z-index: 12; gap: 10px;
+  }
+  .glidai .rule {
+    width: 110px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .glidai .crest {
+    width: 44px; height: 44px;
+    border: 1px solid var(--gold);
+    transform: rotate(45deg);
+    display: grid; place-items: center;
+    position: relative;
+    background: rgba(7,7,10,.5);
+  }
+  .glidai .crest::before {
+    content: ""; position: absolute; left: 4px; right: 4px; top: 4px; bottom: 4px;
+    border: 1px solid rgba(212,175,55,.45);
+  }
+  .glidai .crest span {
+    transform: rotate(-45deg);
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 16px; letter-spacing: .05em;
+    z-index: 2;
+  }
+  .glidai .wordmark {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 18px; letter-spacing: .55em;
+    text-transform: uppercase;
+  }
+  .glidai .sub {
+    font-family: 'Heebo', sans-serif;
+    color: rgba(246,242,232,.6);
+    font-size: 10px; letter-spacing: .55em;
+    text-transform: uppercase;
+  }
+
+  /* typography */
+  .eyebrow {
+    color: var(--gold);
+    letter-spacing: .42em; font-size: 13px;
+    text-transform: uppercase; font-weight: 400;
+  }
+  .h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700; line-height: 1.05;
+    color: var(--gold);
+    font-size: 80px; letter-spacing: -.005em;
+    text-shadow: 0 2px 30px rgba(0,0,0,.55);
+  }
+  .h1.md { font-size: 64px; }
+  .h1.sm { font-size: 52px; }
+  .h1 em { font-style: italic; color: var(--gold-soft); font-weight: 500; }
+  .h1 .white { color: var(--white); font-weight: 500; }
+  .body {
+    font-weight: 300;
+    color: rgba(246,242,232,.9);
+    font-size: 22px; line-height: 1.65;
+    text-shadow: 0 2px 20px rgba(0,0,0,.6);
+  }
+  .body.lg { font-size: 26px; }
+  .body.sm { font-size: 18px; line-height: 1.6; }
+  .divider {
+    width: 72px; height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  /* ==================================================
+     SLIDE 1  —  HOOK: 226K deals · 761B AED
+     ================================================== */
+  .s1 .content {
+    position: absolute; top: 210px; right: 90px; left: 90px; z-index: 7;
+  }
+  .s1 .big-num {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    color: var(--gold);
+    font-size: 220px; line-height: .9;
+    letter-spacing: -.02em;
+    text-shadow: 0 4px 40px rgba(0,0,0,.6);
+    margin: 30px 0 10px;
+  }
+  .s1 .unit {
+    font-family: 'Heebo', sans-serif;
+    color: var(--gold-soft);
+    font-size: 32px; font-weight: 300;
+    margin-bottom: 6px;
+  }
+  .s1 .amount {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--white);
+    font-size: 42px; font-weight: 500;
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+  .s1 .headline {
+    font-family: 'Frank Ruhl Libre', serif;
+    color: var(--white);
+    font-size: 52px; line-height: 1.1; font-weight: 700;
+    margin-bottom: 26px;
+  }
+  .s1 .headline em { color: var(--gold-soft); font-style: italic; }
+  .s1 .chart {
+    position: absolute; bottom: 340px; right: 90px; left: 90px; z-index: 7;
+    padding: 26px 30px;
+    background: rgba(7,7,10,.55);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(3px);
+  }
+  .s1 .chart .lbl {
+    color: var(--gold);
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .s1 .bars {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    height: 130px; gap: 14px;
+  }
+  .s1 .bar { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; gap: 8px; }
+  .s1 .bar .fill {
+    width: 100%;
+    background: linear-gradient(180deg, var(--gold-soft), var(--gold-deep));
+    border-top: 2px solid var(--gold-soft);
+    min-height: 6px;
+  }
+  .s1 .bar .fill.dim { background: rgba(212,175,55,.22); border-top-color: rgba(212,175,55,.4); }
+  .s1 .bar .yr { color: rgba(246,242,232,.55); font-size: 12px; letter-spacing: .1em; text-align: center; }
+
+  /* ==================================================
+     SLIDE 2  —  NET YIELD equation + costs
+     ================================================== */
+  .s2 .content {
+    position: absolute; top: 200px; right: 90px; left: 90px; z-index: 7;
+  }
+  .s2 .eq {
+    display: flex; align-items: center; justify-content: center;
+    gap: 22px; margin: 44px 0 40px;
+    padding: 30px 20px;
+    background: rgba(7,7,10,.6);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(3px);
+  }
+  .s2 .eq .num {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 92px; font-weight: 700;
+    line-height: 1;
+  }
+  .s2 .eq .num.gross { color: var(--gold-soft); }
+  .s2 .eq .num.net { color: var(--gold); }
+  .s2 .eq .lbl {
+    font-family: 'Heebo', sans-serif;
+    font-size: 12px; letter-spacing: .3em;
+    color: rgba(246,242,232,.7); text-transform: uppercase;
+    margin-top: 4px; text-align: center;
+  }
+  .s2 .eq .arrow {
+    color: var(--gold); font-size: 46px; font-weight: 300;
+    margin: 0 6px;
+  }
+  .s2 .eq .col { text-align: center; }
+  .s2 .costs {
+    position: absolute; bottom: 340px; right: 90px; left: 90px; z-index: 7;
+  }
+  .s2 .costs .lbl {
+    color: var(--gold);
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .s2 .cost-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 22px;
+    border-top: 1px solid rgba(212,175,55,.2);
+    background: rgba(7,7,10,.35);
+  }
+  .s2 .cost-row:last-child { border-bottom: 1px solid rgba(212,175,55,.2); }
+  .s2 .cost-row .k {
+    font-family: 'Heebo', sans-serif;
+    color: var(--white); font-size: 18px; font-weight: 300;
+  }
+  .s2 .cost-row .v {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold-soft); font-size: 22px; font-weight: 500;
+    letter-spacing: .02em;
+    unicode-bidi: plaintext;
+  }
+
+  /* ==================================================
+     SLIDE 3  —  OFF-PLAN vs SECONDARY comparison
+     ================================================== */
+  .s3 .content {
+    position: absolute; top: 190px; right: 90px; left: 90px; z-index: 7;
+  }
+  .s3 .table {
+    position: absolute; top: 460px; right: 90px; left: 90px; z-index: 7;
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: rgba(7,7,10,.55);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(3px);
+  }
+  .s3 .col { padding: 26px 24px; }
+  .s3 .col:first-child { border-left: 1px solid rgba(212,175,55,.25); }
+  .s3 .col .hd {
+    font-family: 'Cinzel', serif;
+    color: var(--gold); font-size: 16px;
+    letter-spacing: .3em; text-align: center;
+    padding-bottom: 16px; margin-bottom: 4px;
+    border-bottom: 1px solid rgba(212,175,55,.3);
+  }
+  .s3 .row {
+    padding: 14px 0;
+    border-top: 1px solid rgba(212,175,55,.12);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .s3 .row:first-of-type { border-top: 0; }
+  .s3 .row .k {
+    color: rgba(233,207,123,.7);
+    font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+  }
+  .s3 .row .v {
+    color: var(--white);
+    font-family: 'Heebo', sans-serif;
+    font-size: 17px; font-weight: 300; line-height: 1.5;
+    unicode-bidi: plaintext;
+    text-align: right;
+  }
+  .s3 .insight {
+    position: absolute; bottom: 350px; right: 90px; left: 90px; z-index: 7;
+    text-align: center;
+    color: var(--gold-soft);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-style: italic; font-size: 22px; line-height: 1.5;
+  }
+
+  /* ==================================================
+     SLIDE 4  —  THREE RISKS
+     ================================================== */
+  .s4 .content {
+    position: absolute; top: 180px; right: 90px; left: 90px; z-index: 7;
+  }
+  .s4 .risks {
+    position: absolute; top: 400px; right: 90px; left: 90px; z-index: 7;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .s4 .risk {
+    position: relative;
+    padding: 24px 26px 24px 60px;
+    background: rgba(7,7,10,.6);
+    border-right: 3px solid var(--gold);
+    border-top: 1px solid rgba(212,175,55,.2);
+    border-bottom: 1px solid rgba(212,175,55,.2);
+    backdrop-filter: blur(3px);
+  }
+  .s4 .risk .n {
+    position: absolute; left: 22px; top: 22px;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold-soft);
+    font-size: 44px; line-height: 1; font-weight: 600;
+    opacity: .9;
+  }
+  .s4 .risk .t {
+    color: var(--white);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px; font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .s4 .risk .d {
+    color: rgba(246,242,232,.75);
+    font-family: 'Heebo', sans-serif;
+    font-size: 16px; font-weight: 300; line-height: 1.55;
+  }
+
+  /* ==================================================
+     SLIDE 5  —  CTA
+     ================================================== */
+  .s5 .content {
+    position: absolute; top: 190px; right: 90px; left: 90px; z-index: 7;
+  }
+  .s5 .statement {
+    font-family: 'Frank Ruhl Libre', serif;
+    color: var(--white); font-weight: 700;
+    font-size: 54px; line-height: 1.15;
+    margin: 22px 0;
+  }
+  .s5 .statement em {
+    color: var(--gold-soft); font-style: italic;
+  }
+  .s5 .bullets {
+    position: absolute; top: 640px; right: 90px; left: 90px; z-index: 7;
+    background: rgba(7,7,10,.55);
+    border: 1px solid var(--line);
+    padding: 22px 30px;
+    backdrop-filter: blur(3px);
+  }
+  .s5 .bullets .lbl {
+    color: var(--gold);
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .s5 .bullets ul { list-style: none; }
+  .s5 .bullets li {
+    padding: 6px 0;
+    color: var(--white); font-size: 17px; font-weight: 300;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .s5 .bullets li::before {
+    content: ""; width: 8px; height: 8px;
+    background: var(--gold); transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  .s5 .cta {
+    position: absolute; bottom: 280px; right: 90px; left: 90px; z-index: 7;
+    text-align: center;
+    padding: 22px 30px;
+    background: rgba(7,7,10,.6);
+    border: 1px solid var(--gold);
+    backdrop-filter: blur(3px);
+  }
+  .s5 .cta .ask {
+    color: var(--beige-soft);
+    font-size: 17px; letter-spacing: .12em;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .s5 .cta .ask strong {
+    color: var(--gold-soft);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-style: italic; font-weight: 700;
+    letter-spacing: .05em; font-size: 22px;
+  }
+  .s5 .cta .send {
+    display: inline-block;
+    padding: 14px 34px;
+    border: 1px solid var(--gold);
+    background: linear-gradient(180deg, rgba(212,175,55,.2), rgba(212,175,55,.05));
+    color: var(--white);
+    font-size: 13px; letter-spacing: .42em; text-transform: uppercase;
+  }
+
+  /* ============================================================
+     ONE-CLICK DOWNLOAD TOOL
+     ============================================================ */
+  .dl-tool {
+    position: fixed; top: 24px; left: 24px; z-index: 99999;
+    background: #07070A; border: 1px solid #D4AF37;
+    padding: 20px 24px; border-radius: 3px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.7);
+    font-family: 'Heebo', sans-serif; direction: rtl;
+    min-width: 240px;
+  }
+  .dl-tool .t {
+    color: #D4AF37; font-size: 11px; letter-spacing: .25em;
+    text-transform: uppercase; margin-bottom: 12px; text-align: center;
+  }
+  .dl-tool button {
+    display: block; width: 100%;
+    padding: 14px 24px; background: #D4AF37; color: #07070A;
+    font-family: 'Heebo', sans-serif; font-weight: 700;
+    font-size: 14px; letter-spacing: .25em;
+    border: none; cursor: pointer; border-radius: 2px;
+    text-transform: uppercase; direction: ltr;
+  }
+  .dl-tool button:hover { background: #E9CF7B; }
+  .dl-tool button:disabled { opacity: .5; cursor: wait; }
+  .dl-tool .s {
+    color: #E9CF7B; font-size: 12px; margin-top: 12px;
+    min-height: 18px; text-align: center; direction: ltr;
+  }
+  .dl-tool.captured { display: none !important; }
+  @media print {
+    body { background: #fff; gap: 0; padding: 0; }
+    .label, .dl-tool { display: none; }
+    .slide { box-shadow: none; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ ONE-CLICK DOWNLOAD ============ -->
+<div class="dl-tool" id="dlTool">
+  <div class="t">הורדת קרוסלת אינסטגרם</div>
+  <button id="dlBtn" type="button">⬇ Download 5 Slides</button>
+  <div class="s" id="dlStatus">5 קבצי PNG · 1080×1350</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+(function () {
+  const btn = document.getElementById('dlBtn');
+  const status = document.getElementById('dlStatus');
+  const tool = document.getElementById('dlTool');
+
+  async function waitForImages() {
+    const imgs = Array.from(document.querySelectorAll('.photo-img'));
+    await Promise.all(imgs.map(img => {
+      if (img.complete && img.naturalWidth) return Promise.resolve();
+      return new Promise(resolve => {
+        img.addEventListener('load', resolve, { once: true });
+        img.addEventListener('error', resolve, { once: true });
+      });
+    }));
+  }
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+  }
+  async function downloadAll() {
+    btn.disabled = true;
+    try {
+      status.textContent = 'Loading photos…';
+      await waitForImages();
+      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      await new Promise(r => setTimeout(r, 400));
+      tool.classList.add('captured');
+      await new Promise(r => setTimeout(r, 100));
+      const slides = document.querySelectorAll('.slide');
+      for (let i = 0; i < slides.length; i++) {
+        tool.classList.remove('captured');
+        status.textContent = 'Capturing ' + (i+1) + ' / ' + slides.length + '…';
+        tool.classList.add('captured');
+        await new Promise(r => setTimeout(r, 50));
+        const canvas = await html2canvas(slides[i], {
+          width: 1080, height: 1350,
+          windowWidth: 1080, windowHeight: 1350,
+          scale: 1, useCORS: true, allowTaint: false,
+          backgroundColor: null, logging: false, imageTimeout: 30000
+        });
+        await new Promise(resolve => {
+          canvas.toBlob(blob => {
+            downloadBlob(blob, 'analytics-slide-' + String(i+1).padStart(2,'0') + '.png');
+            resolve();
+          }, 'image/png', 0.95);
+        });
+        await new Promise(r => setTimeout(r, 350));
+      }
+      tool.classList.remove('captured');
+      status.textContent = '✓ Done — 5 slides saved to Downloads';
+    } catch (e) {
+      tool.classList.remove('captured');
+      status.textContent = '✗ Error — ' + (e && e.message || e);
+      console.error(e);
+    } finally { btn.disabled = false; }
+  }
+  btn.addEventListener('click', downloadAll);
+})();
+</script>
+
+<!-- ============================ SLIDE 1 ============================ -->
+<div class="slide s1">
+  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="vignette"></div>
+
+  <div class="top-eyebrow">DLD · Q4 2024</div>
+  <div class="page"><span class="num">01</span><span class="bar"></span><span class="total">05</span></div>
+  <div class="frame"></div>
+
+  <div class="content">
+    <div class="eyebrow">Market Volume</div>
+    <div class="big-num">226K</div>
+    <div class="unit">עסקאות · Dubai Land Department</div>
+    <div class="amount">761 מיליארד AED</div>
+    <div class="divider" style="margin:0 0 22px"></div>
+    <div class="headline">2024 סגרה<br/><em>שנת שיא היסטורית</em><br/>בדובאי.</div>
+  </div>
+
+  <div class="chart">
+    <div class="lbl">נפח עסקאות · DLD 2020-2024</div>
+    <div class="bars">
+      <div class="bar"><div class="fill dim" style="height:30%"></div><div class="yr">2020</div></div>
+      <div class="bar"><div class="fill dim" style="height:44%"></div><div class="yr">2021</div></div>
+      <div class="bar"><div class="fill dim" style="height:62%"></div><div class="yr">2022</div></div>
+      <div class="bar"><div class="fill dim" style="height:74%"></div><div class="yr">2023</div></div>
+      <div class="bar"><div class="fill" style="height:100%"></div><div class="yr">2024</div></div>
+    </div>
+  </div>
+
+  <div class="disclaimer">DLD Q4 2024 · +36% YoY</div>
+  <div class="glidai">
+    <div class="rule"></div>
+    <div class="crest"><span>G</span></div>
+    <div class="wordmark">Glidai Properties</div>
+    <div class="sub">Dubai · Real Estate</div>
+  </div>
+</div>
+<div class="label">Slide 1 — Hook</div>
+
+<!-- ============================ SLIDE 2 ============================ -->
+<div class="slide s2">
+  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="vignette"></div>
+
+  <div class="top-eyebrow">Net Yield Analysis</div>
+  <div class="page"><span class="num">02</span><span class="bar"></span><span class="total">05</span></div>
+  <div class="frame"></div>
+
+  <div class="content">
+    <div class="eyebrow">Net Return</div>
+    <h1 class="h1 md" style="margin-top:14px; color: var(--white)">התשואה שבאמת<br/><em>חוזרת לכיס.</em></h1>
+
+    <div class="eq">
+      <div class="col">
+        <div class="num gross">9%</div>
+        <div class="lbl">ברוטו</div>
+      </div>
+      <div class="arrow">←</div>
+      <div class="col">
+        <div class="num net">6.5%</div>
+        <div class="lbl">נטו</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="costs">
+    <div class="lbl">מה נגרע מהברוטו</div>
+    <div class="cost-row"><span class="k">ניהול נכס</span><span class="v">~5% מההכנסה</span></div>
+    <div class="cost-row"><span class="k">אחזקת בניין (Service Charges)</span><span class="v">10–12 AED/sqft</span></div>
+    <div class="cost-row"><span class="k">תקופות ריקנות שנתיות</span><span class="v">3–5 שבועות</span></div>
+  </div>
+
+  <div class="disclaimer">עדיין מהתשואות הגבוהות בעולם — פשוט מודדים אותה נכון.</div>
+  <div class="glidai">
+    <div class="rule"></div>
+    <div class="crest"><span>G</span></div>
+    <div class="wordmark">Glidai Properties</div>
+    <div class="sub">Dubai · Real Estate</div>
+  </div>
+</div>
+<div class="label">Slide 2 — Net Yield</div>
+
+<!-- ============================ SLIDE 3 ============================ -->
+<div class="slide s3">
+  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1583139063920-7f6dc5fb0c5b?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="vignette"></div>
+
+  <div class="top-eyebrow">Strategy Comparison</div>
+  <div class="page"><span class="num">03</span><span class="bar"></span><span class="total">05</span></div>
+  <div class="frame"></div>
+
+  <div class="content">
+    <div class="eyebrow">Off-Plan vs Secondary</div>
+    <h1 class="h1 md" style="margin-top:14px; color: var(--white)">ההבדל האמיתי<br/>הוא לא <em>המחיר</em>.</h1>
+  </div>
+
+  <div class="table">
+    <div class="col">
+      <div class="hd">Off-Plan</div>
+      <div class="row"><div class="k">תשלום ראשוני</div><div class="v">10–20%</div></div>
+      <div class="row"><div class="k">פריסה</div><div class="v">60/40 עד 70/30 לאורך הבנייה</div></div>
+      <div class="row"><div class="k">תזרים</div><div class="v">בעת המסירה</div></div>
+      <div class="row"><div class="k">אופק זמן</div><div class="v">2–4 שנים</div></div>
+      <div class="row"><div class="k">מטרה</div><div class="v">בניית הון · מינוף פנימי</div></div>
+    </div>
+    <div class="col">
+      <div class="hd">Secondary</div>
+      <div class="row"><div class="k">תשלום ראשוני</div><div class="v">100%</div></div>
+      <div class="row"><div class="k">פריסה</div><div class="v">מלא במעמד הרכישה</div></div>
+      <div class="row"><div class="k">תזרים</div><div class="v">מהיום הראשון</div></div>
+      <div class="row"><div class="k">אופק זמן</div><div class="v">מיידי</div></div>
+      <div class="row"><div class="k">מטרה</div><div class="v">תזרים שוטף · הכנסה פסיבית</div></div>
+    </div>
+  </div>
+
+  <div class="insight">הבחירה תלויה באסטרטגיה שלך —<br/>לא באיזה מוצר "עדיף".</div>
+  <div class="glidai">
+    <div class="rule"></div>
+    <div class="crest"><span>G</span></div>
+    <div class="wordmark">Glidai Properties</div>
+    <div class="sub">Dubai · Real Estate</div>
+  </div>
+</div>
+<div class="label">Slide 3 — Off-Plan vs Secondary</div>
+
+<!-- ============================ SLIDE 4 ============================ -->
+<div class="slide s4">
+  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1546412414-e1885259563a?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="vignette"></div>
+
+  <div class="top-eyebrow">Risk Management</div>
+  <div class="page"><span class="num">04</span><span class="bar"></span><span class="total">05</span></div>
+  <div class="frame"></div>
+
+  <div class="content">
+    <div class="eyebrow">Risk Assessment</div>
+    <h1 class="h1 md" style="margin-top:14px; color: var(--white)">3 סיכונים<br/>שסוכני מכירות<br/><em>לא מדגישים.</em></h1>
+  </div>
+
+  <div class="risks">
+    <div class="risk">
+      <div class="n">01</div>
+      <div class="t">הצפת היצע נקודתית</div>
+      <div class="d">40,000+ יחידות במסירה ב-2025-2026 באזורים מרוכזים. לחץ מקומי על שכירות ומחירי מכירה — צריך למפות רדיוס לפני קנייה.</div>
+    </div>
+    <div class="risk">
+      <div class="n">02</div>
+      <div class="t">פער איכות בין יזמים</div>
+      <div class="d">הפער בין Emaar / Sobha / Damac לבין יזמים חדשים משמעותי. לבדוק דירוג RERA, פרויקטים קודמים ומסירות בזמן.</div>
+    </div>
+    <div class="risk">
+      <div class="n">03</div>
+      <div class="t">שינויי רגולציה</div>
+      <div class="d">Golden Visa, RERA Rental Index, מדיניות עמלות — השוק דינמי והחוקים מתעדכנים. לעקוב אחרי RERA לפני עסקה.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">בדיקת סיכון = חלק מ-Due Diligence · לא אופציונלי.</div>
+  <div class="glidai">
+    <div class="rule"></div>
+    <div class="crest"><span>G</span></div>
+    <div class="wordmark">Glidai Properties</div>
+    <div class="sub">Dubai · Real Estate</div>
+  </div>
+</div>
+<div class="label">Slide 4 — Risks</div>
+
+<!-- ============================ SLIDE 5 ============================ -->
+<div class="slide s5">
+  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="vignette"></div>
+
+  <div class="top-eyebrow">ROI Consultation</div>
+  <div class="page"><span class="num">05</span><span class="bar"></span><span class="total">05</span></div>
+  <div class="frame"></div>
+
+  <div class="content">
+    <div class="eyebrow">The Offer</div>
+    <div class="statement">לא מוכר <em>דירות</em>.<br/>עוזר להחליט<br/>אם דירה מסוימת<br/>מתאימה <em>לתיק שלך</em>.</div>
+  </div>
+
+  <div class="bullets">
+    <div class="lbl">ניתוח כדאיות מותאם</div>
+    <ul>
+      <li>תקציב כניסה ומקורות מימון</li>
+      <li>אופק זמן להשקעה</li>
+      <li>סובלנות סיכון</li>
+      <li>שילוב עם נכסים קיימים בתיק</li>
+    </ul>
+  </div>
+
+  <div class="cta">
+    <div class="ask">
+      פגישת התאמה של 20 דקות · ללא עלות<br/>
+      שלחו <strong>״ROI״</strong> בפרטי · הקישור בביו
+    </div>
+    <div class="send">Contact Glidai Properties ←</div>
+  </div>
+
+  <div class="glidai">
+    <div class="rule"></div>
+    <div class="crest"><span>G</span></div>
+    <div class="wordmark">Glidai Properties</div>
+    <div class="sub">Dubai · Real Estate</div>
+  </div>
+</div>
+<div class="label">Slide 5 — CTA</div>
+
+</body>
+</html>
