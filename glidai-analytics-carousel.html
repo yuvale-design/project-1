@@ -9,18 +9,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@200;300;400;500;700;900&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --black: #07070A;
-    --charcoal: #14141A;
-    --charcoal-2: #1B1B22;
-    --emerald: #0E2B26;
-    --emerald-deep: #061714;
-    --gold: #D4AF37;
-    --gold-soft: #E9CF7B;
-    --gold-deep: #A8862B;
-    --beige: #C8B891;
-    --beige-soft: #E7DCC4;
-    --white: #F6F2E8;
-    --line: rgba(212,175,55,.35);
+    /* Palette upgrade — midnight navy + warm champagne + pearl */
+    --black: #060B15;
+    --charcoal: #0B1424;
+    --charcoal-2: #14203A;
+    --emerald: #1A2E44;
+    --emerald-deep: #0A1729;
+    --gold: #E8C87C;         /* warm champagne */
+    --gold-soft: #F4DFA6;
+    --gold-deep: #B89A50;
+    --copper: #C68A5E;
+    --beige: #D8C89A;
+    --beige-soft: #E8DFC5;
+    --white: #F5EFDF;        /* pearl */
+    --line: rgba(232,200,124,.32);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
@@ -54,16 +56,16 @@
   .vignette {
     position: absolute; inset: 0; z-index: 2;
     background:
-      linear-gradient(180deg, rgba(7,7,10,.72) 0%, rgba(7,7,10,.55) 30%, rgba(7,7,10,.55) 70%, rgba(7,7,10,.92) 100%),
-      radial-gradient(120% 80% at 50% 30%, transparent 0%, rgba(7,7,10,.35) 60%, rgba(7,7,10,.85) 100%);
+      linear-gradient(180deg, rgba(6,11,21,.55) 0%, rgba(6,11,21,.18) 25%, rgba(6,11,21,.22) 70%, rgba(6,11,21,.85) 100%),
+      radial-gradient(130% 90% at 50% 45%, transparent 0%, rgba(6,11,21,.28) 65%, rgba(6,11,21,.7) 100%);
   }
 
-  /* per-slide photo backdrops (gradient fallback + Unsplash photo) */
-  .s1 .photo { background: linear-gradient(180deg, #0a0810 0%, #1d1610 30%, #3c2914 60%, #6b3e1a 80%, #2a1409 100%); }
-  .s2 .photo { background: linear-gradient(180deg, #14100a 0%, #2c1f12 25%, #4a3220 45%, #1a120a 70%, #07070A 100%); }
-  .s3 .photo { background: linear-gradient(180deg, #07070A 0%, #0E2B26 50%, #061714 100%); }
-  .s4 .photo { background: linear-gradient(180deg, #1a1410 0%, #3a2c1c 30%, #14100a 70%, #07070A 100%); }
-  .s5 .photo { background: linear-gradient(180deg, #050407 0%, #14120e 25%, #3a2412 55%, #5a2e10 75%, #1a0c06 100%); }
+  /* per-slide photo backdrops (rich gradient fallback + Unsplash photo) */
+  .s1 .photo { background: linear-gradient(180deg, #060B15 0%, #10192B 30%, #2D2440 55%, #B08050 78%, #D89860 90%, #4A2C1A 100%); }
+  .s2 .photo { background: linear-gradient(180deg, #060B15 0%, #0F1A2E 30%, #2A2140 55%, #A08065 80%, #241628 100%); }
+  .s3 .photo { background: linear-gradient(180deg, #060B15 0%, #0F1A2E 40%, #1A2E44 65%, #08111F 100%); }
+  .s4 .photo { background: linear-gradient(180deg, #0A1424 0%, #1E2E44 30%, #3A2E24 60%, #0B1424 100%); }
+  .s5 .photo { background: linear-gradient(180deg, #060B15 0%, #14203A 20%, #4A3020 50%, #C88050 72%, #7A2E1A 92%, #1A0B12 100%); }
 
   /* luxury frame */
   .frame {
@@ -114,7 +116,7 @@
     transform: rotate(45deg);
     display: grid; place-items: center;
     position: relative;
-    background: rgba(7,7,10,.5);
+    background: rgba(6,11,21,.5);
   }
   .glidai .crest::before {
     content: ""; position: absolute; left: 4px; right: 4px; top: 4px; bottom: 4px;
@@ -208,9 +210,11 @@
   .s1 .chart {
     position: absolute; bottom: 340px; right: 90px; left: 90px; z-index: 7;
     padding: 26px 30px;
-    background: rgba(7,7,10,.55);
+    background: rgba(6,11,21,.55);
     border: 1px solid var(--line);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
   }
   .s1 .chart .lbl {
     color: var(--gold);
@@ -239,16 +243,19 @@
   }
   .s2 .eq {
     display: flex; align-items: center; justify-content: center;
-    gap: 22px; margin: 44px 0 40px;
-    padding: 30px 20px;
-    background: rgba(7,7,10,.6);
+    gap: 18px; margin: 40px 0 36px;
+    padding: 32px 20px;
+    background: rgba(6,11,21,.55);
     border: 1px solid var(--line);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
   }
   .s2 .eq .num {
     font-family: 'Frank Ruhl Libre', serif;
-    font-size: 92px; font-weight: 700;
+    font-size: 72px; font-weight: 700;
     line-height: 1;
+    unicode-bidi: plaintext;
   }
   .s2 .eq .num.gross { color: var(--gold-soft); }
   .s2 .eq .num.net { color: var(--gold); }
@@ -275,7 +282,7 @@
     display: flex; justify-content: space-between; align-items: center;
     padding: 16px 22px;
     border-top: 1px solid rgba(212,175,55,.2);
-    background: rgba(7,7,10,.35);
+    background: rgba(6,11,21,.35);
   }
   .s2 .cost-row:last-child { border-bottom: 1px solid rgba(212,175,55,.2); }
   .s2 .cost-row .k {
@@ -298,9 +305,11 @@
   .s3 .table {
     position: absolute; top: 460px; right: 90px; left: 90px; z-index: 7;
     display: grid; grid-template-columns: 1fr 1fr;
-    background: rgba(7,7,10,.55);
+    background: rgba(6,11,21,.55);
     border: 1px solid var(--line);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
   }
   .s3 .col { padding: 26px 24px; }
   .s3 .col:first-child { border-left: 1px solid rgba(212,175,55,.25); }
@@ -349,11 +358,13 @@
   .s4 .risk {
     position: relative;
     padding: 24px 26px 24px 60px;
-    background: rgba(7,7,10,.6);
+    background: rgba(6,11,21,.6);
     border-right: 3px solid var(--gold);
     border-top: 1px solid rgba(212,175,55,.2);
     border-bottom: 1px solid rgba(212,175,55,.2);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
   }
   .s4 .risk .n {
     position: absolute; left: 22px; top: 22px;
@@ -391,10 +402,12 @@
   }
   .s5 .bullets {
     position: absolute; top: 640px; right: 90px; left: 90px; z-index: 7;
-    background: rgba(7,7,10,.55);
+    background: rgba(6,11,21,.55);
     border: 1px solid var(--line);
     padding: 22px 30px;
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
   }
   .s5 .bullets .lbl {
     color: var(--gold);
@@ -416,9 +429,11 @@
     position: absolute; bottom: 280px; right: 90px; left: 90px; z-index: 7;
     text-align: center;
     padding: 22px 30px;
-    background: rgba(7,7,10,.6);
+    background: rgba(6,11,21,.6);
     border: 1px solid var(--gold);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
   }
   .s5 .cta .ask {
     color: var(--beige-soft);
@@ -606,12 +621,12 @@
 
     <div class="eq">
       <div class="col">
-        <div class="num gross">9%</div>
+        <div class="num gross">10–15%</div>
         <div class="lbl">ברוטו</div>
       </div>
       <div class="arrow">←</div>
       <div class="col">
-        <div class="num net">6.5%</div>
+        <div class="num net">7–12%</div>
         <div class="lbl">נטו</div>
       </div>
     </div>
@@ -619,12 +634,12 @@
 
   <div class="costs">
     <div class="lbl">מה נגרע מהברוטו</div>
-    <div class="cost-row"><span class="k">ניהול נכס</span><span class="v">~5% מההכנסה</span></div>
-    <div class="cost-row"><span class="k">אחזקת בניין (Service Charges)</span><span class="v">10–12 AED/sqft</span></div>
-    <div class="cost-row"><span class="k">תקופות ריקנות שנתיות</span><span class="v">3–5 שבועות</span></div>
+    <div class="cost-row"><span class="k">ניהול נכס</span><span class="v">5–7% מההכנסה</span></div>
+    <div class="cost-row"><span class="k">אחזקת בניין (Service Charges)</span><span class="v">10–15 AED/sqft</span></div>
+    <div class="cost-row"><span class="k">תקופות ריקנות שנתיות</span><span class="v">2–4 שבועות</span></div>
   </div>
 
-  <div class="disclaimer">עדיין מהתשואות הגבוהות בעולם — פשוט מודדים אותה נכון.</div>
+  <div class="disclaimer">מהתשואות הגבוהות בעולם · תלוי באזור, סוג נכס ואסטרטגיית השכרה.</div>
   <div class="glidai">
     <div class="rule"></div>
     <div class="crest"><span>G</span></div>
