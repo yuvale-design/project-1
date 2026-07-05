@@ -505,78 +505,258 @@
   <symbol id="marina-sunset" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice">
     <defs>
       <linearGradient id="msSky" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#0A1428"/>
-        <stop offset=".18" stop-color="#231428"/>
-        <stop offset=".35" stop-color="#4E2020"/>
-        <stop offset=".50" stop-color="#A0482A"/>
-        <stop offset=".60" stop-color="#DC7838"/>
-        <stop offset=".68" stop-color="#B85A30"/>
-        <stop offset=".82" stop-color="#421A18"/>
-        <stop offset="1" stop-color="#06040A"/>
+        <stop offset="0" stop-color="#080D1F"/>
+        <stop offset=".08" stop-color="#141024"/>
+        <stop offset=".16" stop-color="#241628"/>
+        <stop offset=".24" stop-color="#3A1A28"/>
+        <stop offset=".32" stop-color="#5A2224"/>
+        <stop offset=".40" stop-color="#8E3626"/>
+        <stop offset=".47" stop-color="#C4582A"/>
+        <stop offset=".53" stop-color="#E88238"/>
+        <stop offset=".58" stop-color="#F5A858"/>
+        <stop offset=".63" stop-color="#E88238"/>
+        <stop offset=".70" stop-color="#B0481C"/>
+        <stop offset=".78" stop-color="#5E2418"/>
+        <stop offset=".86" stop-color="#2A1214"/>
+        <stop offset=".94" stop-color="#0E080E"/>
+        <stop offset="1" stop-color="#050208"/>
       </linearGradient>
-      <radialGradient id="msSun" cx=".5" cy=".58" r=".38">
-        <stop offset="0" stop-color="#FFECB0" stop-opacity=".85"/>
-        <stop offset=".15" stop-color="#FFB868" stop-opacity=".55"/>
-        <stop offset=".40" stop-color="#D25820" stop-opacity=".22"/>
+      <radialGradient id="msCorona" cx=".5" cy=".445" r=".45">
+        <stop offset="0" stop-color="#FFE8AC" stop-opacity=".9"/>
+        <stop offset=".08" stop-color="#FFC880" stop-opacity=".7"/>
+        <stop offset=".25" stop-color="#E86828" stop-opacity=".28"/>
+        <stop offset=".55" stop-color="#8E2820" stop-opacity=".08"/>
         <stop offset="1" stop-color="#000" stop-opacity="0"/>
       </radialGradient>
+      <linearGradient id="msWater" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#4A1E1A"/>
+        <stop offset=".2" stop-color="#2A1218"/>
+        <stop offset="1" stop-color="#050208"/>
+      </linearGradient>
+      <linearGradient id="msHaze" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#F0A050" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#F0A050" stop-opacity=".22"/>
+        <stop offset="1" stop-color="#F0A050" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="msDistTower" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3A2028" stop-opacity=".6"/>
+        <stop offset="1" stop-color="#180814" stop-opacity=".85"/>
+      </linearGradient>
     </defs>
+
+    <!-- Sky -->
     <rect width="1080" height="1350" fill="url(#msSky)"/>
-    <rect width="1080" height="1350" fill="url(#msSun)"/>
-    <circle cx="540" cy="780" r="38" fill="#FFECA8" opacity=".9"/>
-    <circle cx="540" cy="780" r="58" fill="#FFB868" opacity=".4"/>
-    <rect y="760" width="1080" height="140" fill="#F08048" opacity=".12"/>
-    <!-- distant faint skyline -->
-    <g fill="#3A1830" opacity=".55">
-      <polygon points="0,910 0,860 60,860 60,820 130,820 130,790 200,790 200,830 280,830 280,790 340,790 340,760 400,760 400,790 460,790 460,750 520,750 520,770 580,770 580,740 640,740 640,770 700,770 700,750 760,750 760,790 830,790 830,760 900,760 900,800 970,800 970,780 1040,780 1040,840 1080,840 1080,910"/>
+    <!-- Sun corona -->
+    <rect width="1080" height="1350" fill="url(#msCorona)"/>
+
+    <!-- Wispy horizon clouds catching sun -->
+    <g fill="#E8804A" opacity=".22">
+      <ellipse cx="200" cy="580" rx="140" ry="4"/>
+      <ellipse cx="880" cy="600" rx="120" ry="4"/>
+      <ellipse cx="540" cy="560" rx="380" ry="3"/>
+      <ellipse cx="300" cy="640" rx="180" ry="5"/>
+      <ellipse cx="800" cy="650" rx="160" ry="5"/>
     </g>
-    <!-- mid Marina towers -->
-    <g fill="#160616" opacity=".92">
-      <polygon points="0,1060 0,900 60,900 60,840 130,840 130,780 200,780 200,850 270,850 270,790 340,790 340,720 410,720 410,750 480,750 480,690 550,690 550,650 620,650 620,710 690,710 690,680 760,680 760,740 830,740 830,700 900,700 900,760 970,760 970,720 1040,720 1040,800 1080,800 1080,1060"/>
+    <g fill="#FFC078" opacity=".18">
+      <ellipse cx="540" cy="700" rx="500" ry="8"/>
+      <ellipse cx="400" cy="720" rx="260" ry="5"/>
+      <ellipse cx="720" cy="715" rx="220" ry="5"/>
     </g>
-    <!-- warm rim light on mid skyline -->
-    <g stroke="#EA7840" stroke-width="0.8" opacity=".3" fill="none">
-      <line x1="60" y1="900" x2="60" y2="1060"/>
-      <line x1="130" y1="840" x2="130" y2="1060"/>
-      <line x1="200" y1="850" x2="200" y2="1060"/>
-      <line x1="270" y1="850" x2="270" y2="1060"/>
-      <line x1="340" y1="790" x2="340" y2="1060"/>
-      <line x1="410" y1="750" x2="410" y2="1060"/>
-      <line x1="480" y1="750" x2="480" y2="1060"/>
-      <line x1="550" y1="690" x2="550" y2="1060"/>
-      <line x1="620" y1="710" x2="620" y2="1060"/>
-      <line x1="690" y1="710" x2="690" y2="1060"/>
-      <line x1="760" y1="740" x2="760" y2="1060"/>
-      <line x1="830" y1="740" x2="830" y2="1060"/>
-      <line x1="900" y1="760" x2="900" y2="1060"/>
-      <line x1="970" y1="760" x2="970" y2="1060"/>
-      <line x1="1040" y1="800" x2="1040" y2="1060"/>
+
+    <!-- Haze band across horizon -->
+    <rect y="620" width="1080" height="180" fill="url(#msHaze)"/>
+
+    <!-- Sun disc + inner white-hot core -->
+    <circle cx="540" cy="600" r="40" fill="#FFECA8" opacity=".7"/>
+    <circle cx="540" cy="600" r="26" fill="#FFF4CC"/>
+    <circle cx="540" cy="600" r="14" fill="#FFFFF0"/>
+
+    <!-- Distant skyline (atmospheric fade) -->
+    <g fill="url(#msDistTower)">
+      <rect x="0" y="800" width="40" height="100"/>
+      <rect x="45" y="770" width="35" height="130"/>
+      <rect x="85" y="790" width="30" height="110"/>
+      <rect x="120" y="750" width="45" height="150"/>
+      <rect x="170" y="780" width="35" height="120"/>
+      <rect x="210" y="740" width="40" height="160"/>
+      <rect x="255" y="765" width="35" height="135"/>
+      <rect x="295" y="720" width="45" height="180"/>
+      <rect x="345" y="750" width="40" height="150"/>
+      <rect x="390" y="730" width="35" height="170"/>
+      <rect x="430" y="710" width="45" height="190"/>
+      <rect x="480" y="740" width="40" height="160"/>
+      <rect x="525" y="705" width="35" height="195"/>
+      <rect x="565" y="725" width="40" height="175"/>
+      <rect x="610" y="700" width="45" height="200"/>
+      <rect x="660" y="730" width="40" height="170"/>
+      <rect x="705" y="710" width="35" height="190"/>
+      <rect x="745" y="740" width="45" height="160"/>
+      <rect x="795" y="725" width="40" height="175"/>
+      <rect x="840" y="745" width="35" height="155"/>
+      <rect x="880" y="720" width="40" height="180"/>
+      <rect x="925" y="750" width="45" height="150"/>
+      <rect x="975" y="770" width="35" height="130"/>
+      <rect x="1015" y="795" width="40" height="105"/>
+      <rect x="1060" y="815" width="20" height="85"/>
     </g>
-    <!-- foreground dramatic towers -->
-    <g fill="#040208" opacity=".97">
-      <polygon points="0,1210 0,1080 80,1080 80,990 160,990 160,900 240,900 240,800 320,800 320,720 400,720 400,640 480,640 480,560 560,560 560,620 640,620 640,560 720,560 720,640 800,640 800,720 880,720 880,800 960,800 960,900 1040,900 1040,990 1080,990 1080,1210"/>
+
+    <!-- Mid Marina towers -->
+    <g fill="#180B14" opacity=".9">
+      <rect x="20" y="860" width="55" height="230"/>
+      <rect x="85" y="820" width="60" height="270"/>
+      <rect x="155" y="785" width="55" height="305"/>
+      <rect x="220" y="810" width="60" height="280"/>
+      <rect x="290" y="770" width="55" height="320"/>
+      <rect x="355" y="740" width="65" height="350"/>
+      <rect x="430" y="710" width="60" height="380"/>
+      <rect x="500" y="690" width="65" height="400"/>
+      <rect x="575" y="670" width="70" height="420"/>
+      <rect x="655" y="700" width="60" height="390"/>
+      <rect x="725" y="720" width="65" height="370"/>
+      <rect x="800" y="695" width="60" height="395"/>
+      <rect x="870" y="735" width="65" height="355"/>
+      <rect x="945" y="770" width="55" height="320"/>
+      <rect x="1010" y="800" width="55" height="290"/>
+      <rect x="1070" y="830" width="10" height="260"/>
     </g>
-    <!-- foreground window lights -->
-    <g fill="#F4C468" opacity=".72">
-      <circle cx="90" cy="1150" r="1.4"/>
-      <circle cx="170" cy="1070" r="1.4"/>
-      <circle cx="250" cy="980" r="1.4"/><circle cx="250" cy="930" r="1.4"/>
-      <circle cx="330" cy="880" r="1.4"/><circle cx="330" cy="810" r="1.4"/>
-      <circle cx="410" cy="790" r="1.4"/><circle cx="410" cy="720" r="1.4"/><circle cx="410" cy="670" r="1.4"/>
-      <circle cx="490" cy="720" r="1.4"/><circle cx="490" cy="660" r="1.4"/><circle cx="490" cy="600" r="1.4"/>
-      <circle cx="570" cy="700" r="1.4"/><circle cx="570" cy="640" r="1.4"/><circle cx="570" cy="590" r="1.4"/>
-      <circle cx="650" cy="680" r="1.4"/><circle cx="650" cy="620" r="1.4"/>
-      <circle cx="730" cy="700" r="1.4"/><circle cx="730" cy="640" r="1.4"/>
-      <circle cx="810" cy="770" r="1.4"/><circle cx="810" cy="710" r="1.4"/>
-      <circle cx="890" cy="860" r="1.4"/><circle cx="890" cy="800" r="1.4"/>
-      <circle cx="970" cy="950" r="1.4"/>
-      <circle cx="1050" cy="1030" r="1.4"/>
+
+    <!-- Warm rim light on mid tower west edges (sun-facing) -->
+    <g fill="#E67840" opacity=".32">
+      <rect x="20" y="860" width="3.5" height="230"/>
+      <rect x="85" y="820" width="3.5" height="270"/>
+      <rect x="155" y="785" width="3.5" height="305"/>
+      <rect x="220" y="810" width="3.5" height="280"/>
+      <rect x="290" y="770" width="3.5" height="320"/>
+      <rect x="355" y="740" width="3.5" height="350"/>
+      <rect x="430" y="710" width="3.5" height="380"/>
+      <rect x="500" y="690" width="3.5" height="400"/>
+      <rect x="575" y="670" width="3.5" height="420"/>
+      <rect x="655" y="700" width="3.5" height="390"/>
+      <rect x="725" y="720" width="3.5" height="370"/>
+      <rect x="800" y="695" width="3.5" height="395"/>
+      <rect x="870" y="735" width="3.5" height="355"/>
+      <rect x="945" y="770" width="3.5" height="320"/>
+      <rect x="1010" y="800" width="3.5" height="290"/>
     </g>
-    <!-- water/road base + warm reflection line -->
-    <rect y="1210" width="1080" height="140" fill="#050208"/>
-    <rect y="1206" width="1080" height="4" fill="#B85A32" opacity=".55"/>
-    <rect y="1210" width="1080" height="2" fill="#7A3820" opacity=".65"/>
-    <rect y="1290" width="1080" height="60" fill="#000" opacity=".55"/>
+
+    <!-- Window rows on mid towers (subtle floor lines) -->
+    <g stroke="#0E0510" stroke-width=".5" opacity=".5" fill="none">
+      <line x1="20" y1="890" x2="75" y2="890"/><line x1="20" y1="920" x2="75" y2="920"/><line x1="20" y1="950" x2="75" y2="950"/><line x1="20" y1="980" x2="75" y2="980"/><line x1="20" y1="1010" x2="75" y2="1010"/><line x1="20" y1="1040" x2="75" y2="1040"/>
+      <line x1="85" y1="855" x2="145" y2="855"/><line x1="85" y1="885" x2="145" y2="885"/><line x1="85" y1="915" x2="145" y2="915"/><line x1="85" y1="945" x2="145" y2="945"/><line x1="85" y1="975" x2="145" y2="975"/><line x1="85" y1="1005" x2="145" y2="1005"/><line x1="85" y1="1035" x2="145" y2="1035"/>
+      <line x1="290" y1="810" x2="345" y2="810"/><line x1="290" y1="840" x2="345" y2="840"/><line x1="290" y1="870" x2="345" y2="870"/><line x1="290" y1="900" x2="345" y2="900"/><line x1="290" y1="930" x2="345" y2="930"/><line x1="290" y1="960" x2="345" y2="960"/><line x1="290" y1="990" x2="345" y2="990"/>
+      <line x1="430" y1="750" x2="490" y2="750"/><line x1="430" y1="780" x2="490" y2="780"/><line x1="430" y1="810" x2="490" y2="810"/><line x1="430" y1="840" x2="490" y2="840"/><line x1="430" y1="870" x2="490" y2="870"/><line x1="430" y1="900" x2="490" y2="900"/><line x1="430" y1="930" x2="490" y2="930"/>
+      <line x1="575" y1="710" x2="645" y2="710"/><line x1="575" y1="740" x2="645" y2="740"/><line x1="575" y1="770" x2="645" y2="770"/><line x1="575" y1="800" x2="645" y2="800"/><line x1="575" y1="830" x2="645" y2="830"/><line x1="575" y1="860" x2="645" y2="860"/><line x1="575" y1="890" x2="645" y2="890"/>
+      <line x1="725" y1="760" x2="790" y2="760"/><line x1="725" y1="790" x2="790" y2="790"/><line x1="725" y1="820" x2="790" y2="820"/><line x1="725" y1="850" x2="790" y2="850"/><line x1="725" y1="880" x2="790" y2="880"/><line x1="725" y1="910" x2="790" y2="910"/>
+      <line x1="870" y1="775" x2="935" y2="775"/><line x1="870" y1="805" x2="935" y2="805"/><line x1="870" y1="835" x2="935" y2="835"/><line x1="870" y1="865" x2="935" y2="865"/><line x1="870" y1="895" x2="935" y2="895"/><line x1="870" y1="925" x2="935" y2="925"/>
+    </g>
+
+    <!-- Warm window lights (scattered) -->
+    <g fill="#F0C070" opacity=".8">
+      <circle cx="35" cy="900" r=".9"/><circle cx="55" cy="930" r=".9"/><circle cx="40" cy="960" r=".9"/><circle cx="60" cy="990" r=".9"/><circle cx="45" cy="1020" r=".9"/>
+      <circle cx="100" cy="865" r=".9"/><circle cx="130" cy="895" r=".9"/><circle cx="110" cy="925" r=".9"/><circle cx="120" cy="955" r=".9"/><circle cx="105" cy="985" r=".9"/><circle cx="135" cy="1015" r=".9"/>
+      <circle cx="170" cy="810" r=".9"/><circle cx="190" cy="840" r=".9"/><circle cx="175" cy="870" r=".9"/><circle cx="200" cy="900" r=".9"/><circle cx="180" cy="930" r=".9"/><circle cx="195" cy="990" r=".9"/>
+      <circle cx="240" cy="830" r=".9"/><circle cx="260" cy="860" r=".9"/><circle cx="230" cy="890" r=".9"/><circle cx="270" cy="920" r=".9"/>
+      <circle cx="305" cy="800" r=".9"/><circle cx="325" cy="830" r=".9"/><circle cx="310" cy="860" r=".9"/><circle cx="330" cy="890" r=".9"/><circle cx="315" cy="920" r=".9"/><circle cx="335" cy="950" r=".9"/>
+      <circle cx="375" cy="770" r=".9"/><circle cx="405" cy="800" r=".9"/><circle cx="380" cy="830" r=".9"/><circle cx="410" cy="860" r=".9"/><circle cx="385" cy="890" r=".9"/><circle cx="400" cy="920" r=".9"/>
+      <circle cx="450" cy="740" r=".9"/><circle cx="475" cy="770" r=".9"/><circle cx="445" cy="800" r=".9"/><circle cx="480" cy="830" r=".9"/><circle cx="455" cy="860" r=".9"/><circle cx="470" cy="890" r=".9"/>
+      <circle cx="520" cy="720" r=".9"/><circle cx="550" cy="750" r=".9"/><circle cx="525" cy="780" r=".9"/><circle cx="555" cy="810" r=".9"/><circle cx="530" cy="840" r=".9"/><circle cx="550" cy="870" r=".9"/>
+      <circle cx="595" cy="700" r=".9"/><circle cx="625" cy="730" r=".9"/><circle cx="600" cy="760" r=".9"/><circle cx="630" cy="790" r=".9"/><circle cx="605" cy="820" r=".9"/><circle cx="625" cy="850" r=".9"/>
+      <circle cx="675" cy="730" r=".9"/><circle cx="700" cy="760" r=".9"/><circle cx="680" cy="790" r=".9"/><circle cx="705" cy="820" r=".9"/>
+      <circle cx="745" cy="750" r=".9"/><circle cx="770" cy="780" r=".9"/><circle cx="750" cy="810" r=".9"/><circle cx="780" cy="840" r=".9"/>
+      <circle cx="820" cy="725" r=".9"/><circle cx="845" cy="755" r=".9"/><circle cx="825" cy="785" r=".9"/><circle cx="850" cy="815" r=".9"/>
+      <circle cx="890" cy="770" r=".9"/><circle cx="915" cy="800" r=".9"/><circle cx="895" cy="830" r=".9"/><circle cx="920" cy="860" r=".9"/>
+      <circle cx="960" cy="800" r=".9"/><circle cx="985" cy="830" r=".9"/><circle cx="970" cy="860" r=".9"/><circle cx="990" cy="890" r=".9"/>
+      <circle cx="1020" cy="830" r=".9"/><circle cx="1045" cy="860" r=".9"/><circle cx="1030" cy="890" r=".9"/>
+    </g>
+
+    <!-- Foreground silhouettes (dark dramatic) -->
+    <g fill="#050208">
+      <rect x="0" y="900" width="55" height="310"/>
+      <rect x="55" y="840" width="95" height="370"/>
+      <rect x="150" y="770" width="85" height="440"/>
+      <rect x="235" y="710" width="95" height="500"/>
+      <rect x="330" y="650" width="90" height="560"/>
+      <rect x="420" y="590" width="85" height="620"/>
+      <rect x="505" y="540" width="80" height="670"/>
+      <rect x="585" y="610" width="75" height="600"/>
+      <rect x="660" y="570" width="80" height="640"/>
+      <rect x="740" y="630" width="80" height="580"/>
+      <rect x="820" y="690" width="85" height="520"/>
+      <rect x="905" y="760" width="80" height="450"/>
+      <rect x="985" y="820" width="75" height="390"/>
+      <rect x="1060" y="870" width="20" height="340"/>
+    </g>
+
+    <!-- Warm rim highlight on foreground west edges -->
+    <g fill="#C05820" opacity=".38">
+      <rect x="55" y="840" width="3" height="370"/>
+      <rect x="150" y="770" width="3" height="440"/>
+      <rect x="235" y="710" width="3" height="500"/>
+      <rect x="330" y="650" width="3" height="560"/>
+      <rect x="420" y="590" width="3" height="620"/>
+      <rect x="505" y="540" width="3" height="670"/>
+      <rect x="585" y="610" width="3" height="600"/>
+      <rect x="660" y="570" width="3" height="640"/>
+      <rect x="740" y="630" width="3" height="580"/>
+      <rect x="820" y="690" width="3" height="520"/>
+      <rect x="905" y="760" width="3" height="450"/>
+      <rect x="985" y="820" width="3" height="390"/>
+    </g>
+
+    <!-- Foreground window rows -->
+    <g stroke="#000" stroke-width=".4" opacity=".7" fill="none">
+      <line x1="10" y1="930" x2="50" y2="930"/><line x1="10" y1="960" x2="50" y2="960"/><line x1="10" y1="990" x2="50" y2="990"/><line x1="10" y1="1020" x2="50" y2="1020"/><line x1="10" y1="1050" x2="50" y2="1050"/><line x1="10" y1="1080" x2="50" y2="1080"/>
+      <line x1="65" y1="870" x2="145" y2="870"/><line x1="65" y1="900" x2="145" y2="900"/><line x1="65" y1="930" x2="145" y2="930"/><line x1="65" y1="960" x2="145" y2="960"/><line x1="65" y1="990" x2="145" y2="990"/><line x1="65" y1="1020" x2="145" y2="1020"/><line x1="65" y1="1050" x2="145" y2="1050"/><line x1="65" y1="1080" x2="145" y2="1080"/>
+      <line x1="160" y1="800" x2="230" y2="800"/><line x1="160" y1="830" x2="230" y2="830"/><line x1="160" y1="860" x2="230" y2="860"/><line x1="160" y1="890" x2="230" y2="890"/><line x1="160" y1="920" x2="230" y2="920"/><line x1="160" y1="950" x2="230" y2="950"/><line x1="160" y1="980" x2="230" y2="980"/><line x1="160" y1="1010" x2="230" y2="1010"/>
+      <line x1="240" y1="740" x2="325" y2="740"/><line x1="240" y1="770" x2="325" y2="770"/><line x1="240" y1="800" x2="325" y2="800"/><line x1="240" y1="830" x2="325" y2="830"/><line x1="240" y1="860" x2="325" y2="860"/><line x1="240" y1="890" x2="325" y2="890"/><line x1="240" y1="920" x2="325" y2="920"/><line x1="240" y1="950" x2="325" y2="950"/>
+      <line x1="340" y1="680" x2="415" y2="680"/><line x1="340" y1="710" x2="415" y2="710"/><line x1="340" y1="740" x2="415" y2="740"/><line x1="340" y1="770" x2="415" y2="770"/><line x1="340" y1="800" x2="415" y2="800"/><line x1="340" y1="830" x2="415" y2="830"/><line x1="340" y1="860" x2="415" y2="860"/><line x1="340" y1="890" x2="415" y2="890"/>
+      <line x1="430" y1="620" x2="500" y2="620"/><line x1="430" y1="650" x2="500" y2="650"/><line x1="430" y1="680" x2="500" y2="680"/><line x1="430" y1="710" x2="500" y2="710"/><line x1="430" y1="740" x2="500" y2="740"/><line x1="430" y1="770" x2="500" y2="770"/><line x1="430" y1="800" x2="500" y2="800"/><line x1="430" y1="830" x2="500" y2="830"/>
+      <line x1="515" y1="570" x2="580" y2="570"/><line x1="515" y1="600" x2="580" y2="600"/><line x1="515" y1="630" x2="580" y2="630"/><line x1="515" y1="660" x2="580" y2="660"/><line x1="515" y1="690" x2="580" y2="690"/><line x1="515" y1="720" x2="580" y2="720"/><line x1="515" y1="750" x2="580" y2="750"/><line x1="515" y1="780" x2="580" y2="780"/>
+      <line x1="595" y1="640" x2="655" y2="640"/><line x1="595" y1="670" x2="655" y2="670"/><line x1="595" y1="700" x2="655" y2="700"/><line x1="595" y1="730" x2="655" y2="730"/><line x1="595" y1="760" x2="655" y2="760"/><line x1="595" y1="790" x2="655" y2="790"/><line x1="595" y1="820" x2="655" y2="820"/>
+      <line x1="670" y1="600" x2="735" y2="600"/><line x1="670" y1="630" x2="735" y2="630"/><line x1="670" y1="660" x2="735" y2="660"/><line x1="670" y1="690" x2="735" y2="690"/><line x1="670" y1="720" x2="735" y2="720"/><line x1="670" y1="750" x2="735" y2="750"/><line x1="670" y1="780" x2="735" y2="780"/>
+      <line x1="750" y1="660" x2="815" y2="660"/><line x1="750" y1="690" x2="815" y2="690"/><line x1="750" y1="720" x2="815" y2="720"/><line x1="750" y1="750" x2="815" y2="750"/><line x1="750" y1="780" x2="815" y2="780"/><line x1="750" y1="810" x2="815" y2="810"/>
+      <line x1="830" y1="720" x2="900" y2="720"/><line x1="830" y1="750" x2="900" y2="750"/><line x1="830" y1="780" x2="900" y2="780"/><line x1="830" y1="810" x2="900" y2="810"/><line x1="830" y1="840" x2="900" y2="840"/>
+      <line x1="915" y1="790" x2="980" y2="790"/><line x1="915" y1="820" x2="980" y2="820"/><line x1="915" y1="850" x2="980" y2="850"/><line x1="915" y1="880" x2="980" y2="880"/>
+      <line x1="995" y1="850" x2="1055" y2="850"/><line x1="995" y1="880" x2="1055" y2="880"/><line x1="995" y1="910" x2="1055" y2="910"/>
+    </g>
+
+    <!-- Foreground warm window lights (dense) -->
+    <g fill="#F4C568" opacity=".9">
+      <circle cx="20" cy="940" r="1"/><circle cx="35" cy="970" r="1"/><circle cx="25" cy="1000" r="1"/><circle cx="40" cy="1030" r="1"/><circle cx="30" cy="1060" r="1"/>
+      <circle cx="75" cy="880" r="1"/><circle cx="95" cy="910" r="1"/><circle cx="115" cy="940" r="1"/><circle cx="80" cy="970" r="1"/><circle cx="130" cy="1000" r="1"/><circle cx="95" cy="1030" r="1"/><circle cx="120" cy="1060" r="1"/>
+      <circle cx="175" cy="810" r="1"/><circle cx="195" cy="840" r="1"/><circle cx="215" cy="870" r="1"/><circle cx="180" cy="900" r="1"/><circle cx="200" cy="930" r="1"/><circle cx="220" cy="960" r="1"/><circle cx="190" cy="990" r="1"/>
+      <circle cx="260" cy="750" r="1"/><circle cx="280" cy="780" r="1"/><circle cx="300" cy="810" r="1"/><circle cx="265" cy="840" r="1"/><circle cx="290" cy="870" r="1"/><circle cx="310" cy="900" r="1"/><circle cx="275" cy="930" r="1"/>
+      <circle cx="355" cy="690" r="1"/><circle cx="380" cy="720" r="1"/><circle cx="400" cy="750" r="1"/><circle cx="360" cy="780" r="1"/><circle cx="385" cy="810" r="1"/><circle cx="405" cy="840" r="1"/><circle cx="370" cy="870" r="1"/>
+      <circle cx="445" cy="630" r="1"/><circle cx="465" cy="660" r="1"/><circle cx="485" cy="690" r="1"/><circle cx="450" cy="720" r="1"/><circle cx="475" cy="750" r="1"/><circle cx="490" cy="780" r="1"/><circle cx="460" cy="810" r="1"/>
+      <circle cx="530" cy="580" r="1"/><circle cx="550" cy="610" r="1"/><circle cx="570" cy="640" r="1"/><circle cx="535" cy="670" r="1"/><circle cx="555" cy="700" r="1"/><circle cx="575" cy="730" r="1"/><circle cx="545" cy="760" r="1"/>
+      <circle cx="605" cy="650" r="1"/><circle cx="625" cy="680" r="1"/><circle cx="645" cy="710" r="1"/><circle cx="610" cy="740" r="1"/><circle cx="635" cy="770" r="1"/><circle cx="615" cy="800" r="1"/>
+      <circle cx="680" cy="610" r="1"/><circle cx="700" cy="640" r="1"/><circle cx="720" cy="670" r="1"/><circle cx="685" cy="700" r="1"/><circle cx="710" cy="730" r="1"/><circle cx="725" cy="760" r="1"/>
+      <circle cx="760" cy="670" r="1"/><circle cx="780" cy="700" r="1"/><circle cx="800" cy="730" r="1"/><circle cx="765" cy="760" r="1"/><circle cx="790" cy="790" r="1"/><circle cx="805" cy="820" r="1"/>
+      <circle cx="840" cy="730" r="1"/><circle cx="860" cy="760" r="1"/><circle cx="880" cy="790" r="1"/><circle cx="845" cy="820" r="1"/><circle cx="875" cy="850" r="1"/>
+      <circle cx="925" cy="800" r="1"/><circle cx="945" cy="830" r="1"/><circle cx="965" cy="860" r="1"/><circle cx="930" cy="890" r="1"/>
+      <circle cx="1005" cy="860" r="1"/><circle cx="1030" cy="890" r="1"/><circle cx="1045" cy="920" r="1"/>
+    </g>
+
+    <!-- Water surface -->
+    <rect y="1210" width="1080" height="140" fill="url(#msWater)"/>
+
+    <!-- Water horizon light strip -->
+    <rect y="1204" width="1080" height="6" fill="#D06428" opacity=".6"/>
+    <rect y="1210" width="1080" height="3" fill="#8A3418" opacity=".7"/>
+
+    <!-- Water reflection ripples -->
+    <g fill="#B85832" opacity=".28">
+      <ellipse cx="540" cy="1230" rx="200" ry=".8"/>
+      <ellipse cx="540" cy="1250" rx="150" ry=".8"/>
+      <ellipse cx="540" cy="1270" rx="110" ry=".8"/>
+    </g>
+    <g fill="#E88238" opacity=".28">
+      <ellipse cx="540" cy="1222" rx="60" ry=".7"/>
+      <ellipse cx="540" cy="1240" rx="40" ry=".7"/>
+    </g>
+
+    <!-- Bottom edge fade for text zone -->
+    <rect y="1300" width="1080" height="50" fill="#000" opacity=".55"/>
   </symbol>
 </svg>
 
@@ -657,31 +837,31 @@
   <div class="photo"><svg class="scene" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice"><use href="#marina-sunset"/></svg><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=85&auto=format&fit=crop" /></div>
   <div class="vignette"></div>
 
-  <div class="top-eyebrow">DLD · Q4 2024</div>
+  <div class="top-eyebrow">DLD · 2025</div>
   <div class="page"><span class="num">01</span><span class="bar"></span><span class="total">05</span></div>
   <div class="frame"></div>
 
   <div class="content">
     <div class="eyebrow">Market Volume</div>
-    <div class="big-num">226K</div>
+    <div class="big-num">251K</div>
     <div class="unit">עסקאות · Dubai Land Department</div>
-    <div class="amount">761 מיליארד AED</div>
+    <div class="amount">893 מיליארד AED</div>
     <div class="divider" style="margin:0 0 22px"></div>
-    <div class="headline">2024 סגרה<br/><em>שנת שיא היסטורית</em><br/>בדובאי.</div>
+    <div class="headline">2025 סגרה<br/><em>שנת שיא חדשה</em><br/>בדובאי.</div>
   </div>
 
   <div class="chart">
-    <div class="lbl">נפח עסקאות · DLD 2020-2024</div>
+    <div class="lbl">נפח עסקאות · DLD 2021-2025</div>
     <div class="bars">
-      <div class="bar"><div class="fill dim" style="height:30%"></div><div class="yr">2020</div></div>
-      <div class="bar"><div class="fill dim" style="height:44%"></div><div class="yr">2021</div></div>
-      <div class="bar"><div class="fill dim" style="height:62%"></div><div class="yr">2022</div></div>
-      <div class="bar"><div class="fill dim" style="height:74%"></div><div class="yr">2023</div></div>
-      <div class="bar"><div class="fill" style="height:100%"></div><div class="yr">2024</div></div>
+      <div class="bar"><div class="fill dim" style="height:34%"></div><div class="yr">2021</div></div>
+      <div class="bar"><div class="fill dim" style="height:50%"></div><div class="yr">2022</div></div>
+      <div class="bar"><div class="fill dim" style="height:66%"></div><div class="yr">2023</div></div>
+      <div class="bar"><div class="fill dim" style="height:88%"></div><div class="yr">2024</div></div>
+      <div class="bar"><div class="fill" style="height:100%"></div><div class="yr">2025</div></div>
     </div>
   </div>
 
-  <div class="disclaimer">DLD Q4 2024 · +36% YoY</div>
+  <div class="disclaimer">DLD 2025 · +17% YoY</div>
   <div class="glidai">
     <div class="rule"></div>
     <div class="crest"><span>G</span></div>
@@ -797,7 +977,7 @@
     <div class="risk">
       <div class="n">01</div>
       <div class="t">הצפת היצע נקודתית</div>
-      <div class="d">40,000+ יחידות במסירה ב-2025-2026 באזורים מרוכזים. לחץ מקומי על שכירות ומחירי מכירה — צריך למפות רדיוס לפני קנייה.</div>
+      <div class="d">76,000+ יחידות במסירה ב-2026-2027 באזורים מרוכזים. לחץ מקומי על שכירות ומחירי מכירה — צריך למפות רדיוס לפני קנייה.</div>
     </div>
     <div class="risk">
       <div class="n">02</div>
