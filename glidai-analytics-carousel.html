@@ -46,8 +46,13 @@
     text-transform: uppercase; margin-top: 6px;
   }
 
-  /* photo bg + fallback */
+  /* photo bg + inline SVG Dubai Marina sunset scene as fallback */
   .photo { position: absolute; inset: 0; z-index: 1; }
+  .photo .scene {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0; display: block;
+  }
   .photo .photo-img {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
@@ -495,6 +500,86 @@
 </head>
 <body>
 
+<!-- ======== SHARED DUBAI MARINA SUNSET SCENE (SVG symbol) ======== -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute;left:0;top:0;visibility:hidden;pointer-events:none">
+  <symbol id="marina-sunset" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="msSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#0A1428"/>
+        <stop offset=".18" stop-color="#231428"/>
+        <stop offset=".35" stop-color="#4E2020"/>
+        <stop offset=".50" stop-color="#A0482A"/>
+        <stop offset=".60" stop-color="#DC7838"/>
+        <stop offset=".68" stop-color="#B85A30"/>
+        <stop offset=".82" stop-color="#421A18"/>
+        <stop offset="1" stop-color="#06040A"/>
+      </linearGradient>
+      <radialGradient id="msSun" cx=".5" cy=".58" r=".38">
+        <stop offset="0" stop-color="#FFECB0" stop-opacity=".85"/>
+        <stop offset=".15" stop-color="#FFB868" stop-opacity=".55"/>
+        <stop offset=".40" stop-color="#D25820" stop-opacity=".22"/>
+        <stop offset="1" stop-color="#000" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1080" height="1350" fill="url(#msSky)"/>
+    <rect width="1080" height="1350" fill="url(#msSun)"/>
+    <circle cx="540" cy="780" r="38" fill="#FFECA8" opacity=".9"/>
+    <circle cx="540" cy="780" r="58" fill="#FFB868" opacity=".4"/>
+    <rect y="760" width="1080" height="140" fill="#F08048" opacity=".12"/>
+    <!-- distant faint skyline -->
+    <g fill="#3A1830" opacity=".55">
+      <polygon points="0,910 0,860 60,860 60,820 130,820 130,790 200,790 200,830 280,830 280,790 340,790 340,760 400,760 400,790 460,790 460,750 520,750 520,770 580,770 580,740 640,740 640,770 700,770 700,750 760,750 760,790 830,790 830,760 900,760 900,800 970,800 970,780 1040,780 1040,840 1080,840 1080,910"/>
+    </g>
+    <!-- mid Marina towers -->
+    <g fill="#160616" opacity=".92">
+      <polygon points="0,1060 0,900 60,900 60,840 130,840 130,780 200,780 200,850 270,850 270,790 340,790 340,720 410,720 410,750 480,750 480,690 550,690 550,650 620,650 620,710 690,710 690,680 760,680 760,740 830,740 830,700 900,700 900,760 970,760 970,720 1040,720 1040,800 1080,800 1080,1060"/>
+    </g>
+    <!-- warm rim light on mid skyline -->
+    <g stroke="#EA7840" stroke-width="0.8" opacity=".3" fill="none">
+      <line x1="60" y1="900" x2="60" y2="1060"/>
+      <line x1="130" y1="840" x2="130" y2="1060"/>
+      <line x1="200" y1="850" x2="200" y2="1060"/>
+      <line x1="270" y1="850" x2="270" y2="1060"/>
+      <line x1="340" y1="790" x2="340" y2="1060"/>
+      <line x1="410" y1="750" x2="410" y2="1060"/>
+      <line x1="480" y1="750" x2="480" y2="1060"/>
+      <line x1="550" y1="690" x2="550" y2="1060"/>
+      <line x1="620" y1="710" x2="620" y2="1060"/>
+      <line x1="690" y1="710" x2="690" y2="1060"/>
+      <line x1="760" y1="740" x2="760" y2="1060"/>
+      <line x1="830" y1="740" x2="830" y2="1060"/>
+      <line x1="900" y1="760" x2="900" y2="1060"/>
+      <line x1="970" y1="760" x2="970" y2="1060"/>
+      <line x1="1040" y1="800" x2="1040" y2="1060"/>
+    </g>
+    <!-- foreground dramatic towers -->
+    <g fill="#040208" opacity=".97">
+      <polygon points="0,1210 0,1080 80,1080 80,990 160,990 160,900 240,900 240,800 320,800 320,720 400,720 400,640 480,640 480,560 560,560 560,620 640,620 640,560 720,560 720,640 800,640 800,720 880,720 880,800 960,800 960,900 1040,900 1040,990 1080,990 1080,1210"/>
+    </g>
+    <!-- foreground window lights -->
+    <g fill="#F4C468" opacity=".72">
+      <circle cx="90" cy="1150" r="1.4"/>
+      <circle cx="170" cy="1070" r="1.4"/>
+      <circle cx="250" cy="980" r="1.4"/><circle cx="250" cy="930" r="1.4"/>
+      <circle cx="330" cy="880" r="1.4"/><circle cx="330" cy="810" r="1.4"/>
+      <circle cx="410" cy="790" r="1.4"/><circle cx="410" cy="720" r="1.4"/><circle cx="410" cy="670" r="1.4"/>
+      <circle cx="490" cy="720" r="1.4"/><circle cx="490" cy="660" r="1.4"/><circle cx="490" cy="600" r="1.4"/>
+      <circle cx="570" cy="700" r="1.4"/><circle cx="570" cy="640" r="1.4"/><circle cx="570" cy="590" r="1.4"/>
+      <circle cx="650" cy="680" r="1.4"/><circle cx="650" cy="620" r="1.4"/>
+      <circle cx="730" cy="700" r="1.4"/><circle cx="730" cy="640" r="1.4"/>
+      <circle cx="810" cy="770" r="1.4"/><circle cx="810" cy="710" r="1.4"/>
+      <circle cx="890" cy="860" r="1.4"/><circle cx="890" cy="800" r="1.4"/>
+      <circle cx="970" cy="950" r="1.4"/>
+      <circle cx="1050" cy="1030" r="1.4"/>
+    </g>
+    <!-- water/road base + warm reflection line -->
+    <rect y="1210" width="1080" height="140" fill="#050208"/>
+    <rect y="1206" width="1080" height="4" fill="#B85A32" opacity=".55"/>
+    <rect y="1210" width="1080" height="2" fill="#7A3820" opacity=".65"/>
+    <rect y="1290" width="1080" height="60" fill="#000" opacity=".55"/>
+  </symbol>
+</svg>
+
 <!-- ============ ONE-CLICK DOWNLOAD ============ -->
 <div class="dl-tool" id="dlTool">
   <div class="t">הורדת קרוסלת אינסטגרם</div>
@@ -569,7 +654,7 @@
 
 <!-- ============================ SLIDE 1 ============================ -->
 <div class="slide s1">
-  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="photo"><svg class="scene" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice"><use href="#marina-sunset"/></svg><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=85&auto=format&fit=crop" /></div>
   <div class="vignette"></div>
 
   <div class="top-eyebrow">DLD · Q4 2024</div>
@@ -608,7 +693,7 @@
 
 <!-- ============================ SLIDE 2 ============================ -->
 <div class="slide s2">
-  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="photo"><svg class="scene" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice"><use href="#marina-sunset"/></svg><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=85&auto=format&fit=crop" /></div>
   <div class="vignette"></div>
 
   <div class="top-eyebrow">Net Yield Analysis</div>
@@ -651,7 +736,7 @@
 
 <!-- ============================ SLIDE 3 ============================ -->
 <div class="slide s3">
-  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1583139063920-7f6dc5fb0c5b?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="photo"><svg class="scene" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice"><use href="#marina-sunset"/></svg><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1583139063920-7f6dc5fb0c5b?w=1200&q=85&auto=format&fit=crop" /></div>
   <div class="vignette"></div>
 
   <div class="top-eyebrow">Strategy Comparison</div>
@@ -660,29 +745,31 @@
 
   <div class="content">
     <div class="eyebrow">Off-Plan vs Secondary</div>
-    <h1 class="h1 md" style="margin-top:14px; color: var(--white)">ההבדל האמיתי<br/>הוא לא <em>המחיר</em>.</h1>
+    <h1 class="h1 md" style="margin-top:14px; color: var(--white)">פריסה של שנים.<br/><em>0% ריבית לקבלן.</em></h1>
   </div>
 
   <div class="table">
     <div class="col">
       <div class="hd">Off-Plan</div>
-      <div class="row"><div class="k">תשלום ראשוני</div><div class="v">10–20%</div></div>
-      <div class="row"><div class="k">פריסה</div><div class="v">60/40 עד 70/30 לאורך הבנייה</div></div>
-      <div class="row"><div class="k">תזרים</div><div class="v">בעת המסירה</div></div>
-      <div class="row"><div class="k">אופק זמן</div><div class="v">2–4 שנים</div></div>
-      <div class="row"><div class="k">מטרה</div><div class="v">בניית הון · מינוף פנימי</div></div>
+      <div class="row"><div class="k">תשלום ראשוני</div><div class="v">10–20% במעמד החתימה</div></div>
+      <div class="row"><div class="k">פריסה בזמן בנייה</div><div class="v">50/50 · 60/40 · 70/30 · רבעוני / חודשי</div></div>
+      <div class="row"><div class="k">Post-Handover Plan</div><div class="v">פריסה עד 5 שנים אחרי המסירה</div></div>
+      <div class="row"><div class="k">ריבית לקבלן</div><div class="v">0%</div></div>
+      <div class="row"><div class="k">אופק זמן</div><div class="v">2–4 שנים למסירה</div></div>
+      <div class="row"><div class="k">מטרה</div><div class="v">מינוף פנימי · בניית הון</div></div>
     </div>
     <div class="col">
       <div class="hd">Secondary</div>
-      <div class="row"><div class="k">תשלום ראשוני</div><div class="v">100%</div></div>
-      <div class="row"><div class="k">פריסה</div><div class="v">מלא במעמד הרכישה</div></div>
-      <div class="row"><div class="k">תזרים</div><div class="v">מהיום הראשון</div></div>
+      <div class="row"><div class="k">תשלום ראשוני</div><div class="v">100% במעמד הרכישה</div></div>
+      <div class="row"><div class="k">פריסה</div><div class="v">מלא · או משכנתא בנקאית</div></div>
+      <div class="row"><div class="k">Post-Handover Plan</div><div class="v">לא רלוונטי</div></div>
+      <div class="row"><div class="k">ריבית משכנתא</div><div class="v">4–5% (אם נלקחת)</div></div>
       <div class="row"><div class="k">אופק זמן</div><div class="v">מיידי</div></div>
       <div class="row"><div class="k">מטרה</div><div class="v">תזרים שוטף · הכנסה פסיבית</div></div>
     </div>
   </div>
 
-  <div class="insight">הבחירה תלויה באסטרטגיה שלך —<br/>לא באיזה מוצר "עדיף".</div>
+  <div class="insight">Off-Plan אינו רק דירה —<br/>הוא מכשיר מינוף פיננסי.</div>
   <div class="glidai">
     <div class="rule"></div>
     <div class="crest"><span>G</span></div>
@@ -694,7 +781,7 @@
 
 <!-- ============================ SLIDE 4 ============================ -->
 <div class="slide s4">
-  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1546412414-e1885259563a?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="photo"><svg class="scene" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice"><use href="#marina-sunset"/></svg><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1546412414-e1885259563a?w=1200&q=85&auto=format&fit=crop" /></div>
   <div class="vignette"></div>
 
   <div class="top-eyebrow">Risk Management</div>
@@ -736,7 +823,7 @@
 
 <!-- ============================ SLIDE 5 ============================ -->
 <div class="slide s5">
-  <div class="photo"><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=85&auto=format&fit=crop" /></div>
+  <div class="photo"><svg class="scene" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice"><use href="#marina-sunset"/></svg><img class="photo-img" crossorigin="anonymous" loading="eager" onerror="this.remove()" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=85&auto=format&fit=crop" /></div>
   <div class="vignette"></div>
 
   <div class="top-eyebrow">ROI Consultation</div>
